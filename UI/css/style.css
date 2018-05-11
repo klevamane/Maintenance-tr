@@ -1,0 +1,113 @@
+/* RUDIMENTS */
+
+/* whenvere there is any width, it factors in the margin and padding into that width
+    instead of adding it onto it
+    */
+*{
+    box-sizing: border-box;
+}
+:root {
+    --primaryOrange: rgb(255, 124, 17);
+    --backgroundColour:  rgb(193, 205, 214);
+    --fontColour:  #485e74;
+}
+#primary-background {
+    background: var(--backgroundColour);
+}
+body{
+    color: var(--fontColour);
+    line-height: 1.6;
+    font-family: 'Roboto', sans-serif;
+    padding: 1em;
+}
+
+button {
+    background: var(--primaryOrange);
+    border: none;
+    padding: 8px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(167, 20, 20, 0.1);  
+}
+.container {
+    margin: 0 auto;
+}
+
+form input, form textarea {
+border:1px solid #ced4da;
+    border-radius: .25rem;
+}
+/* Logo */
+#logo2 {
+    color: var(--primaryOrange);
+    font-weight: bold;
+    font-size: 25px;
+}
+#logo1 {
+    font-size: 22px;
+}
+/* End of logo */
+
+/* END OF RUDIMENTS */
+
+/***************** CARDS **********************/
+
+.card form .form-header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    
+}
+.cardlogo-icon {
+    padding-top: 10px;
+}
+
+.card {
+    max-width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    background:#fff;
+    box-shadow: 0 0 20px 0 rgba(72, 94, 160, 0.7);
+    border-radius: 5px;
+}
+.card form {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 20px;
+}
+.form-small-text {
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+.card form input, .card form button {
+    width: 100%;
+    padding: 1em;
+    
+}
+.card form label {
+    display: block;
+    font-size: 13px;
+    padding: 5px 0;
+}
+.card form a {
+    text-decoration: none;
+    color: #485e74;
+
+}
+.card form button {
+    font-size: 12px;
+}
