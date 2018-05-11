@@ -18,7 +18,11 @@ body{
     color: var(--fontColour);
     line-height: 1.6;
     font-family: 'Roboto', sans-serif;
-    padding: 1em;
+}
+body#dashboard {
+    margin: 0;
+    padding: 0;
+    background:   rgb(244, 246, 248);
 }
 
 button {
@@ -86,6 +90,37 @@ border:1px solid #ced4da;
 }
 
 
+/****************** SIDEBAR  *******************/
+#sidebar .toggle-btn i {
+    position: absolute;
+    left: 230px;
+    top: 20px;
+}
+
+#sidebar {
+    width: 200px;
+    height: 100%;
+    background: var(--fontColour);
+    position: fixed;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+}
+#sidebar ul li {
+    border-bottom: 1px solid white;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#sidebar.inactive {
+    left: -200px;
+}
 
 /* END OF RUDIMENTS */
 
