@@ -59,6 +59,34 @@ border:1px solid #ced4da;
 }
 /* End of logo */
 
+/* Margins */
+.marg-top10y{
+    margin-top: 10px;
+}
+
+.marg-top20y{
+    margin-top: 20px;
+}
+
+.marg-top30y{
+    margin-top: 30px;
+}
+
+.marg-top40y{
+    margin-top: 40px;
+}
+
+
+.marg-bot10y{
+    margin-bottom: 10px;
+}
+
+.marg-bot20y{
+    margin-bottom: 20px;
+}
+
+
+
 /* END OF RUDIMENTS */
 
 /***************** CARDS **********************/
