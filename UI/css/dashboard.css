@@ -95,8 +95,9 @@ ul.pagination {
     display: inline-block; 
     margin: 8px 0;
     overflow: hidden;
-    margin-left: 60px;
+    margin-left: 120px;
     cursor: pointer;
+     
     
 }
 .list ul li {
