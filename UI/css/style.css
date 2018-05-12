@@ -85,7 +85,6 @@ form select {
     margin-top: 40px;
 }
 
-
 .marg-bot10y{
     margin-bottom: 10px;
 }
@@ -94,7 +93,9 @@ form select {
     margin-bottom: 20px;
 }
 
-
+.marg-left30 {
+    margin-left: 120px;
+}
 /****************** SIDEBAR  *******************/
 #sidebar .toggle-btn i {
     position: absolute;
@@ -178,6 +179,9 @@ form select {
 }
 .card form button {
     font-size: 12px;
+    width: 100%;
+    padding: 0.8rem;
+    cursor: pointer;
 }
 
 
@@ -249,6 +253,7 @@ nav ul li a {
     nav ul li {
         display: block;
         text-align: center;
+        border-bottom: 1px solid rgba(30, 60, 90, 0.795)
 
     }
     .active {
@@ -296,5 +301,10 @@ nav ul li a {
 .seperator {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 0px;
+    grid-gap: 20px;
+}
+
+.status-btn {
+    display: grid;
+    grid-template-columns: 1fr;
 }
