@@ -12,7 +12,7 @@
 <body id="primary-background">
     <div class="container">
         <div class="card">
-        <form action="">
+        <form action="./Admin.html">
             <div class="form-header">
                 <div><span id="logo1">Kleva</span><span id="logo2">fix'</span></div>
                 <div class="cardlogo-icon"><span><a href="#"><i class="fa fa-arrow-circle-o-left"> Home</i></a></span></div>
@@ -20,30 +20,30 @@
                  <span><hr/></span>
                 <div class="form-group marg10">
                         <label for="name">Firstname</label>
-                        <input type="text" name="fname" id="fname">
+                        <input type="text" name="fname" id="fname" required>
                    </div>
                    <div class="form-group marg10">
                         <label for="lname">Lastname</label>
-                        <input type="text" name="lname" id="lname">
+                        <input type="text" name="lname" id="lname" required>
                    </div>
                    <div class="form-group marg10">
                         <label for="company">Email</label>
-                        <input type="email" name="email" id="email">
+                        <input type="email" name="email" id="email" required>
                    </div>
                    <div class="form-group marg10">
                         <label for="mobile">Mobile</label>
-                        <input type="text" name="mobile" id="mobile">
+                        <input type="text" name="mobile" id="mobile" required maxlength="11" minlength="11">
                    </div>
                    <div class="form-group marg10">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password">
+                        <input type="password" name="password" id="password" required>
                    </div>
                    <div class="form-group marg10">
                         <label for="cpassword">Confirm password</label>
-                        <input type="password" name="cpassword" id="password">
+                        <input type="password" name="cpassword" id="password" required>
                    </div>
                    <p class="marg10"><button type="submit">Register</button></p>
-                   <p><a href="./login.html">Already Registered? Login</a></p>    
+                   <p><a href="./Signin.html">Already Registered? Login</a></p>    
         </form>
 </div>
     </div>

@@ -128,6 +128,12 @@ form select {
     left: -200px;
 }
 
+
+.card-redirect-tag {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* END OF RUDIMENTS */
 
 /***************** CARDS **********************/
