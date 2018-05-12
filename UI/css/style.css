@@ -18,9 +18,15 @@ body{
     color: var(--fontColour);
     line-height: 1.6;
     font-family: 'Roboto', sans-serif;
-    padding: 1em;
 }
-
+body#dashboard {
+    margin: 0;
+    padding: 0;
+    background:   rgb(244, 246, 248);
+}
+.nobody-margin {
+    margin: 0 !important;
+}
 button {
     background: var(--primaryOrange);
     border: none;
@@ -44,9 +50,12 @@ hr {
     margin: 0 auto;
 }
 
-form input, form textarea {
+form input, form textarea, form select {
 border:1px solid #ced4da;
     border-radius: .25rem;
+}
+form select {
+    padding: 10px;
 }
 /* Logo */
 #logo2 {
@@ -86,6 +95,37 @@ border:1px solid #ced4da;
 }
 
 
+/****************** SIDEBAR  *******************/
+#sidebar .toggle-btn i {
+    position: absolute;
+    left: 230px;
+    top: 20px;
+}
+
+#sidebar {
+    width: 200px;
+    height: 100%;
+    background: var(--fontColour);
+    position: fixed;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+}
+#sidebar ul li {
+    border-bottom: 1px solid white;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#sidebar.inactive {
+    left: -200px;
+}
 
 /* END OF RUDIMENTS */
 
@@ -121,7 +161,7 @@ border:1px solid #ced4da;
     margin-top: 0.25rem;
   }
 
-.card form input, .card form button {
+.card form input, .card form button .card form textarea {
     width: 100%;
     padding: 1em;
     
@@ -138,4 +178,123 @@ border:1px solid #ced4da;
 }
 .card form button {
     font-size: 12px;
+}
+
+
+/******** NAVIGATION BAR ****/
+nav {
+    width: 100%;
+    background: rgb(6, 70, 129);
+    border-bottom: 2px solid var(--primaryOrange);
+}
+
+.navbar-wrapper
+{
+    margin: 0 auto
+}
+nav ul {
+ width: 100%;
+ margin: 0 auto;
+ padding: 0;   
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 15px;    
+}
+nav ul li:hover {
+    background: var(--primaryOrange);
+    transition: 0.5s;
+}
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-toggle {
+    width: 100%;
+    padding: 10px 20px;
+    background: #001f44;
+    text-align: right;
+    color: #fff;
+    font-size: 25px;
+    display: none;
+}
+
+/* Container media Query */
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+  
+  /* Implement as long as screen is not greater than 768px */
+  @media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+    nav ul {
+        width: 100%;
+        display: none;
+    }
+    nav ul li {
+        display: block;
+        text-align: center;
+
+    }
+    .active {
+        display: block;
+    }
+}
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+    
+  }
+  
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+  }
+  
+
+
+
+
+
+
+
+
+
+.user-area {
+    max-width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    background:#fff;
+    box-shadow: 0 0 20px 0 rgba(72, 94, 160, 0.7);
+    border-radius: 5px;
+}
+
+/* Dashboard */
+.seperator {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 0px;
 }
