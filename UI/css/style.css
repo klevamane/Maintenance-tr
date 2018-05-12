@@ -24,7 +24,9 @@ body#dashboard {
     padding: 0;
     background:   rgb(244, 246, 248);
 }
-
+.nobody-margin {
+    margin: 0 !important;
+}
 button {
     background: var(--primaryOrange);
     border: none;
@@ -46,10 +48,6 @@ hr {
 }
 .container {
     margin: 0 auto;
-}
-.navbar-wrapper
-{
-    margin: 0 auto
 }
 
 form input, form textarea, form select {
@@ -186,9 +184,42 @@ form select {
 /******** NAVIGATION BAR ****/
 nav {
     width: 100%;
-    background: var(--primaryOrange);
+    background: rgb(6, 70, 129);
+    border-bottom: 2px solid var(--primaryOrange);
 }
 
+.navbar-wrapper
+{
+    margin: 0 auto
+}
+nav ul {
+ width: 100%;
+ margin: 0 auto;
+ padding: 0;   
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 15px;    
+}
+nav ul li:hover {
+    background: var(--primaryOrange);
+    transition: 0.5s;
+}
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-toggle {
+    width: 100%;
+    padding: 10px 20px;
+    background: #001f44;
+    text-align: right;
+    color: #fff;
+    font-size: 25px;
+    display: none;
+}
 
 /* Container media Query */
 
@@ -206,10 +237,29 @@ nav {
     }
   }
   
+  /* Implement as long as screen is not greater than 768px */
+  @media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+    nav ul {
+        width: 100%;
+        display: none;
+    }
+    nav ul li {
+        display: block;
+        text-align: center;
+
+    }
+    .active {
+        display: block;
+    }
+}
   @media (min-width: 768px) {
     .container {
       max-width: 720px;
     }
+    
   }
   
   @media (min-width: 992px) {

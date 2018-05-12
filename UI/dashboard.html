@@ -12,21 +12,25 @@
     <title>Sign up</title>
 </head>
 
-<body id="primary-background">
+<body id="primary-background" class="nobody-margin">
     <nav>
+            <div class="nav-toggle">
+                    <i class="fa fa-bars handlebar"></i>
+                </div>
         <div class="container">
-            <ul>
+            
+            <ul id="navul" class="navul">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Leave</a></li>
+                <li><a href="./Index.html">Signout</a></li>
 
             </ul>
         </div>
     </nav>
     <div class="container">
         <div class="seperator" style="grid-gap: 20px;">
-            <div class="card-fluid">
+            <div class="card-fluid marg-top30y">
                 <form action="">
                     <div class="form-header">
                         <div>
@@ -149,6 +153,17 @@
             
            
     </div>
+<script src="./js/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.handlebar').click(function(){
+            $('#navul').toggleClass('active'); 
+        });
+        
+    });
+    </script>
+
 </body>
 
 </html>
