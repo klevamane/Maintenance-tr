@@ -1,29 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <title>Dashboard</title>
+    <title>Sign up</title>
 </head>
-<body id="dashboard">
 
-    <section id="sidebar">
-        <div class="toggle-btn" onclick="toggleSidebar()"><i class="fa fa-bars fa-2x" style="color: red"></i></div>
-        <ul>
-            <li><a href="">Create Request</a></li>
-            <li><a href="">View request</a></li>
-            <li><a href="">Contact admin</a></li>
-        </ul>
-    </section>
-    
+<body id="primary-background">
+    <div class="container">
+        <div class="seperator" style="grid-gap: 20px;">
+            <div class="card-fluid">
+                <form action="">
+                    <div class="form-header">
+                        <div>
+                            <span id="logo1">Make a reques</span>
+                            <span id="logo2">t</span>
+                        </div>
+                        <div class="cardlogo-icon">
+                            <span>
+                                <a href="#">
+                                    <i class="fa fa-calendar"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <span>
+                        <hr/>
+                    </span>
+                    <div class="form-group marg10">
+                        <label for="name">Brand</label>
+                        <input type="text" name="brand" id="brand">
+                    </div>
+                    <div class="form-group marg10">
+                        <label for="model">Model Number</label>
+                        <input type="text" name="model" id="model">
+                    </div>
+                    <div class="form-group marg10">
+                        <label for="fault">Fault</label>
+                        <select class="dropdown" name="fault" id="fault">
+                            <option selected>Choose..</option>
+                            <option value="Broken screen">Broken screen</option>
+                            <option value="Water damage">Water damage</option>
+                            <option value="Unlocking Operator">Unlocking Operator</option>
+                            <option value="Screen Issues">Screen Issues</option>
+                            <option value="Proximity Sensor">Proximity Sensor</option>
+                            <option value="Front camera">Front camera</option>
+                            <option value="Rear camera">Rear camera</option>
+                            <option value="Keyboard">Keyboard</option>
+                            <option value="Recover files">Recover files</option>
+                            <option value="Flash">Flash</option>
+                            <option value="Battery replacement">Battery replacement</option>
+                            <option value="network issues">Wireless network issues</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group marg10">
+                        <label for="other">If other, elaborate here</label>
+                        <input type="text" name="other" id="other">
+                    </div>
+                    <div class="form-group marg10">
+                        <label for="password">Describe the issue</label>
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                    </div>
+
+                    <p class="marg10">
+                        <button type="submit">Make request</button>
+                    </p>
+
+                </form>
+            </div>
+            <!-- End of Card 1 -->
+
+            <div>
+                <h2 class="card-h2">Request Made</h2>
+                <hr>
+
+                <span>Filter by</span>
+                <span>
+                    <select name="" class="status-quo">
+                        <option value="">Approved</option>
+                        <option value="">Rejected</option>
+                        <option value="">Finished</option>
+                        <option value="">Pending</option>
+                        <option value="">Processing</option>
+                    </select>
+                </span>
+
+                <!-- CARD REQUEST 1 -->
+                <div class="card-fluid pad10 marg-top10y">
+                    <span>
+                        <strong>Heading</strong>
+                    </span>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, molestiae. Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit. Sapiente sit illo soluta iste alias perspiciatis itaque architecto
+                        sed culpa esse?
+                    </p>
+                    <hr>
+
+                    <span class="status-pill-rejected">Rejected</span>
+                    <span class="status-date"> 12 May</span>
+                </div>
+                    <!-- CARD REQUEST 2 -->
+                <div class="card-fluid pad10 marg-top10y">
+                        <span>
+                            <strong>Heading</strong>
+                        </span>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, molestiae. Lorem ipsum dolor sit amet
+                            consectetur adipisicing elit. Sapiente sit illo soluta iste alias perspiciatis itaque architecto
+                            sed culpa esse?
+                        </p>
+                        <hr>
+                        <span class="status-pill-accepted">Accepted</span>
+                        <span class="status-date"> 12 May</span>
+                    </div>
+                    <!-- End of Card 2 -->
+                    <div class="list">
+                            <ul class="pagination">
+                                    <li class="disabled"><a href="#!"><i class="fa fa-angle-left"></i></a></li>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li class="active">3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li><a href="#!"><i class="fa fa-angle-right"></i></a></li>
+                                  </ul>
+                    </div>
+                    
+                </div>
+               
+            </div>
+            
+           
+    </div>
 </body>
-<script>
-    function toggleSidebar() {
-        document.getElementById("sidebar").classList.toggle('inactive');
-    }
-</script>
+
 </html>

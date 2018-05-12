@@ -48,9 +48,12 @@ hr {
     margin: 0 auto;
 }
 
-form input, form textarea {
+form input, form textarea, form select {
 border:1px solid #ced4da;
     border-radius: .25rem;
+}
+form select {
+    padding: 10px;
 }
 /* Logo */
 #logo2 {
@@ -156,7 +159,7 @@ border:1px solid #ced4da;
     margin-top: 0.25rem;
   }
 
-.card form input, .card form button {
+.card form input, .card form button .card form textarea {
     width: 100%;
     padding: 1em;
     
@@ -173,4 +176,34 @@ border:1px solid #ced4da;
 }
 .card form button {
     font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.user-area {
+    max-width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    background:#fff;
+    box-shadow: 0 0 20px 0 rgba(72, 94, 160, 0.7);
+    border-radius: 5px;
+}
+
+/* Dashboard */
+.seperator {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 0px;
 }
