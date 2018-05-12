@@ -303,3 +303,8 @@ nav ul li a {
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
 }
+
+.status-btn {
+    display: grid;
+    grid-template-columns: 1fr;
+}
