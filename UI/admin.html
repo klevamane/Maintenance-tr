@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Admin</title>
+</head>
+
+<body id="primary-background" class="nobody-margin">
+    <nav>
+            <div class="nav-toggle">
+                    <i class="fa fa-bars handlebar"></i>
+                </div>
+        <div class="container">
+            
+            <ul id="navul" class="navul">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="./Index.html">Signout</a></li>
+
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+       
+
+            <div>
+                <h2 class="card-h2">Request Infomation</h2>
+                <hr>
+
+                
+
+                <!-- CARD REQUEST 1 -->
+                <div class="card-fluid pad10 marg-top10y">
+                    <span>
+                        <strong>Heading</strong>
+                    </span>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, molestiae. Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit. Sapiente sit illo soluta iste alias perspiciatis itaque architecto
+                        sed culpa esse?
+                    </p>
+                    <hr>
+                    
+                    <span class="status-pill-rejected">Rejected</span>
+                    <span class="status-date"> 12 May</span>
+                    
+                </div>
+                <p><button class="marg-left30">Back</button></p>
+                </div>
+               
+            </div>
+            
+           
+    </div>
+<script src="./js/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.handlebar').click(function(){
+            $('#navul').toggleClass('active'); 
+        });
+        
+    });
+    </script>
+
+</body>
+
+</html>
