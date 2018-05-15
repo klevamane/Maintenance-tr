@@ -1,0 +1,41 @@
+{
+  "name": "maintenance-tr",
+  "version": "1.0.0",
+  "description": "Maintenance Tracker App is an application that provides users with the ability to reach out to",
+  "main": "index.js",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "express": "^4.16.3",
+    "joi": "^13.3.0",
+    "jsonwebtoken": "^8.2.1",
+    "morgan": "^1.9.0",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klevamane/Maintenance-tr.git"
+  },
+  "keywords": [
+    "maintenance",
+    "repairs"
+  ],
+  "author": "Onengiye Richard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/klevamane/Maintenance-tr/issues"
+  },
+  "homepage": "https://github.com/klevamane/Maintenance-tr#readme"
+}
