@@ -46,10 +46,30 @@ class usercontroller {
 * @memberOf
 */
   static authenticateUser(req, res) {
+    let status;
+    let positionOfUser;
     for (let i = 0; i < Users.length; i += 1) {
-      if (Users[i].email === req.email && Users[i].password === req.password) {
-        res.status(302).json({ message: 'Login successfull' });
+      if (Users[i].email === req.email) {
+        status = 1;
+        positionOfUser = i;
+        break;
       }
+    }
+    // if status = 1, then email exist
+    if (status === 1) {
+      // compare passowrd
+      // return res.status(200).json(authenticatedUser);
+      bcrypt.compare(req.body.password, Users[positionOfUser].password, (err, result) => {
+        if (result) {
+          // Ensure to put the secretekey in your environment variable
+          const token = jwt.sign({ id: Users[positionOfUser].id }, 'secreteKey', { expiresIn: '1h' });
+          return res.status(202).json({
+            message: 'User has been authenticated',
+            token
+          });
+        }
+        return res.status(401).json({ message: 'Invalid email or password' });
+      });
     }
   }
 }

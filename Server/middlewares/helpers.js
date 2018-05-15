@@ -19,3 +19,8 @@ exports.validateRegisterUSerSchema = {
   password: Joi.string().min(6).max(15).required(),
   mobile: Joi.string().max(11).regex(/^[0-9]{1}[7-9]{1}[0-1]{1}[1-9]{1}[0-9]{7}/).required(),
 };
+
+exports.validateAuthenticateUserSchema = {
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).max(15).required()
+};

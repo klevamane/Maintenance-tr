@@ -24,11 +24,26 @@ export const validateCreateUser = (req, res, next) => {
   }
 };
 
-export const checkCategory = (req, res, next) => {
-  req.check('category', 'Alphabets only').isLength({ min: 2 });
-  const errors = req.validationErrors();
-  if (errors) {
-    return res.status(406).json({ messages: 'Invalid Category' });
+
+export const validateUserLogin = (req, res, next) => {
+  const schema = {
+    email: Joi.string().email(),
+    password: Joi.string().min(6).max(15).required(),
+  };
+  const { error, value } = Joi.validate(req.body, schema);
+  if (error) {
+    switch (error.details[0].context.key) {
+      case 'email':
+        res.status(400).json({ error: 'You must provide a valid email address' });
+        break;
+      case 'password':
+        res.status(400).json({ error: 'Password must be between 6-15 characters' });
+        break;
+      default:
+        res.status(400).send({ error: 'Invalid User details' });
+    }
+  } else {
+    next();
   }
-  next();
 };
+
