@@ -10,10 +10,11 @@ const port = process.env.port || 3000;
 // Log HTTP methods to console
 app.use(logger('dev'));
 
-// Middleware
+// Middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Routes
 app.use('/api/v1/auth', userRoutes);
 
 app.get('*', (req, res, next) => {
