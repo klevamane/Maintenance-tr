@@ -71,6 +71,7 @@ class usercontroller {
         return res.status(401).json({ message: 'Invalid email or password' });
       });
     }
+    return res.status(401).json({ message: 'Invalid email or password' });
   }
 }
 
