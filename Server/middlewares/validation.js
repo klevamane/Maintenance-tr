@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { validateRegisterUSerSchema } from './helpers';
+import { validateRegisterUSerSchema, validateAuthenticateUserSchema } from './helpers';
 
 export const validateCreateUser = (req, res, next) => {
   // Use schema blue print to validate req variables
@@ -25,12 +25,9 @@ export const validateCreateUser = (req, res, next) => {
 };
 
 
-export const validateUserLogin = (req, res, next) => {
-  const schema = {
-    email: Joi.string().email(),
-    password: Joi.string().min(6).max(15).required(),
-  };
-  const { error, value } = Joi.validate(req.body, schema);
+export const validateAuthenticateUser = (req, res, next) => {
+  // Use schema (validateAuthenticateUserSchema) blue print to validate req object variables
+  const { error, value } = Joi.validate(req.body, validateAuthenticateUserSchema);
   if (error) {
     switch (error.details[0].context.key) {
       case 'email':
@@ -46,4 +43,3 @@ export const validateUserLogin = (req, res, next) => {
     next();
   }
 };
-

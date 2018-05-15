@@ -49,7 +49,7 @@ class usercontroller {
     let status;
     let positionOfUser;
     for (let i = 0; i < Users.length; i += 1) {
-      if (Users[i].email === req.email) {
+      if (Users[i].email === req.body.email) {
         status = 1;
         positionOfUser = i;
         break;
