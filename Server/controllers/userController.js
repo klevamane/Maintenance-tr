@@ -1,4 +1,6 @@
 import Users from '../models/user';
+import jwt from 'jsonwebtoken';
+
 
 /**
 * @class usercontroller
@@ -29,5 +31,23 @@ class usercontroller {
     const registeredUser = Users[position];
     return res.status(200).json({ message: 'User has been registered', registeredUser });
   }
+
+
+  /**
+* @static
+* @description A registered user will be authenticated to gain access to the application
+* @param  {object} req gets values passed to the api
+* @param  {object} res sends result as output
+* @returns {object} returns 202 status code and valid user message is  if successful, else 401
+* @memberOf
+*/
+  static authenticateUser(req, res) {
+    for (let i = 0; i < Users.length; i += 1) {
+      if (Users[i].email === req.email && Users[i].password === req.password) {
+        res.status(302).json({ message: 'Login successfull' });
+      }
+    }
+  }
 }
+
 export default usercontroller;
