@@ -1,6 +1,6 @@
-import Users from '../models/user';
 import jwt from 'jsonwebtoken';
-
+import bcrypt from 'bcrypt';
+import Users from '../models/user';
 
 /**
 * @class usercontroller
@@ -17,21 +17,25 @@ class usercontroller {
      * @memberOf
      */
   static registerUser(req, res) {
-    const newUser = {
-      id: Users.length + 1,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email,
-      password: req.body.password,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-    };
-    Users.push(newUser);
-    const position = Users.length - 1;
-    const registeredUser = Users[position];
-    return res.status(200).json({ message: 'User has been registered', registeredUser });
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+      if (err) {
+        return res.status(500).json({ error: err });
+      }
+      const newUser = {
+        id: Users.length + 1,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: hash,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      };
+      Users.push(newUser);
+      const position = Users.length - 1;
+      const registeredUser = Users[position];
+      return res.status(200).json({ message: 'User has been registered', registeredUser });
+    });
   }
-
 
   /**
 * @static
