@@ -35,7 +35,7 @@ class requestController {
 
   /**
   * @static
-  * @description List all user requests businesses
+  * @description List all user requests
   * @param  {object} req gets values passed to the api
   * @param  {object} res sends result as output
   * @returns {object} Success message with the request list or error message
@@ -53,6 +53,23 @@ class requestController {
     }
     return res.status(302).json({ message: 'Displaying user requests ', userRequests });
   }
+  /**
+* @static
+* @description List single request by the logged in user
+* @param  {object} req gets values passed to the api
+* @param  {object} res sends result as output
+* @returns {object} Success message with request list or error message
+  */
+  static getUserRequestById(req, res) {    
+    const id = parseInt(req.params.requestId, 10);
+    const requestGottenById = Requests.filter(element =>
+      ((element.userid === req.decodedUserData.id) && (element.id === id)));
+    if (requestGottenById.length !== 1) {
+      return res.status(404).json({ error: 'Request not found' });
+    }
+    return res.status(302).json({ message: 'Request found', requestGottenById });
+    // winston.info(newArray);
+    // winston.info(newArray.length);
+  }
 }
 export default requestController;
-
