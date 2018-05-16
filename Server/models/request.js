@@ -4,6 +4,7 @@ const requests = [{
   fault: 'Broken screen',
   brand: 'Sony',
   modelNumber: 'z200',
+  status: 'Pending',
   description: 'some lorem ipsum description to do here',
   createdAt: Date.now(),
   updatedAt: Date.now()
@@ -14,15 +15,29 @@ const requests = [{
   fault: 'Water damage',
   brand: 'LG',
   modelNumber: 'V30',
+  status: 'Pending',
   description: 'some lorem ipsum description to do here',
   createdAt: Date.now(),
   updatedAt: Date.now()
 },
 {
-  id: 2,
+  id: 3,
+  userid: 2,
+  fault: 'Water damage',
+  brand: 'LG',
+  status: 'Pending',
+  modelNumber: 'V30',
+  description: 'some lorem ipsum description to do here',
+  createdAt: Date.now(),
+  updatedAt: Date.now()
+},
+
+{
+  id: 4,
   userid: 2,
   fault: 'Water damage',
   brand: 'Chigo',
+  status: 'Pending',
   modelNumber: 'ACSP12',
   description: 'some lorem ipsum description to do here',
   createdAt: Date.now(),
