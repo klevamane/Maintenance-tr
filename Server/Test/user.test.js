@@ -32,7 +32,7 @@ describe('POST USER /user', () => {
       });
   });
 
-  it('Mobile number should ne of nigerian format', (done) => {
+  it('Mobile number should be of nigerian format', (done) => {
     const user = {
       firstname: 'Bestman',
       email: 'email@email.com',
@@ -70,6 +70,24 @@ describe('POST USER /user', () => {
       });
   });
 
+  it('You must provide a valid email address', (done) => {
+    const user = {
+      firstname: 'Bestman',
+      email: 'email',
+      lastname: 'Kevin',
+      mobile: '08025785342',
+      password: 'Password123',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(user)
+      .end((err, res) => {
+        expect(res.body.error).to.equal('You must provide a valid email address');
+        expect(res).to.have.status(400);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
 
 
   it('Firstname must contain only alphabets', (done) => {
@@ -88,6 +106,41 @@ describe('POST USER /user', () => {
         done();
       });
   });
+
+  it('Password must be between 6-15 characters', (done) => {
+    const user = {
+      firstname: 'Kevin',
+      email: 'userone@email.com',
+      lastname: 'Kevin',
+      password: 'pas'
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(user)
+      .end((err, res) => {
+        expect(res.body.error).to.equal('Password must be between 6-15 characters');
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+
+  it('Enter password less than 16 characters', (done) => {
+    const user = {
+      firstname: 'Kevin',
+      email: 'userone@email.com',
+      lastname: 'Kevin',
+      password: 'paslore10ipsumloremsom'
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(user)
+      .end((err, res) => {
+        expect(res.body.error).to.equal('Password must be between 6-15 characters');
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+
 
   it('lastname must contain only alphabets', (done) => {
     const user = {
