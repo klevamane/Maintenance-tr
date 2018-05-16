@@ -42,6 +42,18 @@ const requests = [{
   description: 'some lorem ipsum description to do here',
   createdAt: Date.now(),
   updatedAt: Date.now()
-}];
+},
+{
+  id: 5,
+  userid: 1,
+  fault: 'Broken screen',
+  brand: 'Sony',
+  modelNumber: 'z200',
+  status: 'Pending',
+  description: 'some lorem ipsum description to do here',
+  createdAt: Date.now(),
+  updatedAt: Date.now()
+},
+];
 
 export default requests;
