@@ -31,7 +31,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test-dev": "mocha ./server/test --exit --compilers js:babel-register --timeout 20000",
+    "test-dev": "nyc mocha ./server/Test --exit --compilers js:babel-register --timeout 20000",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev": "nodemon --exec npm run babel-node -- ./app.js",
     "babel-node": "babel-node --presets=env"
   },
