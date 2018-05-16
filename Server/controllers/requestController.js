@@ -19,7 +19,7 @@ class requestController {
       fault: req.body.fault,
       brand: req.body.brand,
       modelNumber: req.body.modelNumber,
-      user: req.decodedUserDate.id,
+      user: req.decodedUserData.id,
       description: req.body.description,
       other: req.body.other,
       createdAt: Date.now(),
