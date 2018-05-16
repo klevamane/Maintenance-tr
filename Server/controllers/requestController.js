@@ -1,4 +1,6 @@
+import winston from 'winston';
 import Requests from '../models/request';
+
 
 /**
 * @class requestController
@@ -29,6 +31,27 @@ class requestController {
     const position = Requests.length - 1;
     const newRequest = Requests[position];
     return res.status(200).json({ message: 'Request has been sent', newRequest });
+  }
+
+  /**
+  * @static
+  * @description List all user requests businesses
+  * @param  {object} req gets values passed to the api
+  * @param  {object} res sends result as output
+  * @returns {object} Success message with the request list or error message
+  */
+  static getUserRequests(req, res) {
+    const userRequests = [];
+    for (let i = 0; i < Requests.length; i += 1) {
+      if (Requests[i].userid === req.decodedUserData.id) {
+        userRequests.push(Requests[i]);
+      }
+    }
+    winston.info(userRequests.length);
+    if (userRequests.length === 0) {
+      return res.status(404).json({ message: 'No request found' });
+    }
+    return res.status(302).json({ message: 'Displaying user requests ', userRequests });
   }
 }
 export default requestController;
