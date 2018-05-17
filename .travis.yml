@@ -5,13 +5,11 @@ after_success:
   - "npm run coverage"
 before_script: 
   - "npm install"
-  - "npm install codeclimate-test-reporter istanbul -g"
 cache: 
   directories: 
     - node_modules
 env: 
   global: 
-    - CC_TEST_REPORTER_ID=f07127f3df314d9840650484f020f6bcd6007f043956c590fc951318b30c29ef
 language: node_js
 node_js: 
   - "8.10.0"
@@ -19,4 +17,4 @@ notifications:
   email: false
 script: 
   - "npm run test"
-  - "check-coverage"
+  
