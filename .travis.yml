@@ -1,20 +1,18 @@
---- 
-after_script: 
-  - "codeclimate-test-reporter < ./coverage/lcov.info"
-after_success: 
-  - "npm run coverage"
-before_script: 
-  - "npm install"
-cache: 
-  directories: 
-    - node_modules
-env: 
-  global: 
 language: node_js
-node_js: 
-  - "8.10.0"
-notifications: 
-  email: false
-script: 
-  - "npm run test"
-  
+node_js:
+ - "6"
+notifications:
+ email: false
+cache:
+ directories:
+   - node_modules
+before_script:
+ - npm install
+script:
+ - npm run test
+after_success:
+ - npm run coverage
+#  - npm run report-coverage
+#  - npm run coveralls
+env:
+  global:
