@@ -30,7 +30,7 @@
     "nyc": "^11.8.0"
   },
   "scripts": {
-    "test": "nyc mocha server/test/**/*test.js --exit --compilers js:babel-register --timeout 20000",
+    "test": "nyc mocha ./server/test/*.text.js --exit --compilers js:babel-register --timeout 20000",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "test-dev": "nyc mocha ./server/test --exit --compilers js:babel-register --timeout 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
