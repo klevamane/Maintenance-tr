@@ -158,5 +158,4 @@ describe('POST USER /user', () => {
         done();
       });
   });
-
 });

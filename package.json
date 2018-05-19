@@ -11,28 +11,30 @@
     "babel-register": "^6.26.0",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "express": "^4.16.3",
-    "joi": "^13.3.0",
-    "jsonwebtoken": "^8.2.1",
-    "morgan": "^1.9.0",
-    "winston": "^2.4.2"
-  },
-  "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "coveralls": "^3.0.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "express": "^4.16.3",
+    "joi": "^13.3.0",
+    "jsonwebtoken": "^8.2.1",
     "mocha": "^5.0.4",
     "mocha-lcov-reporter": "^1.3.0",
+    "morgan": "^1.9.0",
     "nodemon": "^1.17.4",
-    "nyc": "^11.8.0"
+    "nyc": "^11.8.0",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    
+    
   },
   "scripts": {
     "start": "babel-node ./app.js",
-    "test": "nyc mocha --recursive server/test --exit --compilers js:babel-register --timeout 20000",
+    "test": "nyc mocha --recursive ./server --exit --compilers js:babel-core/register --timeout 20000",
     "test-dev": "nyc mocha ./server --exit --compilers js:babel-register --timeout 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "check-coverage": "nyc check-coverage --lines 70 --per-file",
