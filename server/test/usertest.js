@@ -11,24 +11,24 @@ chai.use(chaiHttp);
 describe('POST USER /user', () => {
   // runBeforeAll();
   // doBeforeEach();
-  it('should create a new user', (done) => {
-    const user = {
-      firstname: 'Bestman',
-      email: 'email@email.com',
-      lastname: 'Jonji',
-      mobile: '08025773821',
-      password: 'Password123',
-    };
-    chai.request(app)
-      .post('/api/v1/auth/signup')
-      .send(user)
-      .end((err, res) => {
-        expect(res.body.message).to.equal('User has been registered');
-        expect(res).to.have.status(201);
-        expect(res.body).to.be.a('object');
-        done();
-      });
-  });
+//   it('should create a new user', (done) => {
+//     const user = {
+//       firstname: 'Bestman',
+//       email: 'email@email.com',
+//       lastname: 'Jonji',
+//       mobile: '08025773821',
+//       password: 'Password123',
+//     };
+//     chai.request(app)
+//       .post('/api/v1/auth/signup')
+//       .send(user)
+//       .end((err, res) => {
+//         expect(res.body.message).to.equal('User has been registered');
+//         expect(res).to.have.status(201);
+//         expect(res.body).to.be.a('object');
+//         done();
+//       });
+//   });
 
   it('Mobile number should be of nigerian format', (done) => {
     const user = {
