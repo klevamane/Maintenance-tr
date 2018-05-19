@@ -15,4 +15,5 @@ after_success:
 #  - npm run report-coverage
 #  - npm run coveralls
 env:
+ - NODE_ENV=test, 
   global:
