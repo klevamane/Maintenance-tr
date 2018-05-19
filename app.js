@@ -2,8 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import winston from 'winston';
 import logger from 'morgan';
-import userRoutes from './Server/routes/userRoute';
-import requestRoutes from './Server/routes/requestRoute';
+import userRoutes from './server/routes/userRoute';
+import requestRoutes from './server/routes/requestRoute';
 
 const app = express();
 const port = process.env.port || 3000;
