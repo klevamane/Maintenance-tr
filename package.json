@@ -1,7 +1,7 @@
 {
   "name": "maintenance-tr",
   "version": "1.0.0",
-  "description": "Maintenance Tracker App is an application that provides users with the ability to reach out to",
+  "description": "Maintenance Tracker App",
   "main": "index.js",
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -34,9 +34,8 @@
     "npm": "5.7.1"
   },
 
-
   "scripts": {
-    "test": "mocha ./server/test --exit --compilers js:babel-register --timeout 20000",
+    "test": "mocha ./Server/test --exit --compilers js:babel-register --timeout 20000",
     "dev": "nodemon --exec npm run babel-node -- ./app.js",
     "babel-node": "babel-node --presets=env"
   },
