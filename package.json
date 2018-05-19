@@ -33,7 +33,7 @@
     "test2": "nyc mocha server/test/*.test.js --exit --compilers js:babel-register --timeout 20000",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "test-dev": "nyc mocha ./server/test --exit --compilers js:babel-register --timeout 20000",
-    "test": "nyc --reporter=html --reporter=text mocha --require babel-register server/tests/*",
+    "test": "nyc --reporter=html --reporter=text mocha --require babel-register server/test/*",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "check-coverage": "nyc check-coverage --lines 70 --per-file",
     "dev": "nodemon --exec npm run babel-node -- ./app.js",
