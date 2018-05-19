@@ -1,7 +1,8 @@
+import winston from 'winston';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import Users from '../models/user';
-import winston from 'winston';
+
 
 /**
 * @class usercontroller
