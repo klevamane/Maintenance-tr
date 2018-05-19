@@ -7,7 +7,7 @@ import app from './../../app';
 const { expect } = chai;
 chai.use(chaiHttp);
 
-// process.env.NODE = test;
+process.env.NODE_ENV = test;
 
 // CREATE
 describe('POST USER /user', () => {
