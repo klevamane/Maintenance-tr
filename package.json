@@ -30,7 +30,8 @@
   "devDependencies": {},
   "scripts": {
     "start": "babel-node ./app.js",
-    "test": "mocha '.Server/test' --exit --compilers js:babel-register --timeout 20000",
+    "test2": "mocha '.Server/test' --exit --compilers js:babel-register --timeout 20000",
+    "test": "nyc --reporter=html --reporter=text mocha --require babel-register Server/test/*",
     "test-dev": "nyc mocha ./server --exit --compilers js:babel-register --timeout 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "check-coverage": "nyc check-coverage --lines 70 --per-file",
