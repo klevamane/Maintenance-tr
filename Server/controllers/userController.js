@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
+import winston from 'winston';
 import bcrypt from 'bcrypt';
 import Users from '../models/user';
-import winston from 'winston';
+
 
 /**
 * @class usercontroller
@@ -34,7 +35,7 @@ class usercontroller {
       Users.push(newUser);
       const position = Users.length - 1;
       const registeredUser = Users[position];
-      return res.status(200).json({ message: 'User has been registered', registeredUser });
+      return res.status(201).json({ message: 'User has been registered', registeredUser });
     });
   }
 
