@@ -60,7 +60,7 @@ class requestController {
 * @param  {object} res sends result as output
 * @returns {object} Success message with request list or error message
   */
-  static getUserRequestById(req, res) {    
+  static getUserRequestById(req, res) {
     const id = parseInt(req.params.requestId, 10);
     const requestGottenById = Requests.filter(element =>
       ((element.userid === req.decodedUserData.id) && (element.id === id)));

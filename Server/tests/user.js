@@ -158,3 +158,42 @@ describe('POST USER /user', () => {
       });
   });
 });
+
+describe('POST USER /Login', () => {
+  // runBeforeAll();
+  // doBeforeEach();
+  it('Invalid password', (done) => {
+    const user = {
+      firstname: 'Bestman',
+      email: 'manipresh@ymail.com',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        expect(res.body.error).to.equal('Password must be between 6-15 characters');
+        expect(res).to.have.status(400);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+});
+
+describe('POST USER /Login', () => {
+  it('You must provide a valid email address', (done) => {
+    const user = {
+      firstname: 'Bestman',
+      email: 'manip',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        expect(res.body.error).to.equal('You must provide a valid email address');
+        expect(res).to.have.status(400);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+});
+
