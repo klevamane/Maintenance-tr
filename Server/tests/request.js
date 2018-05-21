@@ -81,16 +81,16 @@ describe('POST USER REQUEST FILE', () => {
       });
   });
 
-  it('Get all requests of a logged in user', (done) => {
-    chai.request(app)
-      .get('/api/v1/users/requests')
-      .set('Authorization', `Bearer ${authenticationToken}`)
-      .end((err, res) => {
-        winston.info(`GET ALL USER REQ ${authenticationToken}`);
-        expect(res.body.message).to.equal('Displaying user requests');
-        expect(res).to.have.status(302);
-        expect(res.body).to.be.a('object');
-        done();
-      });
-  });
+//   it('Get all requests of a logged in user', (done) => {
+//     chai.request(app)
+//       .get('/api/v1/users/requests')
+//       .set('Authorization', `Bearer ${authenticationToken}`)
+//       .end((err, res) => {
+//         winston.info(`GET ALL USER REQ ${authenticationToken}`);
+//         expect(res.body.message).to.equal('Displaying user requests');
+//         expect(res).to.have.status(302);
+//         expect(res.body).to.be.a('object');
+//         done();
+//       });
+//   });
 });
