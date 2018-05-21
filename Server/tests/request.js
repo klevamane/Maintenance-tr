@@ -9,10 +9,29 @@ chai.use(chaiHttp);
 
 let authenticationToken;
 let loggedInUserId;
+
+// const doBeforeAll = () => {
+//   before(() => {
+//     const user = {
+//       email: 'oniadekan@gmail.com',
+//       password: 'password123',
+//     };
+//     chai.request(app)
+//       .post('/api/v1/auth/login')
+//       .send(user)
+//       .end((err, res) => {
+//         expect(res.body.message).to.equal('User has been authenticated');
+//         expect(res).to.have.status(202);
+//       });
+//   });
+// };
+
+
 describe('POST USER REQUEST FILE', () => {
+  // doBeforeAll();
   it('Should Authenticate user for request', (done) => {
     const user = {
-      email: 'adebroki@gmail.com',
+      email: 'oniadekan@gmail.com',
       password: 'password123',
     };
     chai.request(app)
@@ -28,6 +47,19 @@ describe('POST USER REQUEST FILE', () => {
   });
 
   it('Create new request for a user', (done) => {
+    before(() => {
+      const user1 = {
+        email: 'oniadekan@gmail.com',
+        password: 'password123',
+      };
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(user1)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('User has been authenticated');
+          expect(res).to.have.status(202);
+        });
+    });
     winston.info(`This is the user ID: ${loggedInUserId}`);
     winston.info(`This is the user AuthTOken: ${authenticationToken}`);
     const user = {
@@ -44,6 +76,19 @@ describe('POST USER REQUEST FILE', () => {
       .end((err, res) => {
         expect(res.body.message).to.equal('Request has been sent');
         expect(res).to.have.status(200);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('Get all requests of a logged in user', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/requests')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .end((err, res) => {
+        winston.info(`GET ALL USER REQ ${authenticationToken}`);
+        expect(res.body.message).to.equal('Displaying user requests');
+        expect(res).to.have.status(302);
         expect(res.body).to.be.a('object');
         done();
       });
