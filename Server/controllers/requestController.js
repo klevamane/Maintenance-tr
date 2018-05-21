@@ -1,4 +1,5 @@
 import winston from 'winston';
+// import jwt from 'jsonwebtoken';
 import Requests from '../models/request';
 
 
@@ -41,9 +42,14 @@ class requestController {
   * @returns {object} Success message with the request list or error message
   */
   static getUserRequests(req, res) {
+    const authentcationTokenId = parseInt(req.decodedUserData.id, 10);
+    winston.info(`This is the authtoken: ${authentcationTokenId}`);
+    // const decoded = jwt.decode(authentcationToken);
+    // winston.info(`This is the payload ${decoded.payload}`);
+
     const userRequests = [];
     for (let i = 0; i < Requests.length; i += 1) {
-      if (Requests[i].userid === req.decodedUserData.id) {
+      if (Requests[i].userid === authentcationTokenId) {
         userRequests.push(Requests[i]);
       }
     }
