@@ -61,14 +61,10 @@ class usercontroller {
       return res.status(401).json({ message: 'Invalid email or password outside' });
     }
     winston.info(`Status is equal to ${status}`);
-    // if status = 1, then email exist
-    // if (status === 1) {
-    // compare passowrd
-    // return res.status(200).json(authenticatedUser);
     bcrypt.compare(req.body.password, Users[positionOfUser].password, (err, result) => {
       if (result) {
         // Ensure to put the secretekey in your environment variable
-        const token = jwt.sign({ id: Users[positionOfUser].id }, 'secreteKey', { expiresIn: '1h' });
+        const token = jwt.sign({ id: Users[positionOfUser].id }, 'secreteKey', { expiresIn: 60 * 2 });
         return res.status(202).json({
           message: 'User has been authenticated',
           token
