@@ -314,3 +314,7 @@ nav ul li a {
     display: grid;
     grid-template-columns: 1fr;
 }
+
+.text-right-side {
+    float: right;
+}
