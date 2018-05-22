@@ -33,6 +33,7 @@
     "test2": "mocha '.Server/test' --exit --compilers js:babel-register --timeout 20000",
     "test4": "nyc --reporter=html --reporter=text mocha --require babel-register Server/tests/*",
     "test": "nyc mocha --require babel-register Server/tests/* --exit",
+    "test-dl": "mocha --require babel-register Server/tests/* --exit",
     "test-dev": "nyc mocha ./server --exit --compilers js:babel-register --timeout 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "check-coverage": "nyc check-coverage --lines 70 --per-file",

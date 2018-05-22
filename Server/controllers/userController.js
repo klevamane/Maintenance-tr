@@ -67,7 +67,8 @@ class usercontroller {
         const token = jwt.sign({ id: Users[positionOfUser].id }, 'secreteKey', { expiresIn: 60 * 2 });
         return res.status(202).json({
           message: 'User has been authenticated',
-          token
+          token,
+        //   user: Users[positionOfUser]
         });
       }
       return res.status(401).json({ message: 'Invalid email or password Inside' });
