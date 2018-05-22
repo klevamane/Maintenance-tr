@@ -1,4 +1,5 @@
 import winston from 'winston';
+// import jwt from 'jsonwebtoken';
 import Requests from '../models/request';
 
 
@@ -21,7 +22,7 @@ class requestController {
       fault: req.body.fault,
       brand: req.body.brand,
       modelNumber: req.body.modelNumber,
-      user: req.decodedUserData.id,
+      user: req.decodedUserData,
       description: req.body.description,
       other: req.body.other,
       createdAt: Date.now(),
@@ -41,17 +42,21 @@ class requestController {
   * @returns {object} Success message with the request list or error message
   */
   static getUserRequests(req, res) {
+    const authentcationTokenId = parseInt(req.decodedUserData.id, 10);
+    // winston.info(`This is the authtoken: ${authentcationTokenId}`);
     const userRequests = [];
     for (let i = 0; i < Requests.length; i += 1) {
-      if (Requests[i].userid === req.decodedUserData.id) {
+      if (Requests[i].userid === authentcationTokenId) {
         userRequests.push(Requests[i]);
       }
     }
-    winston.info(userRequests.length);
+    winston.info(`Number og requests are ${userRequests.length}`);
+
     if (userRequests.length === 0) {
-      return res.status(404).json({ message: 'No request found' });
+      return res.status(401).json({ message: 'No request for this user' });
     }
-    return res.status(302).json({ message: 'Displaying user requests ', userRequests });
+    winston.info(`Number og requests Again are ${userRequests.length}`);
+    return res.status(200).json({ message: 'Displaying user requests', userRequests });
   }
   /**
 * @static
