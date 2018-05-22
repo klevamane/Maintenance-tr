@@ -27,19 +27,22 @@ body#dashboard {
 .nobody-margin {
     margin: 0 !important;
 }
-button {
+button, .btn {
     background: var(--primaryOrange);
     border: none;
     padding: 8px;
     border-radius: 3px;
     color: #fff;
 }
+.btn {
+    text-decoration: none;
+}
 .danger {
     background: #f02d13 !important;
 }
 
 .view-detail {
-    background: rgb(158, 160, 161);
+    background: rgb(158, 160, 161) !important;
 }
 
 ul {
