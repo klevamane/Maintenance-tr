@@ -243,7 +243,14 @@ nav ul li a {
     font-size: 25px;
     display: none;
 }
+nav .brand {
+    float: left;
+    padding-top: 5px;
 
+}
+nav .brand #logo1 {
+    color: #fff;
+}
 /* Container media Query */
 
 .container {
@@ -339,7 +346,7 @@ nav ul li a {
     grid-gap: 10px;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 758px) {
     .seperator2 {
         display: grid;
         grid-template-columns: 1fr;
@@ -348,6 +355,8 @@ nav ul li a {
         margin-bottom: 50px;
     }
   }
+  
+  
 .status-btn {
     display: grid;
     grid-template-columns: 1fr;
@@ -366,9 +375,12 @@ nav ul li a {
     font-size: 16px;
     color: #fff;
     font-weight: 700;
+    border: rgb(209, 202, 202) 3px;
+    background: var(--fontColour);
+    padding: 10px;
 }
 .caption span {
-    color: var(--fontColour);
+    color: var(--primaryOrange);
 }
 .caption h1 {
     color: var(--primaryOrange);
