@@ -66,6 +66,19 @@ form select {
 #logo1 {
     font-size: 22px;
 }
+#logo1-index {
+    font-size: 21px;
+    color: #fff;
+    padding-left: 0;
+    margin-left: 0;
+    font-weight: 800;
+    
+    
+}
+.index-ul {
+    display: inline-block !important;
+}
+
 /* End of logo */
 
 /* Margins */
@@ -246,6 +259,16 @@ nav ul li a {
       max-width: 540px;
     }
   }
+
+  @media (max-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+    .seperator2 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+  }
   
   /* Implement as long as screen is not greater than 768px */
   @media (max-width: 768px) {
@@ -310,6 +333,21 @@ nav ul li a {
     grid-gap: 20px;
 }
 
+.seperator2 {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    grid-gap: 10px;
+}
+
+@media (max-width: 576px) {
+    .seperator2 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .seperator2 .card-fluid {
+        margin-bottom: 50px;
+    }
+  }
 .status-btn {
     display: grid;
     grid-template-columns: 1fr;
@@ -317,4 +355,45 @@ nav ul li a {
 
 .text-right-side {
     float: right;
+}
+
+.caption {
+    max-width: 100%;
+    display: inline-block;
+    text-align: justify;
+}
+.caption p {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+}
+.caption span {
+    color: var(--fontColour);
+}
+.caption h1 {
+    color: var(--primaryOrange);
+    padding-top: 60px;
+    padding-bottom: 0;
+    margin-bottom: 0; 
+    font-size: 40px;
+    font-weight: 700;
+    
+}
+.caption hr {
+    margin-top: 0 !important;
+}
+.caption h2 {
+    padding-top: 0;
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 20px;
+    padding-left: 20px;
+    
+}
+.display-inline-altered {
+    display: inline-block;
+}
+.indexbg {
+    background-image: url("../img/bg1.jpg");
 }
