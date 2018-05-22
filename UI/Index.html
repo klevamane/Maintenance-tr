@@ -15,7 +15,7 @@
                         <i class="fa fa-bars handlebar"></i>
                     </div>
             <div class="container">
-                <span class="brand"><span id="logo1">Kleva</span><span id="logo2">fix'</span></span>
+                <span class="brand" id="brand"><span id="logo1">Kleva</span><span id="logo2">fix'</span></span>
                 <ul id="navul" class="navul">
                 
                     <li><a href="./Signin.html">Sign up</a></li>
@@ -68,7 +68,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('.handlebar').click(function(){
-            $('#navul').toggleClass('active'); 
+            $('#navul').toggleClass('active');
+            $('#brand').toggleClass('brand-active'); 
         });
         
     });
