@@ -414,3 +414,31 @@ nav .brand #logo1 {
 .indexbg {
     background-image: url("../img/bg1.jpg");
 }
+
+/************** FORM INPUT HIGHLIGHT AND PATTERNS **********/
+#form-in  input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="textarea"]:focus input[type="url"]:focus  {
+    border-color: rgb(13, 70, 109) !important;
+    -webkit-box-shadow: none;
+    box-shadow: 3px 3px rgb(13, 70, 109) !important;;
+    color:rgb(13, 70, 109) !important;;
+    font-size: 15px;
+    
+  }
+
+  .form-in input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus  {
+    border-color: rgb(13, 70, 109) !important;
+    -webkit-box-shadow: none;
+    box-shadow: 3px 3px rgb(13, 70, 109) !important;
+    color:rgb(13, 70, 109) !important;;
+  }
+ 
+
+ 
+
+  .form-in label {
+    color: rgb(13, 70, 109) !important;
+    font-size: 10px;
+  }
+button {
+    cursor: pointer;
+}
