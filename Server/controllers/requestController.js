@@ -79,24 +79,26 @@ class requestController {
   }
   /**
 * @static
-* @description Modify the request of a logged in user
+* @description Modify the request of a logged in user. Only the owner of the request can modify the request
 * @param  {object} req gets values passed to the api
-* @param  {object} res sends result as output
-* @returns {object} Success message request  has been modified
+* @param  {object} res sends the updated 
+* @returns {object} Sends the updated request as output with success message  and status code
   */
   static modifyUserRequest(req, res) {
     const id = parseInt(req.params.requestId, 10);
     let requestPosition = -1;
     let status = false;
+    if (id > Requests.length) { return res.status(403).json({ message: 'Bad request' }); }
     const loggedInUserId = parseInt(req.decodedUserData.id, 10);
     for (let i = 0; i < Requests.length; i += 1) {
-      if (Requests.id === id && Requests.userid === loggedInUserId) {
+      if (Requests[i].id === id && Requests[i].userid === loggedInUserId) {
         requestPosition = i;
         status = true;
         break;
       }
     }
-    if (!status) {
+    winston.info(`The status to modify request is ${status} and position is ${requestPosition}`);
+    if (status === false) {
       return res.status(401).json({ message: 'You are Unauthorized to edit this request' });
     }
     const changesToBeMade = {
