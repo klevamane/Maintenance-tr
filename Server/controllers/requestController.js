@@ -1,6 +1,7 @@
 import winston from 'winston';
 // import jwt from 'jsonwebtoken';
 import Requests from '../models/request';
+import users from '../models/user';
 
 
 /**
@@ -72,9 +73,48 @@ class requestController {
     if (requestGottenById.length !== 1) {
       return res.status(404).json({ error: 'Request not found' });
     }
-    return res.status(302).json({ message: 'Request found', requestGottenById });
+    return res.status(200).json({ message: 'Request found', requestGottenById });
     // winston.info(newArray);
     // winston.info(newArray.length);
+  }
+  /**
+* @static
+* @description Modify the request of a logged in user. Only the owner of the request can modify the request
+* @param  {object} req gets values passed to the api
+* @param  {object} res sends the updated 
+* @returns {object} Sends the updated request as output with success message  and status code
+  */
+  static modifyUserRequest(req, res) {
+    const id = parseInt(req.params.requestId, 10);
+    let requestPosition = -1;
+    let status = false;
+    if (id > Requests.length) { return res.status(403).json({ message: 'Bad request' }); }
+    const loggedInUserId = parseInt(req.decodedUserData.id, 10);
+    for (let i = 0; i < Requests.length; i += 1) {
+      if (Requests[i].id === id && Requests[i].userid === loggedInUserId) {
+        requestPosition = i;
+        status = true;
+        break;
+      }
+    }
+    winston.info(`The status to modify request is ${status} and position is ${requestPosition}`);
+    if (status === false) {
+      return res.status(401).json({ message: 'You are Unauthorized to edit this request' });
+    }
+    const changesToBeMade = {
+      status: 'Pending',
+      fault: req.body.fault,
+      brand: req.body.brand,
+      modelNumber: req.body.modelNumber,
+      user: req.decodedUserData,
+      description: req.body.description,
+      other: req.body.other,
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    };
+    Requests[requestPosition] = changesToBeMade;
+    const updatedRequest = Requests[requestPosition];
+    return res.json({ message: 'Request has been updated', updatedRequest });
   }
 }
 export default requestController;
