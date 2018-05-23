@@ -20,7 +20,7 @@ app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/users', requestRoutes);
 
 app.get('*', (req, res, next) => {
-  res.status(404).json({ message: 'Something went wrong' });
+  res.status(501).json({ message: 'Something went wrong' });
   next();
 });
 
