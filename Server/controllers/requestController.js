@@ -1,7 +1,5 @@
 import winston from 'winston';
-// import jwt from 'jsonwebtoken';
 import Requests from '../models/request';
-import users from '../models/user';
 
 
 /**
@@ -79,9 +77,10 @@ class requestController {
   }
   /**
 * @static
-* @description Modify the request of a logged in user. Only the owner of the request can modify the request
+* @description Modify the request of a logged in user
+    Only the owner of the request can modify the request
 * @param  {object} req gets values passed to the api
-* @param  {object} res sends the updated 
+* @param  {object} res sends the modiefied request
 * @returns {object} Sends the updated request as output with success message  and status code
   */
   static modifyUserRequest(req, res) {
@@ -97,7 +96,6 @@ class requestController {
         break;
       }
     }
-    winston.info(`The status to modify request is ${status} and position is ${requestPosition}`);
     if (status === false) {
       return res.status(401).json({ message: 'You are Unauthorized to edit this request' });
     }
@@ -114,7 +112,7 @@ class requestController {
     };
     Requests[requestPosition] = changesToBeMade;
     const updatedRequest = Requests[requestPosition];
-    return res.json({ message: 'Request has been updated', updatedRequest });
+    return res.status(200).json({ message: 'Request has been modified', updatedRequest });
   }
 }
 export default requestController;
