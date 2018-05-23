@@ -1,4 +1,3 @@
-import winston from 'winston';
 import chaiHttp from 'chai-http';
 import chai from 'chai';
 import app from './../../app';
@@ -22,8 +21,6 @@ describe('POST USER REQUEST FILE', () => {
       .send(user)
       .end((err, res) => {
         authenticationToken = res.body.token;
-        winston.info('Authoken after added');
-        winston.info(authenticationToken);
         expect(res.body.message).to.equal('User has been authenticated');
         expect(res).to.have.status(202);
         expect(res.body).to.be.a('object');
@@ -44,7 +41,19 @@ describe('POST USER REQUEST FILE', () => {
       });
   });
 
-  it('Get a by Id requests of a logged in user', (done) => {
+  it('Delete user request', (done) => {
+    chai.request(app)
+      .delete('/api/v1/users/requests/6')
+      .set('authorization', `Bearer ${authenticationToken}`)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('The request has been deleted');
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('Get request by Id requests of a logged in user', (done) => {
     chai.request(app)
       .get('/api/v1/users/requests/2')
       .set('authorization', `Bearer ${authenticationToken}`)

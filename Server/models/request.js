@@ -54,6 +54,17 @@ const requests = [{
   createdAt: Date.now(),
   updatedAt: Date.now()
 },
+{
+  id: 6,
+  userid: 2,
+  fault: 'Water damage',
+  brand: 'LG',
+  modelNumber: 'V30',
+  status: 'Pending',
+  description: 'some lorem ipsum description to do here',
+  createdAt: Date.now(),
+  updatedAt: Date.now()
+}
 ];
 
 export default requests;
