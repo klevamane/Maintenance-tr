@@ -34,7 +34,7 @@ status of their request.
 
 * GET http://localhost:3000/api/v1/users/requests - List all user requests
 * GET http://localhost:3000/api/v1/users/requests/:requestid - List a user request by Id
-* DELETE http://localhost:3000/api/v1/businesses/:id - Deletes a user request
+* DELETE http://localhost:3000/api/v1/users/requests/:id - Deletes a user request
 * POST http://localhost:3000/api/v1/auth/signup - Register a new user
 * POST http://localhost:3000/api/v1/auth/login - Authenticate registered user
 
