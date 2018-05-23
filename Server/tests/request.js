@@ -62,6 +62,31 @@ describe('POST USER REQUEST FILE', () => {
       });
   });
 
+  it('Get a by Id requests of a logged in user', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/requests/2')
+      .set('authorization', `Bearer ${authenticationToken}`)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('Request found');
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('Should return request not found', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/requests/20')
+      .set('authorization', `Bearer ${authenticationToken}`)
+      .end((err, res) => {
+        expect(res.body.error).to.equal('Request not found');
+        expect(res).to.have.status(404);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+
   // it('Create new request for a user', (done) => {
   //   before(() => {
   //     const user1 = {
