@@ -8,25 +8,6 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 let authenticationToken;
-let loggedInUserId;
-let latestdecodeuser;
-
-// const doBeforeAll = () => {
-//   before(() => {
-//     const user = {
-//       email: 'oniadekan@gmail.com',
-//       password: 'password123',
-//     };
-//     chai.request(app)
-//       .post('/api/v1/auth/login')
-//       .send(user)
-//       .end((err, res) => {
-//         expect(res.body.message).to.equal('User has been authenticated');
-//         expect(res).to.have.status(202);
-//       });
-//   });
-// };
-
 
 describe('POST USER REQUEST FILE', () => {
   // doBeforeAll();
@@ -87,36 +68,79 @@ describe('POST USER REQUEST FILE', () => {
   });
 
 
-  // it('Create new request for a user', (done) => {
-  //   before(() => {
-  //     const user1 = {
-  //       email: 'oniadekan@gmail.com',
-  //       password: 'password123',
-  //     };
-  //     chai.request(app)
-  //       .post('/api/v1/auth/login')
-  //       .send(user1)
-  //       .end((err, res) => {
-  //         expect(res.body.message).to.equal('User has been authenticated');
-  //         expect(res).to.have.status(202);
-  //       });
-  //   });
-  //   const user = {
-  //     fault: 'Broken Screen',
-  //     brand: 'LG',
-  //     modelNumber: '77263',
-  //     // user: loggedInUserId,
-  //     description: 'description'
-  //   };
-  //   chai.request(app)
-  //     .post('/api/v1/users/requests')
-  //     .set('Authorization', `Bearer ${authenticationToken}`)
-  //     .send(user)
-  //     .end((err, res) => {
-  //       expect(res.body.message).to.equal('Request has been sent');
-  //       expect(res).to.have.status(200);
-  //       expect(res.body).to.be.a('object');
-  //       done();
-  //     });
-  // });
+  it('User request has been modified', (done) => {
+    const request = {
+      fault: 'Broken Screen',
+      brand: 'LGG',
+      modelNumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .put('/api/v1/users/requests/2')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('Request has been modified');
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('User request has been modified', (done) => {
+    const request = {
+      fault: 'Broken Screen',
+      brand: 'LGG',
+      modelNumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .put('/api/v1/users/requests/1')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('You are Unauthorized to edit this request');
+        expect(res).to.have.status(401);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('User Unaunthorized to edit request', (done) => {
+    const request = {
+      fault: 'Broken Screen',
+      brand: 'LGG',
+      modelNumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .put('/api/v1/users/requests/1')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('You are Unauthorized to edit this request');
+        expect(res).to.have.status(401);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('Request to be modified does not exist', (done) => {
+    const request = {
+      fault: 'Broken Screen',
+      brand: 'LGG',
+      modelNumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .put('/api/v1/users/requests/7')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('Bad request');
+        expect(res).to.have.status(403);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
 });
