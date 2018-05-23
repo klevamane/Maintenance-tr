@@ -9,5 +9,6 @@ routes.post('/requests', checkAuthentication, requestController.createRequest);
 routes.get('/requests', checkAuthentication, requestController.getUserRequests);
 routes.get('/requests/:requestId', checkAuthentication, requestController.getUserRequestById);
 routes.put('/requests/:requestId', checkAuthentication, validateNewRequest, requestController.modifyUserRequest);
+routes.delete('/requests/:requestId', checkAuthentication, requestController.deleteRequest);
 
 export default routes;
