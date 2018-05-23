@@ -31,7 +31,9 @@
     "codeclimate-test-reporter": "^0.5.0"
   },
   "scripts": {
-    "start": "babel-node ./app.js",
+    "start2": "babel-node ./app.js",
+    "start": "nodemon --exec npm run babel-node -- ./app.js",
+    "dev": "nodemon --exec npm run babel-node -- ./app.js",
     "test2": "mocha '.Server/test' --exit --compilers js:babel-register --timeout 20000",
     "test4": "nyc --reporter=html --reporter=text mocha --require babel-register Server/tests/*",
     "test": "nyc mocha --require babel-register Server/tests/* --exit",
@@ -40,7 +42,6 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "codeclimate-report": "codeclimate-test-reporter < ./coverage/lcov.info",
     "check-coverage": "nyc check-coverage --lines 80 --per-file",
-    "dev": "nodemon --exec npm run babel-node -- ./app.js",
     "babel-node": "babel-node --presets=env"
   },
   "engines": {
