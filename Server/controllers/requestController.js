@@ -49,7 +49,6 @@ class requestController {
         userRequests.push(Requests[i]);
       }
     }
-    winston.info(`Number og requests are ${userRequests.length}`);
 
     if (userRequests.length === 0) {
       return res.status(401).json({ message: 'No request for this user' });
