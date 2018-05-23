@@ -58,9 +58,8 @@ class usercontroller {
       }
     }
     if (status !== 1) {
-      return res.status(401).json({ message: 'Invalid email or password outside' });
+      return res.status(406).json({ message: 'Invalid email or password' });
     }
-    winston.info(`Status is equal to ${status}`);
     bcrypt.compare(req.body.password, Users[positionOfUser].password, (err, result) => {
       if (result) {
         // Ensure to put the secretekey in your environment variable
@@ -71,7 +70,7 @@ class usercontroller {
         //   user: Users[positionOfUser]
         });
       }
-      return res.status(401).json({ message: 'Invalid email or password Inside' });
+      return res.status(401).json({ message: 'Invalid email or password' });
     });
   //  }
   //  return res.status(401).json({ message: 'Invalid email or password outside' });

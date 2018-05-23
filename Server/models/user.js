@@ -32,6 +32,17 @@ const users = [
     updatedAt: '15/05/2018',
 
   },
+  {
+    id: 4,
+    firstname: 'Precious',
+    lastname: 'Nsidibe',
+    email: 'scriptuser@ymail.com',
+    password: '$2b$10$DRghgnBZcA/YSKBWzxt5nOfgi8.0OV2.KHH2yGN1yvG5HrxRhF/jW',
+    mobile: '08023456442',
+    createdAt: '15/05/2018',
+    updatedAt: '15/05/2018',
+
+  }
 ];
 
 export default users;

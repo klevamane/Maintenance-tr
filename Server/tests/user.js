@@ -194,5 +194,37 @@ describe('POST USER /Login', () => {
         done();
       });
   });
+
+  it('Invalid email or password', (done) => {
+    const user = {
+      email: 'adebroki@gmail.com',
+      password: 'extremely'
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('Invalid email or password');
+        expect(res).to.have.status(401);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('Aunauthorized', (done) => {
+    const user = {
+      email: 'adebrokikali@gmail.com',
+      password: 'extremely'
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('Invalid email or password');
+        expect(res).to.have.status(406);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
 });
 
