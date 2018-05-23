@@ -32,8 +32,6 @@ status of their request.
 
 ## Routes
 
-* POST http://localhost:3000/api/v1/businesses - Register a new Business
-* PUT http://localhost:3000/api/v1/businesses/:id -  a business
 * GET http://localhost:3000/api/v1/users/requests - List all user requests
 * GET http://localhost:3000/api/v1/users/requests/:requestid - List a user request by Id
 * DELETE http://localhost:3000/api/v1/businesses/:id - Deletes a user request
