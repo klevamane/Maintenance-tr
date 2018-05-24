@@ -5,6 +5,11 @@ import logger from 'morgan';
 import userRoutes from './Server/routes/userRoute';
 import requestRoutes from './Server/routes/requestRoute';
 
+require('dotenv').config();
+const { Client } = require('pg');
+
+const client = new Client();
+
 const app = express();
 const port = process.env.port || 3000;
 
