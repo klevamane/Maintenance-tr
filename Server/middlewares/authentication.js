@@ -12,8 +12,6 @@ exports.checkAuthentication = (req, res, next) => {
     const decodededtoken = jwt.decode(token);
     // Add a new property to the request body
     req.decodedUserData = decoded;
-    winston.info(`Checking decoded token ${decodededtoken.id}`);
-    winston.info(`req.decodedUserData data from checkAuthentication: ${decoded} `);
     next();
   } catch (error) {
     return res.status(401).json({
