@@ -1,0 +1,156 @@
+
+/***************** CARDS **********************/
+
+.card-fluid form .form-header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    
+}
+.cardlogo-icon {
+    padding-top: 10px;
+}
+
+.card-fluid {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    background:#fff;
+    box-shadow: 0 0 20px 0 rgba(72, 94, 160, 0.7);
+    border-radius: 5px;
+}
+.card-fluid form {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 20px;
+}
+
+.card-fluid form input, .card-fluid form button, .card-fluid form textarea, card-fluid select {
+    width: 100%;
+    padding: 1em;
+    
+}
+.card-fluid form label {
+    display: block;
+    font-size: 13px;
+    padding: 5px 0;
+}
+.card-fluid form a {
+    text-decoration: none;
+    color: #485e74;
+
+}
+.card-fluid form button {
+    font-size: 12px;
+}
+
+.card-fluid form .dropdown {
+    display: block;
+    width: 100%;
+}
+.pad10 {
+    padding: 10px;
+}
+.pad5 {
+    padding: 5px;
+}
+
+.status-quo {
+    padding: 5px;
+    border-radius: 3px;
+    border:1px solid #ced4da;
+}
+.status-pill-rejected {
+    background: red;
+    padding: 3px;
+    color: white;
+    border-radius: 2px;
+}
+
+.status-pill-accepted {
+    background: green;
+    padding: 3px;
+    color: white;
+    border-radius: 2px;
+}
+.status-pill-pending {
+    background: #959faa;
+    padding: 3px;
+    color: white;
+    border-radius: 2px;
+}
+.status-date {
+    color: #959faa;
+    float: right;
+}
+
+.card-h2 {
+    text-align: center;
+}
+
+ul.pagination {
+    /* display: inline-block; */
+    display: inline-block; 
+    margin: 8px 0;
+    overflow: hidden;
+    margin-left: 120px;
+    cursor: pointer;
+     
+    
+}
+.list ul li {
+  
+  border: 2px solid #28425c;
+  font-size: 1rem;
+  padding: 0px 8px;
+  float: left;
+}
+.list ul li:hover {
+background: #a9b2bb;
+}
+ul.pagination li:first-child {
+
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+ul.pagination li:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+ul.pagination li.active {
+background: #28425c;
+color: #fff;
+}
+/* MEDIA QUERIES */
+
+/* styles will only work if the screen size is bigger than 700px*/
+@media(min-width: 700px) {
+    
+}
+
+/* styles will only work if the screen size is smaller than 567px*/
+@media (max-width: 576px) {
+    .seperator {
+        grid-template-columns: 1fr;
+    }
+    ul.pagination {
+        /* display: inline-block; */
+    justify-content: center;        
+        
+        
+    }
+  }
+  
+  @media (min-width: 768px) {
+    
+  }
+  
+  @media (min-width: 992px) {
+    
+  }
+  
+  @media (min-width: 1200px) {
+    
+  }

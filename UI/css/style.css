@@ -1,0 +1,316 @@
+/* RUDIMENTS */
+
+/* whenvere there is any width, it factors in the margin and padding into that width
+    instead of adding it onto it
+    */
+*{
+    box-sizing: border-box;
+}
+:root {
+    --primaryOrange: rgb(255, 124, 17);
+    --backgroundColour:  rgb(193, 205, 214);
+    --fontColour:  #485e74;
+}
+#primary-background {
+    background: var(--backgroundColour);
+}
+body{
+    color: var(--fontColour);
+    line-height: 1.6;
+    font-family: 'Roboto', sans-serif;
+}
+body#dashboard {
+    margin: 0;
+    padding: 0;
+    background:   rgb(244, 246, 248);
+}
+.nobody-margin {
+    margin: 0 !important;
+}
+button {
+    background: var(--primaryOrange);
+    border: none;
+    padding: 8px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(167, 20, 20, 0.1);  
+}
+.container {
+    margin: 0 auto;
+}
+
+form input, form textarea, form select {
+border:1px solid #ced4da;
+    border-radius: .25rem;
+}
+form select {
+    padding: 10px;
+}
+/* Logo */
+#logo2 {
+    color: var(--primaryOrange);
+    font-weight: bold;
+    font-size: 25px;
+}
+#logo1 {
+    font-size: 22px;
+}
+/* End of logo */
+
+/* Margins */
+.marg-top10y{
+    margin-top: 10px;
+}
+
+.marg-top20y{
+    margin-top: 20px;
+}
+
+.marg-top30y{
+    margin-top: 30px;
+}
+
+.marg-top40y{
+    margin-top: 40px;
+}
+
+.marg-bot10y{
+    margin-bottom: 10px;
+}
+
+.marg-bot20y{
+    margin-bottom: 20px;
+}
+
+.marg-left30 {
+    margin-left: 120px;
+}
+/****************** SIDEBAR  *******************/
+#sidebar .toggle-btn i {
+    position: absolute;
+    left: 230px;
+    top: 20px;
+}
+
+#sidebar {
+    width: 200px;
+    height: 100%;
+    background: var(--fontColour);
+    position: fixed;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+}
+#sidebar ul li {
+    border-bottom: 1px solid white;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#sidebar.inactive {
+    left: -200px;
+}
+
+
+.card-redirect-tag {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* END OF RUDIMENTS */
+
+/***************** CARDS **********************/
+
+.card form .form-header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    
+}
+.cardlogo-icon {
+    padding-top: 10px;
+}
+
+.card {
+    max-width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    background:#fff;
+    box-shadow: 0 0 20px 0 rgba(72, 94, 160, 0.7);
+    border-radius: 5px;
+}
+.card form {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 20px;
+}
+.form-small-text {
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+.card form input, .card form button .card form textarea {
+    width: 100%;
+    padding: 1em;
+    
+}
+.card form label {
+    display: block;
+    font-size: 13px;
+    padding: 5px 0;
+}
+.card form a {
+    text-decoration: none;
+    color: #485e74;
+
+}
+.card form button {
+    font-size: 12px;
+    width: 100%;
+    padding: 0.8rem;
+    cursor: pointer;
+}
+
+
+/******** NAVIGATION BAR ****/
+nav {
+    width: 100%;
+    background: rgb(6, 70, 129);
+    border-bottom: 2px solid var(--primaryOrange);
+}
+
+.navbar-wrapper
+{
+    margin: 0 auto
+}
+nav ul {
+ width: 100%;
+ margin: 0 auto;
+ padding: 0;   
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 15px;    
+}
+nav ul li:hover {
+    background: var(--primaryOrange);
+    transition: 0.5s;
+}
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-toggle {
+    width: 100%;
+    padding: 10px 20px;
+    background: #001f44;
+    text-align: right;
+    color: #fff;
+    font-size: 25px;
+    display: none;
+}
+
+/* Container media Query */
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+  
+  /* Implement as long as screen is not greater than 768px */
+  @media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+    nav ul {
+        width: 100%;
+        display: none;
+    }
+    nav ul li {
+        display: block;
+        text-align: center;
+        border-bottom: 1px solid rgba(30, 60, 90, 0.795)
+
+    }
+    .active {
+        display: block;
+    }
+}
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+    
+  }
+  
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+  }
+  
+
+
+
+
+
+
+
+
+
+.user-area {
+    max-width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    background:#fff;
+    box-shadow: 0 0 20px 0 rgba(72, 94, 160, 0.7);
+    border-radius: 5px;
+}
+
+/* Dashboard */
+.seperator {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.status-btn {
+    display: grid;
+    grid-template-columns: 1fr;
+}
