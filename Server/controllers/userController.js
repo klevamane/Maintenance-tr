@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import winston from 'winston';
 import bcrypt from 'bcrypt';
 import Users from '../models/user';
+import db from '../queries';
 
 
 /**
@@ -37,6 +38,29 @@ class usercontroller {
       const registeredUser = Users[position];
       return res.status(201).json({ message: 'User has been registered', registeredUser });
     });
+  }
+
+
+  /**
+     * Register a new user on the platform
+     * @static
+     * @description list all users
+     * @param  {object} req gets values passed to the api
+     * @param  {object} res sends result as output
+     * @returns {object} Success message with the user created or error message
+     * @memberOf
+     */
+  static listUsers(req, res, next) {
+    // Parameterized query to avoid sql injection
+    db.any('select * from usertype where id = $1', 2)
+      .then((data) => {
+        res.status(200)
+          .json({
+            message: 'Retrieved ALL users',
+            data
+          });
+      })
+      .catch(err => next(err));
   }
 
   /**
