@@ -1,20 +1,15 @@
 import pg from 'pg';
+import configuration from '../Server/configuration/configuration';
 
 const { Pool } = pg;
-// // 'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
-// const connectionString = 'postgresql://user:user@localhost:5432/challengedb';
-
-// const db = new Pool({
-//   connectionString,
-// });
-const connectionConfig = {
-  user: 'user',
-  host: 'localhost',
-  database: 'challengedb',
-  password: 'user',
-  port: 5432,
-  max: 10,
-  idleTimeoutMillis: 30000,
-};
-const db = new Pool(connectionConfig);
+let connectionConfig;
+if (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'test') {
+  connectionConfig = 'development';
+} else if (process.env.NODE_ENV !== test || process.env.NODE_ENV !== 'development') {
+  connectionConfig = 'production';
+} else {
+  connectionConfig = test;
+}
+const connectionSettings = configuration[connectionConfig];
+const db = new Pool(connectionSettings);
 export default db;

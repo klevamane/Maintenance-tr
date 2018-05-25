@@ -42,7 +42,6 @@ class requestController {
   */
   static getUserRequests(req, res) {
     const authentcationTokenId = parseInt(req.decodedUserData.id, 10);
-    // winston.info(`This is the authtoken: ${authentcationTokenId}`);
     const userRequests = [];
     for (let i = 0; i < Requests.length; i += 1) {
       if (Requests[i].userid === authentcationTokenId) {
@@ -53,7 +52,6 @@ class requestController {
     if (userRequests.length === 0) {
       return res.status(401).json({ message: 'No request for this user' });
     }
-    winston.info(`Number og requests Again are ${userRequests.length}`);
     return res.status(200).json({ message: 'Displaying user requests', userRequests });
   }
   /**
@@ -71,8 +69,6 @@ class requestController {
       return res.status(404).json({ error: 'Request not found' });
     }
     return res.status(200).json({ message: 'Request found', requestGottenById });
-    // winston.info(newArray);
-    // winston.info(newArray.length);
   }
 
   /**

@@ -28,7 +28,7 @@ class usercontroller {
         .then(() => {
           const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password, role) VALUES ( $1, $2, $3, $4, $5, $6)';
           const bindingParamaters =
-            [req.body.firstname, req.body.lastname, req.body.email, req.body.mobile, req.body.password, true];
+            [req.body.firstname, req.body.lastname, req.body.email, req.body.mobile, hash, true];
           // continue the chain by returning result to the next then block
           return db.query(sql, bindingParamaters);
         })
@@ -63,7 +63,7 @@ class usercontroller {
         const users = result.rows;
         return res.status(302).json({ message: 'List of clients', users });
       })
-      .catch((err) => res.status(400).json({ err, message: 'something is wrong' }));
+      .catch(err => res.status(400).json({ err, message: 'something is wrong' }));
   }
 
   /**
@@ -75,32 +75,59 @@ class usercontroller {
 * @memberOf
 */
   static authenticateUser(req, res) {
-    let status;
-    let positionOfUser;
-    for (let i = 0; i < Users.length; i += 1) {
-      if (Users[i].email === req.body.email) {
-        status = 1;
-        positionOfUser = i;
-        break;
-      }
-    }
-    if (status !== 1) {
-      return res.status(406).json({ message: 'Invalid email or password' });
-    }
-    bcrypt.compare(req.body.password, Users[positionOfUser].password, (err, result) => {
-      if (result) {
-        // Ensure to put the secretekey in your environment variable
-        const token = jwt.sign({ id: Users[positionOfUser].id }, 'secreteKey', { expiresIn: 60 * 2 });
-        return res.status(202).json({
-          message: 'User has been authenticated',
-          token,
-        //   user: Users[positionOfUser]
+    // let status;
+    // let positionOfUser;
+
+    // for (let i = 0; i < Users.length; i += 1) {
+    //   if (Users[i].email === req.body.email) {
+    //     status = 1;
+    //     positionOfUser = i;
+    //     break;
+    //   }
+    // }
+    // if (status !== 1) {
+    //   return res.status(406).json({ message: 'Invalid email or password' });
+    // }
+
+
+    db.connect()
+      .then(() => {
+        const sql = 'select * from registereduser where email =$1 LIMIT 1 ';
+        const bindingParamaters = [req.body.email];
+        // continue the chain by returning result to the next then block
+        return db.query(sql, bindingParamaters);
+      })
+      .then((user) => {
+        const storedPassword = user.rows[0].password;     
+        bcrypt.compare(req.body.password, storedPassword, (err, result) => {
+          if (result) {
+            // Ensure to put the secretekey in your environment variable
+            const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * 4 });
+            return res.status(202).json({
+              message: 'User has been authenticated',
+              token
+            });
+          }
+          return res.status(401).json({ message: 'Invalid email or password' });
         });
-      }
-      return res.status(401).json({ message: 'Invalid email or password' });
-    });
+      })
+      .catch((err => res.status(400).json({ err, message: 'Invalid email or password' })));
+  }
+  // });
+  // bcrypt.compare(req.body.password, Users[positionOfUser].password, (err, result) => {
+  //   if (result) {
+  //     // Ensure to put the secretekey in your environment variable
+  //     const token = jwt.sign({ id: Users[positionOfUser].id }, 'secreteKey', { expiresIn: 60 * 4 });
+  //     return res.status(202).json({
+  //       message: 'User has been authenticated',
+  //       token,
+  //     //   user: Users[positionOfUser]
+  //     });
+  //   }
+  //   return res.status(401).json({ message: 'Invalid email or password' });
+  // });
   //  }
   //  return res.status(401).json({ message: 'Invalid email or password outside' });
-  }
 }
+// }
 export default usercontroller;

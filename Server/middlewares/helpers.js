@@ -16,6 +16,20 @@ exports.checkIfEmailAlreadyExist = (req, res, next) => {
     });
 };
 
+exports.checkIfLoginEmailExist = (req, res, next) => {
+  const sql = 'select * from registereduser where email = $1';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [req.body.email];
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      if (result.rowCount === 0) {
+        // Indicate invalid email or password so the user won't be sure which is wrong
+        return res.status(406).json({ message: 'Invalid email or password' });
+      }
+      next();
+    });
+};
+
 exports.checkIfMobileAlreadyExist = (req, res, next) => {
   const sql = 'select * from registereduser where mobile = $1';
   // binding parameter value must be an array else error is thrown

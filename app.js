@@ -2,10 +2,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import winston from 'winston';
 import logger from 'morgan';
+import dotenv from 'dotenv';
+
 import userRoutes from './Server/routes/userRoute';
 import requestRoutes from './Server/routes/requestRoute';
 
+dotenv.config();
 const app = express();
+
 const port = process.env.PORT || 3000;
 
 // Log HTTP methods to console
