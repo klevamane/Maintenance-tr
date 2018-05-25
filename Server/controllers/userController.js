@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import winston from 'winston';
 import bcrypt from 'bcrypt';
 import Users from '../models/user';
-import db from '../queries';
+import db from '../connection';
 
 
 /**
@@ -24,43 +24,46 @@ class usercontroller {
       if (err) {
         return res.status(500).json({ error: err });
       }
-      const newUser = {
-        id: Users.length + 1,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: hash,
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-      };
-      Users.push(newUser);
-      const position = Users.length - 1;
-      const registeredUser = Users[position];
-      return res.status(201).json({ message: 'User has been registered', registeredUser });
+      db.connect()
+        .then(() => {
+          const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password, role) VALUES ( $1, $2, $3, $4, $5, $6)';
+          const bindingParamaters =
+            [req.body.firstname, req.body.lastname, req.body.email, req.body.mobile, req.body.password, true];
+          // continue the chain by returning result to the next then block
+          return db.query(sql, bindingParamaters);
+        })
+        .then((user) => {
+          const numberofCreatedUsers = user.rowCount;
+          return res.status(201).json({ message: 'User has been registered', numberofCreatedUsers });
+        })
+        .catch((err => res.status(400).json({ err, message: 'Unable to register user' })));
     });
   }
-
-
   /**
-     * Register a new user on the platform
+     * Displays the lis of all users a new user on the platform
      * @static
-     * @description list all users
+     * @description list users
      * @param  {object} req gets values passed to the api
      * @param  {object} res sends result as output
      * @returns {object} Success message with the user created or error message
      * @memberOf
      */
-  static listUsers(req, res, next) {
+  static listUser(req, res) {
     // Parameterized query to avoid sql injection
-    db.any('select * from usertype where id = $1', 2)
-      .then((data) => {
-        res.status(200)
-          .json({
-            message: 'Retrieved ALL users',
-            data
-          });
+    db.connect()
+      .then(() => {
+        // const sql = 'select * from registereduser where id = $1';
+        const sql = 'select * from registereduser';
+        // const bindingParamater = [1];
+        // continue the chain by returning result to the next then block
+        // return db.query(sql, bindingParamater);
+        return db.query(sql);
       })
-      .catch(err => next(err));
+      .then((result) => {
+        const users = result.rows;
+        return res.status(302).json({ message: 'List of clients', users });
+      })
+      .catch((err) => res.status(400).json({ err, message: 'something is wrong' }));
   }
 
   /**
