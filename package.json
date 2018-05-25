@@ -9,10 +9,12 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "bcrypt": "^2.0.1",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "coveralls": "^3.0.1",
+    "dotenv": "^5.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -25,6 +27,8 @@
     "morgan": "^1.9.0",
     "nodemon": "^1.17.4",
     "nyc": "^11.8.0",
+    "pg": "^7.4.3",
+    "pg-promise": "^8.4.4",
     "winston": "^2.4.2"
   },
   "devDependencies": {

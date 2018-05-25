@@ -1,15 +1,48 @@
 import Joi from 'joi';
 import User from '../models/user';
+import db from '../connection';
 
 
 exports.checkIfEmailAlreadyExist = (req, res, next) => {
-  for (let i = 0; i < User.length; i += 1) {
-    if (User[i].email === req.body.email) {
-      return res.status(302).json({ message: 'User with the same email already exist' });
-    }
-  }
-  next();
+  const sql = 'select * from registereduser where email = $1';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [req.body.email];
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      if (result.rowCount > 0) {
+        return res.status(302).json({ message: 'User with the same email already exist' });
+      }
+      next();
+    });
 };
+
+exports.checkIfLoginEmailExist = (req, res, next) => {
+  const sql = 'select * from registereduser where email = $1';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [req.body.email];
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      if (result.rowCount === 0) {
+        // Indicate invalid email or password so the user won't be sure which is wrong
+        return res.status(406).json({ message: 'Invalid email or password' });
+      }
+      next();
+    });
+};
+
+exports.checkIfMobileAlreadyExist = (req, res, next) => {
+  const sql = 'select * from registereduser where mobile = $1';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [req.body.mobile];
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      if (result.rowCount > 0) {
+        return res.status(302).json({ message: 'The mobile number is in already used by another client' });
+      }
+      next();
+    });
+};
+
 
 // Validation schema to be used as a blueprint in implementing validation
 exports.validateRegisterUSerSchema = {
