@@ -16,6 +16,20 @@ exports.checkIfEmailAlreadyExist = (req, res, next) => {
     });
 };
 
+exports.checkIfMobileAlreadyExist = (req, res, next) => {
+  const sql = 'select * from registereduser where mobile = $1';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [req.body.mobile];
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      if (result.rowCount > 0) {
+        return res.status(302).json({ message: 'The mobile number is in already used by another client' });
+      }
+      next();
+    });
+};
+
+
 // Validation schema to be used as a blueprint in implementing validation
 exports.validateRegisterUSerSchema = {
   email: Joi.string().email().required(),
