@@ -13,6 +13,7 @@ exports.checkAuthentication = (req, res, next) => {
     // Add a new property to the request body
     req.decodedUserData = decoded;
     winston.info(`Checking decoded token ${decodededtoken.id}`);
+    winston.info(`checking andoth ${req.decodedUserData.id}`);
     next();
   } catch (error) {
     return res.status(401).json({

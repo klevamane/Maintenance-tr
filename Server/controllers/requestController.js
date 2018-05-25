@@ -1,6 +1,6 @@
 import winston from 'winston';
 import Requests from '../models/request';
-
+import db from '../connection';
 
 /**
 * @class requestController
@@ -15,22 +15,22 @@ class requestController {
       * @returns {object} Success message with the user created or error message
       */
   static createRequest(req, res) {
-    const createAnewRequest = {
-      id: Requests.length + 1,
-      status: 'Pending',
-      fault: req.body.fault,
-      brand: req.body.brand,
-      modelNumber: req.body.modelNumber,
-      user: req.decodedUserData,
-      description: req.body.description,
-      other: req.body.other,
-      createdAt: Date.now(),
-      updatedAt: Date.now()
-    };
-    Requests.push(createAnewRequest);
-    const position = Requests.length - 1;
-    const newRequest = Requests[position];
-    return res.status(200).json({ message: 'Request has been sent', newRequest });
+    db.connect()
+      .then(() => {
+        winston.info(req.decodedUserData);
+        const userid = parseInt(req.decodedUserData.id, 10);
+        const sql = 'INSERT INTO request( fault, brand, modelnumber, userid, description, other, statusid) VALUES ( $1, $1, $1, $1, $1, $1, $1)';
+        const bindingParamaters =
+            [req.body.fault, req.body.brand, req.body.modelnumber,
+              userid, req.body.description, req.body.other, 1];
+          // continue the chain by returning result to the next then block
+        return db.query(sql, bindingParamaters);
+      })
+      .then((requestRecieved) => {
+        const numberofRequestCreated = requestRecieved.rowCount;
+        return res.status(201).json({ message: 'Request  has been created', numberofRequestCreated });
+      })
+      .catch((err => res.status(400).json({ err, message: 'Unable to register user' })));
   }
 
   /**
@@ -42,6 +42,8 @@ class requestController {
   */
   static getUserRequests(req, res) {
     const authentcationTokenId = parseInt(req.decodedUserData.id, 10);
+
+
     const userRequests = [];
     for (let i = 0; i < Requests.length; i += 1) {
       if (Requests[i].userid === authentcationTokenId) {

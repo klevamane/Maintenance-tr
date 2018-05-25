@@ -54,7 +54,6 @@ class usercontroller {
       .then(() => {
         // const sql = 'select * from registereduser where id = $1';
         const sql = 'select * from registereduser';
-        // const bindingParamater = [1];
         // continue the chain by returning result to the next then block
         // return db.query(sql, bindingParamater);
         return db.query(sql);
@@ -75,21 +74,6 @@ class usercontroller {
 * @memberOf
 */
   static authenticateUser(req, res) {
-    // let status;
-    // let positionOfUser;
-
-    // for (let i = 0; i < Users.length; i += 1) {
-    //   if (Users[i].email === req.body.email) {
-    //     status = 1;
-    //     positionOfUser = i;
-    //     break;
-    //   }
-    // }
-    // if (status !== 1) {
-    //   return res.status(406).json({ message: 'Invalid email or password' });
-    // }
-
-
     db.connect()
       .then(() => {
         const sql = 'select * from registereduser where email =$1 LIMIT 1 ';
@@ -102,7 +86,7 @@ class usercontroller {
         bcrypt.compare(req.body.password, storedPassword, (err, result) => {
           if (result) {
             // Ensure to put the secretekey in your environment variable
-            const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * 4 });
+            const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * 15 });
             return res.status(202).json({
               message: 'User has been authenticated',
               token

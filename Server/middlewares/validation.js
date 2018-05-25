@@ -59,7 +59,8 @@ export const validateNewRequest = (req, res, next) => {
       case 'modelNumber':
         res.status(400).json({ error: 'Model number should contain only Alphabets and numbers' }); break;
       default:
-        res.status(400).send({ error: 'Invalid User details' });
+        // res.status(400).send({ error: 'Invalid User details' });
+        next();
     }
   } else {
     next();
