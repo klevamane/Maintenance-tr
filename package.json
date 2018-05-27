@@ -40,7 +40,7 @@
     "dev": "nodemon --exec npm run babel-node -- ./app.js",
     "test2": "mocha '.Server/test' --exit --compilers js:babel-register --timeout 20000",
     "test4": "nyc --reporter=html --reporter=text mocha --require babel-register Server/tests/*",
-    "test": "nyc mocha --require babel-register Server/tests/* --exit",
+    "testmain": "nyc mocha --require babel-register Server/tests/* --exit",
     "test-dl": "mocha --require babel-register Server/tests/* --exit",
     "test-dev": "nyc mocha ./server --exit --compilers js:babel-register --timeout 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -49,7 +49,7 @@
     "babel-node": "babel-node --presets=env",
     "ddl" : "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/ddl",
     "fk_ddl" : "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/fk_ddl",
-    "localtest" : "npm run ddl && npm run fk_ddl"
+    "test" : "npm run ddl && npm run fk_ddl"
   },
   "engines": {
     "node": "8.10.0",
