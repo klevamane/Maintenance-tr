@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Setup configuration based on environment
 const configuration = {
   development: {
     user: process.env.LOCALDBUSER,
