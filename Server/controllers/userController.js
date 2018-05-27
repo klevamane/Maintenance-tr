@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import winston from 'winston';
 import bcrypt from 'bcrypt';
-import Users from '../models/user';
 import db from '../connection';
 
 
@@ -26,9 +25,9 @@ class usercontroller {
       }
       db.connect()
         .then(() => {
-          const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password, role) VALUES ( $1, $2, $3, $4, $5, $6)';
+          const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password) VALUES ( $1, $2, $3, $4, $5)';
           const bindingParamaters =
-            [req.body.firstname, req.body.lastname, req.body.email, req.body.mobile, hash, true];
+            [req.body.firstname, req.body.lastname, req.body.email, req.body.mobile, hash];
           // continue the chain by returning result to the next then block
           return db.query(sql, bindingParamaters);
         })
@@ -82,7 +81,7 @@ class usercontroller {
         return db.query(sql, bindingParamaters);
       })
       .then((user) => {
-        const storedPassword = user.rows[0].password;     
+        const storedPassword = user.rows[0].password;
         bcrypt.compare(req.body.password, storedPassword, (err, result) => {
           if (result) {
             // Ensure to put the secretekey in your environment variable
@@ -97,21 +96,6 @@ class usercontroller {
       })
       .catch((err => res.status(400).json({ err, message: 'Invalid email or password' })));
   }
-  // });
-  // bcrypt.compare(req.body.password, Users[positionOfUser].password, (err, result) => {
-  //   if (result) {
-  //     // Ensure to put the secretekey in your environment variable
-  //     const token = jwt.sign({ id: Users[positionOfUser].id }, 'secreteKey', { expiresIn: 60 * 4 });
-  //     return res.status(202).json({
-  //       message: 'User has been authenticated',
-  //       token,
-  //     //   user: Users[positionOfUser]
-  //     });
-  //   }
-  //   return res.status(401).json({ message: 'Invalid email or password' });
-  // });
-  //  }
-  //  return res.status(401).json({ message: 'Invalid email or password outside' });
 }
 // }
 export default usercontroller;

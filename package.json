@@ -46,7 +46,10 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "codeclimate-report": "codeclimate-test-reporter < ./coverage/lcov.info",
     "check-coverage": "nyc check-coverage --lines 80 --per-file",
-    "babel-node": "babel-node --presets=env"
+    "babel-node": "babel-node --presets=env",
+    "ddl" : "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/ddl",
+    "fk_ddl" : "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/fk_ddl",
+    "localtest" : "npm run ddl && npm run fk_ddl"
   },
   "engines": {
     "node": "8.10.0",

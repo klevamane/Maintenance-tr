@@ -6,7 +6,8 @@ const configuration = {
   development: {
     user: process.env.LOCALDBUSER,
     password: process.env.LOCALDBPSWD,
-    database: process.env.LOCALDB,
+    // database: process.env.LOCALDB,
+    database: 'dbtester',
     host: process.env.LOCALDBHOST,
     port: process.env.LOCALDBSERVERPORT,
     max: 10,
@@ -18,7 +19,7 @@ const configuration = {
     password: process.env.TESTDBPSWD,
     database: process.env.TESTDB,
     host: process.env.TESTDBHOST,
-    port: process.env.TESTDBSERVERPORT,
+    //  port: process.env.TESTDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 3000
   },
