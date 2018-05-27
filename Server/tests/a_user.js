@@ -13,18 +13,18 @@ describe('POST USER /user', () => {
   // doBeforeEach();
   it('should create a new user', (done) => {
     const user = {
-      firstname: 'Bestman',
-      email: 'email@email.com',
+      firstname: 'breventh',
+      email: 'exampleuser@email.com',
       lastname: 'Jonji',
-      mobile: '08025773821',
+      mobile: '08025912821',
       password: 'Password123',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
-        expect(res.body.message).to.equal('User has been registered');
         expect(res).to.have.status(201);
+        expect(res.body.message).to.equal('User has been registered');
         expect(res.body).to.be.a('object');
         done();
       });
@@ -195,7 +195,7 @@ describe('POST USER /Login', () => {
       });
   });
 
-  it('Invalid email or password', (done) => {
+  it('Email not in database', (done) => {
     const user = {
       email: 'adebroki@gmail.com',
       password: 'extremely'
@@ -205,13 +205,13 @@ describe('POST USER /Login', () => {
       .send(user)
       .end((err, res) => {
         expect(res.body.message).to.equal('Invalid email or password');
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(406);
         expect(res.body).to.be.a('object');
         done();
       });
   });
 
-  it('Aunauthorized', (done) => {
+  it('user should be Unauthorized', (done) => {
     const user = {
       email: 'adebrokikali@gmail.com',
       password: 'extremely'

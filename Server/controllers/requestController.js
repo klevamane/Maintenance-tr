@@ -17,12 +17,10 @@ class requestController {
   static createRequest(req, res) {
     db.connect()
       .then(() => {
-        winston.info(req.decodedUserData);
         const userid = parseInt(req.decodedUserData.id, 10);
-        const sql = 'INSERT INTO request( fault, brand, modelnumber, userid, description, other, statusid) VALUES ( $1, $1, $1, $1, $1, $1, $1)';
-        const bindingParamaters =
-            [req.body.fault, req.body.brand, req.body.modelnumber,
-              userid, req.body.description, req.body.other, 1];
+        const sql = 'INSERT INTO request(fault, brand, modelnumber, userid, description, other, statusid) VALUES ( $1, $2, $3, $4, $5, $6, $7)';
+        const bindingParamaters = [req.body.fault, req.body.brand, req.body.modelnumber,
+          userid, req.body.description, 'timeofday()', '1'];
           // continue the chain by returning result to the next then block
         return db.query(sql, bindingParamaters);
       })
@@ -42,8 +40,6 @@ class requestController {
   */
   static getUserRequests(req, res) {
     const authentcationTokenId = parseInt(req.decodedUserData.id, 10);
-
-
     const userRequests = [];
     for (let i = 0; i < Requests.length; i += 1) {
       if (Requests[i].userid === authentcationTokenId) {

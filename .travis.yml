@@ -12,3 +12,6 @@ after_success:
  - npm run coverage
  - npm run codeclimate-report
  - npm run check-coverage
+ env:
+  #global:
+ - NODE_ENV=test
