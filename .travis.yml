@@ -12,7 +12,7 @@ before_install:
   - npm install -g mocha
   - npm install
   - createuser user -s -U postgres
-  - createdb testdb --username=user 
+  - createdb dbtester --username=user 
 script:
  - npm run test
 after_success:
