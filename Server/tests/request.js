@@ -1,4 +1,4 @@
-import chaiHttp from 'chai-http';
+/* import chaiHttp from 'chai-http';
 import chai from 'chai';
 import app from './../../app';
 // import Users from './../models/user';
@@ -283,3 +283,4 @@ describe('POST USER REQUEST FILE', () => {
       });
   });
 });
+ */

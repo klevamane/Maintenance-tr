@@ -2,23 +2,24 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Setup configuration based on environment
 const configuration = {
   development: {
     user: process.env.LOCALDBUSER,
     password: process.env.LOCALDBPSWD,
-    database: process.env.LOCALDB,
+    database: 'dbtester',
     host: process.env.LOCALDBHOST,
     port: process.env.LOCALDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 3000
   },
-
+  // test environment configuration
   test: {
-    user: process.env.TESTDBUSER,
-    password: process.env.TESTDBPSWD,
-    database: process.env.TESTDB,
-    host: process.env.TESTDBHOST,
-    port: process.env.TESTDBSERVERPORT,
+    user: 'user',
+    password: 'user',
+    database: 'testdb',
+    host: '127.0.0.1',
+    //  port: process.env.TESTDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 3000
   },
