@@ -1,6 +1,13 @@
 language: node_js
 node_js:
- - "8"
+ - "6"
+notifications:
+ email: false
+services:
+  - postgresql
+cache:
+ directories:
+   - node_modules
 before_install:
   - npm install -g mocha
   - npm install
@@ -12,6 +19,6 @@ after_success:
  - npm run coverage
  - npm run codeclimate-report
  - npm run check-coverage
- env:
+env:
   #global:
  - NODE_ENV=test
