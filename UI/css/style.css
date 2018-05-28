@@ -27,12 +27,22 @@ body#dashboard {
 .nobody-margin {
     margin: 0 !important;
 }
-button {
+button, .btn {
     background: var(--primaryOrange);
     border: none;
     padding: 8px;
     border-radius: 3px;
     color: #fff;
+}
+.btn {
+    text-decoration: none;
+}
+.danger {
+    background: #f02d13 !important;
+}
+
+.view-detail {
+    background: rgb(158, 160, 161) !important;
 }
 
 ul {
@@ -66,6 +76,19 @@ form select {
 #logo1 {
     font-size: 22px;
 }
+#logo1-index {
+    font-size: 21px;
+    color: #fff;
+    padding-left: 0;
+    margin-left: 0;
+    font-weight: 800;
+    
+    
+}
+.index-ul {
+    display: inline-block !important;
+}
+
 /* End of logo */
 
 /* Margins */
@@ -230,7 +253,14 @@ nav ul li a {
     font-size: 25px;
     display: none;
 }
+nav .brand {
+    float: left;
+    padding-top: 5px;
 
+}
+nav .brand #logo1 {
+    color: #fff;
+}
 /* Container media Query */
 
 .container {
@@ -244,6 +274,16 @@ nav ul li a {
   @media (min-width: 576px) {
     .container {
       max-width: 540px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+    .seperator2 {
+        display: grid;
+        grid-template-columns: 1fr;
     }
   }
   
@@ -310,7 +350,203 @@ nav ul li a {
     grid-gap: 20px;
 }
 
+.seperator2 {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    grid-gap: 10px;
+}
+
+@media (max-width: 758px) {
+    .seperator2 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .seperator2 .card-fluid {
+        margin-bottom: 50px;
+    }
+    .brand {
+        display: none;
+    }
+  }
+.brand-active {
+    display: inline-block;
+}
+  
 .status-btn {
     display: grid;
     grid-template-columns: 1fr;
+}
+
+.text-right-side {
+    float: right;
+}
+
+.caption {
+    max-width: 100%;
+    display: inline-block;
+    text-align: justify;
+}
+.caption p {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+    border: rgb(209, 202, 202) 3px;
+    background: var(--fontColour);
+    padding: 10px;
+}
+.caption span {
+    color: var(--primaryOrange);
+}
+.caption h1 {
+    color: var(--primaryOrange);
+    padding-top: 60px;
+    padding-bottom: 0;
+    margin-bottom: 0; 
+    font-size: 40px;
+    font-weight: 700;
+    
+}
+.caption hr {
+    margin-top: 0 !important;
+}
+.caption h2 {
+    padding-top: 0;
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 20px;
+    padding-left: 20px;
+    
+}
+.display-inline-altered {
+    display: inline-block;
+}
+.indexbg {
+    background-image: url("../img/bg1.jpg");
+}
+
+/************** FORM INPUT HIGHLIGHT AND PATTERNS **********/
+#form-in  input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="textarea"]:focus input[type="url"]:focus  {
+    border-color: rgb(13, 70, 109) !important;
+    -webkit-box-shadow: none;
+    box-shadow: 3px 3px rgb(13, 70, 109) !important;;
+    color:rgb(13, 70, 109) !important;;
+    font-size: 15px;
+    
+  }
+
+  .form-in input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus  {
+    border-color: rgb(13, 70, 109) !important;
+    -webkit-box-shadow: none;
+    box-shadow: 3px 3px rgb(13, 70, 109) !important;
+    color:rgb(13, 70, 109) !important;;
+  }
+ 
+
+ 
+
+  .form-in label {
+    color: rgb(13, 70, 109) !important;
+    font-size: 10px;
+  }
+button {
+    cursor: pointer;
+}
+
+/****************** TABLE ****************************/
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+  table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+    
+  }
+  
+  table th,
+  table td {
+    padding: .625em;
+    text-align: center;
+  }
+  
+  table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: rgb(6, 70, 129);
+  }
+  
+  @media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+  
+    table caption {
+      font-size: 1.3em;
+      background:var(--primaryOrange);
+      border: none;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+      
+    }
+    table thead tr th {
+      background: var(--fontColour);
+      font-size: 25px;
+      
+    }
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    table td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  .table-head {
+      color: #fff;
+  }
+  table tr:nth-child(odd) {
+    background-color:  rgb(227, 231, 238);
 }

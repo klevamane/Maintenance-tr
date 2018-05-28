@@ -13,20 +13,20 @@
 </head>
 
 <body id="primary-background" class="nobody-margin">
-    <nav>
-            <div class="nav-toggle">
-                    <i class="fa fa-bars handlebar"></i>
-                </div>
-        <div class="container">
-            
-            <ul id="navul" class="navul">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="./Signin.html">Signout</a></li>
+        <nav>
+                <div class="nav-toggle">
+                        <i class="fa fa-bars handlebar"></i>
+                    </div>
+            <div class="container">
+                <span class="brand" id="brand"><span id="logo1">Kleva</span><span id="logo2">fix'</span></span>
+                <ul id="navul" class="navul">
+                
+                    <li><a href="./Index.html">Sign out</a></li>
+    
+                </ul>
+            </div>
+        </nav>
 
-            </ul>
-        </div>
-    </nav>
     <div class="container">
        
             
@@ -46,59 +46,57 @@
             </span>
                 <hr>
 
-                
+                <table>
+                        <caption>User requests</caption>
+                        <thead class="table-head">
+                          <tr>
+                            <th scope="col">Request Id</th>
+                            <th scope="col">Brand</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Detail</th>
+                            <th scope="col">Cancel</th>
 
-                <!-- CARD REQUEST 1 -->
-                <a href="./Request-info.html" class="card-redirect-tag">
-                <div class="card-fluid pad10 marg-top10y">
-                    <span>
-                        <strong>Heading</strong>
-                    </span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, molestiae. Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Sapiente sit illo soluta iste alias perspiciatis itaque architecto
-                        sed culpa esse?
-                    </p>
-                    <hr>
-                    
-                    <span class="status-pill-rejected">Rejected</span>
-                    <span class="status-date"> 12 May</span>
-                </div>
-            </a>
-
-                 <!-- CARD REQUEST 1 -->
-                 <a href="./Request-info.html" class="card-redirect-tag">
-                 <div class="card-fluid pad10 marg-top10y">
-                        <span>
-                            <strong>Heading</strong>
-                        </span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, molestiae. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Sapiente sit illo soluta iste alias perspiciatis itaque architecto
-                            sed culpa esse?
-                        </p>
-                        <hr>
-                        
-                        <span class="status-pill-rejected">Rejected</span>
-                        <span class="status-date"> 12 May</span>
-                    </div>
-                </a>
-
-                     <!-- CARD REQUEST 1 -->
-                     <a href="./Request-info.html" class="card-redirect-tag">
-                     <div class="card-fluid pad10 marg-top10y">
-                        <span>
-                            <strong>Heading</strong>
-                        </span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, molestiae. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Sapiente sit illo soluta iste alias perspiciatis itaque architecto
-                            sed culpa esse?
-                        </p>
-                        <hr>
-                        <span class="status-pill-rejected">Rejected</span>
-                        <span class="status-date"> 12 May</span>
-                    </div>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                          <a href=""></a><td data-label="Request Id">1</td> </a>
+                            <td data-label="Brand">Haier Thermocool</td>
+                            <td data-label="Type">Maintenance</td>
+                            <td data-label="Status">Pending</td>
+                            <td data-label="Status"><a href="./Request-info.html" class="btn view-detail">view</a></td>
+                            <td data-label="Cancel"><button class="danger"><i class="fa fa-trash"> Cancel Request</i></button></td>
+                          </tr>
+                          <tr>
+                            <td scope="row" data-label="Request Id">2</td>
+                            <td data-label="Brand">LG</td>
+                            <td data-label="Type">Maintenance</td>
+                            <td data-label="Status">Pending</td>
+                            <td data-label="Status"><a href="./Request-info.html" class="btn view-detail">view</a></td>
+                            <td data-label="Cancel"><button class="danger"><i class="fa fa-trash"> Cancel Request</i></button></td>
+                          </tr>
+                          <tr>
+                            <td scope="row" data-label="Request Id">3</td>
+                            <td data-label="Brand">Daewoo</td>
+                            <td data-label="Type">Repair</td>
+                            <td data-label="Status">Completed</td>
+                            <td data-label="Status"><a href="./Request-info.html" class="btn view-detail">view</a></td>
+                            <td data-label="Cancel"><button class="danger"><i class="fa fa-trash"> Cancel Request</i></button></td>
+                          </tr>
+                          <tr>
+                            <td scope="row" data-label="Request Id">4</td>
+                            <td data-label="Brand">Apple</td>
+                            <td data-label="Type">Repair</td>
+                            <td data-label="Status">Approved</td>
+                            <td data-label="Status"><a href="./Request-info.html" class="btn view-detail">view</a></td>
+                            <td data-label="Cancel"><button class="danger"><i class="fa fa-trash"> Cancel Request</i></button></td>
+                          </tr>
+                        </tbody>
+                      </table>                
                 </a>
                     <div class="list">
-                            <ul class="pagination"">
+                            <ul class="pagination">
                                     <li class="disabled"><a href="#!"><i class="fa fa-angle-left"></i></a></li>
                                     <li>1</li>
                                     <li>2</li>
@@ -108,7 +106,7 @@
                                     <li><a href="#!"><i class="fa fa-angle-right"></i></a></li>
                                   </ul>
                     </div>
-                <p><button class="marg-left30">Back</button></p>
+                
                 </div>
                
             </div>

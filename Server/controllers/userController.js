@@ -24,6 +24,7 @@ class usercontroller {
       if (err) {
         return res.status(500).json({ error: err });
       }
+
       db.connect()
         .then(() => {
           const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password, role) VALUES ( $1, $2, $3, $4, $5, $6)';
@@ -65,6 +66,7 @@ class usercontroller {
       .catch(err => res.status(400).json({ err, message: 'something is wrong' }));
   }
 
+
   /**
 * @static
 * @description A registered user will be authenticated to gain access to the application
@@ -74,6 +76,7 @@ class usercontroller {
 * @memberOf
 */
   static authenticateUser(req, res) {
+
     db.connect()
       .then(() => {
         const sql = 'select * from registereduser where email =$1 LIMIT 1 ';
