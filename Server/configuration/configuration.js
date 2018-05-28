@@ -16,10 +16,10 @@ const configuration = {
   },
 
   test: {
-    user: process.env.TESTDBUSER,
-    password: process.env.TESTDBPSWD,
-    database: process.env.TESTDB,
-    host: process.env.TESTDBHOST,
+    user: 'user',
+    password: 'user',
+    database: 'testdb',
+    host: '127.0.0.1',
     //  port: process.env.TESTDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 3000
