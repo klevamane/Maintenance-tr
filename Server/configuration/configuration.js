@@ -7,7 +7,8 @@ const configuration = {
   development: {
     user: process.env.LOCALDBUSER,
     password: process.env.LOCALDBPSWD,
-    database: 'dbtester',
+    // database: 'dbtester',
+    database: 'testonly',
     host: process.env.LOCALDBHOST,
     port: process.env.LOCALDBSERVERPORT,
     max: 10,

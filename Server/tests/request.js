@@ -27,7 +27,7 @@ describe('POST USER REQUEST FILE', () => {
   // doBeforeAll();
   it('Should Authenticate user for request', (done) => {
     const user = {
-      email: 'exampleuser@user.com',
+      email: 'exampleusertwo@user.com',
       password: 'password123',
     };
     chai.request(app)
@@ -62,6 +62,26 @@ describe('POST USER REQUEST FILE', () => {
       });
   });
 
+  it('It should create a request', (done) => {
+    const request = {
+      fault: 'Camera',
+      brand: 'LG',
+      modelnumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .post('/api/v1/users/requests')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        expect(res.body.message).to.equal('Request has been created');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+
   it('Get all requests of a logged in user', (done) => {
     chai.request(app)
       .get('/api/v1/users/requests')
@@ -86,17 +106,17 @@ describe('POST USER REQUEST FILE', () => {
   //     });
   // });
 
-  // it('Get request by Id requests of a logged in user', (done) => {
-  //   chai.request(app)
-  //     .get('/api/v1/users/requests/1')
-  //     .set('authorization', `Bearer ${authenticationToken}`)
-  //     .end((err, res) => {
-  //       expect(res.body.message).to.equal('Request found');
-  //       expect(res).to.have.status(200);
-  //       expect(res.body).to.be.a('object');
-  //       done();
-  //     });
-  // });
+  it('Get request by Id requests of a logged in user', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/requests/1')
+      .set('authorization', `Bearer ${authenticationToken}`)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('Request found');
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
 
   it('Should return request not found', (done) => {
     chai.request(app)
@@ -111,43 +131,43 @@ describe('POST USER REQUEST FILE', () => {
   });
 
 
-  // it('User request has been modified', (done) => {
-  //   const request = {
-  //     fault: 'Broken Screen',
-  //     brand: 'LGG',
-  //     modelNumber: '77263',
-  //     description: 'description'
-  //   };
-  //   chai.request(app)
-  //     .put('/api/v1/users/requests/2')
-  //     .set('Authorization', `Bearer ${authenticationToken}`)
-  //     .send(request)
-  //     .end((err, res) => {
-  //       expect(res.body.message).to.equal('Request has been modified');
-  //       expect(res).to.have.status(200);
-  //       expect(res.body).to.be.a('object');
-  //       done();
-  //     });
-  // });
+  it('User request has been modified', (done) => {
+    const request = {
+      fault: 'Broken Screen',
+      brand: 'LGG',
+      modelNumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .put('/api/v1/users/requests/2')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('Request has been modified');
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
 
-  // it('User request has been modified', (done) => {
-  //   const request = {
-  //     fault: 'Broken Screen',
-  //     brand: 'LGG',
-  //     modelNumber: '77263',
-  //     description: 'description'
-  //   };
-  //   chai.request(app)
-  //     .put('/api/v1/users/requests/1')
-  //     .set('Authorization', `Bearer ${authenticationToken}`)
-  //     .send(request)
-  //     .end((err, res) => {
-  //       expect(res.body.message).to.equal('You are Unauthorized to edit this request');
-  //       expect(res).to.have.status(401);
-  //       expect(res.body).to.be.a('object');
-  //       done();
-  //     });
-  // });
+  it('User request has been modified', (done) => {
+    const request = {
+      fault: 'Broken Screen',
+      brand: 'LGG',
+      modelNumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .put('/api/v1/users/requests/1')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('You are Unauthorized to edit this request');
+        expect(res).to.have.status(401);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
 });
 
 //   it('User Unaunthorized to edit request', (done) => {
@@ -158,7 +178,7 @@ describe('POST USER REQUEST FILE', () => {
 //       description: 'description'
 //     };
 //     chai.request(app)
-//       .put('/api/v1/users/requests/1')
+//       .put('/api/v1/users/requests/40')
 //       .set('Authorization', `Bearer ${authenticationToken}`)
 //       .send(request)
 //       .end((err, res) => {
@@ -243,7 +263,6 @@ describe('POST USER REQUEST FILE', () => {
 //         done();
 //       });
 //   });
-
 
 //   it('Request to be modified does not exist', (done) => {
 //     const request = {
