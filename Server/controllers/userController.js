@@ -75,7 +75,6 @@ class usercontroller {
 * @memberOf
 */
   static authenticateUser(req, res) {
-
     db.connect()
       .then(() => {
         const sql = 'select * from registereduser where email =$1 LIMIT 1 ';
