@@ -37,7 +37,9 @@ dbconnect.connect()
     winston.info('User Id foreign key has been created form request message table');
   })
   .then(() => {
-    dbconnect.query('insert into status(name) values("Pending")');
+    const sqlStatus = `INSERT INTO status(name)
+           VALUES ('Pending')`;
+    dbconnect.query(sqlStatus);
   })
   .catch((err) => {
     winston.info(`Error Adding Foreign Key constraints ${err}`);
