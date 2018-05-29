@@ -1,5 +1,6 @@
 import chaiHttp from 'chai-http';
 import chai from 'chai';
+import winston from 'winston';
 import app from './../../app';
 // import Users from './../models/user';
 
@@ -28,6 +29,7 @@ describe('POST USER REQUEST FILE', () => {
   });
 
   it('New request created', (done) => {
+    winston.info(`the auth-token is ${authenticationToken}`);
     const request = {
       fault: 'Broken Screen',
       brand: 'LGG',
@@ -132,8 +134,6 @@ describe('POST USER REQUEST FILE', () => {
   //       done();
   //     });
   // });
-
-  
 });
 
 //   it('User Unaunthorized to edit request', (done) => {
