@@ -117,34 +117,18 @@ class requestController {
   */
   static modifyUserRequest(req, res) {
     const id = parseInt(req.params.requestId, 10);
-    let requestPosition = -1;
-    let status = false;
-    if (id > Requests.length) { return res.status(403).json({ message: 'Bad request' }); }
-    const loggedInUserId = parseInt(req.decodedUserData.id, 10);
-    for (let i = 0; i < Requests.length; i += 1) {
-      if (Requests[i].id === id && Requests[i].userid === loggedInUserId) {
-        requestPosition = i;
-        status = true;
-        break;
-      }
-    }
-    if (status === false) {
-      return res.status(401).json({ message: 'You are Unauthorized to edit this request' });
-    }
-    const changesToBeMade = {
-      status: 'Pending',
-      fault: req.body.fault,
-      brand: req.body.brand,
-      modelNumber: req.body.modelNumber,
-      user: req.decodedUserData,
-      description: req.body.description,
-      other: req.body.other,
-      createdAt: Date.now(),
-      updatedAt: Date.now()
-    };
-    Requests[requestPosition] = changesToBeMade;
-    const updatedRequest = Requests[requestPosition];
-    return res.status(200).json({ message: 'Request has been modified', updatedRequest });
+    const bindingParameters = [req.body.fault, req.body.brand, req.body.modelnumber,
+      req.body.description, req.body.other, id, req.decodedUserData.id];
+    const sql = 'UPDATE request SET fault=$1, brand=$2, modelnumber=$3, description=$4, other=$5 WHERE id = $6 and userid =$7';
+    db.query(sql, bindingParameters)
+      .then((updatedRequest) => {
+        if (updatedRequest.rowCount < 0) {
+          return res.status(401).json({ message: 'You are Unauthorized to edit this request' });
+        }
+        const modifiedRequest = updatedRequest.rows;
+        res.status(200).json({ message: 'Request has been modified', modifiedRequest });
+      })
+      .catch(err => res.status(400).json({ err, message: 'Unable to update request' }));
   }
 }
 export default requestController;

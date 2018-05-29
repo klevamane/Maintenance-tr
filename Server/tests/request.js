@@ -30,7 +30,6 @@ describe('POST USER REQUEST FILE', () => {
       email: 'exampleuser@user.com',
       password: 'password123',
     };
-    winston.info(`request token ${authenticationToken}`);
     chai.request(app)
       .post('/api/v1/auth/login')
       .send(user)
