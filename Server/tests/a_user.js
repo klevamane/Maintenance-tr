@@ -14,9 +14,9 @@ describe('POST USER /user', () => {
   it('should create a new user', (done) => {
     const user = {
       firstname: 'breventh',
-      email: 'exampleuser@email.com',
+      email: 'exampleuser@user.com',
       lastname: 'Jonji',
-      mobile: '08025912821',
+      mobile: '08025912897',
       password: 'Password123',
     };
     chai.request(app)
