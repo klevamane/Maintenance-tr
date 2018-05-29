@@ -27,6 +27,24 @@ describe('POST USER REQUEST FILE', () => {
       });
   });
 
+  it('New request created', (done) => {
+    const request = {
+      fault: 'Broken Screen',
+      brand: 'LGG',
+      modelNumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .post('/api/v1/users/requests')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('Request has been created');
+        expect(res).to.have.status(201);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
 
   it('Get all requests of a logged in user', (done) => {
     chai.request(app)
@@ -52,17 +70,17 @@ describe('POST USER REQUEST FILE', () => {
   //     });
   // });
 
-  it('Get request by Id requests of a logged in user', (done) => {
-    chai.request(app)
-      .get('/api/v1/users/requests/3')
-      .set('authorization', `Bearer ${authenticationToken}`)
-      .end((err, res) => {
-        expect(res.body.message).to.equal('Request found');
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.a('object');
-        done();
-      });
-  });
+  // it('Get request by Id requests of a logged in user', (done) => {
+  //   chai.request(app)
+  //     .get('/api/v1/users/requests/1')
+  //     .set('authorization', `Bearer ${authenticationToken}`)
+  //     .end((err, res) => {
+  //       expect(res.body.message).to.equal('Request found');
+  //       expect(res).to.have.status(200);
+  //       expect(res.body).to.be.a('object');
+  //       done();
+  //     });
+  // });
 
   it('Should return request not found', (done) => {
     chai.request(app)
@@ -115,24 +133,7 @@ describe('POST USER REQUEST FILE', () => {
   //     });
   // });
 
-  it('New request created', (done) => {
-    const request = {
-      fault: 'Broken Screen',
-      brand: 'LGG',
-      modelNumber: '77263',
-      description: 'description'
-    };
-    chai.request(app)
-      .post('/api/v1/users/requests')
-      .set('Authorization', `Bearer ${authenticationToken}`)
-      .send(request)
-      .end((err, res) => {
-        expect(res.body.message).to.equal('Request has been created');
-        expect(res).to.have.status(201);
-        expect(res.body).to.be.a('object');
-        done();
-      });
-  });
+  
 });
 
 //   it('User Unaunthorized to edit request', (done) => {

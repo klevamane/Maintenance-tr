@@ -25,9 +25,12 @@ class requestController {
       })
       .then((requestRecieved) => {
         const numberofRequestCreated = requestRecieved.rowCount;
+        if (numberofRequestCreated < 1) {
+          return res.status(400).json({ messgae: 'Unable to make request' });
+        }
         return res.status(201).json({ message: 'Request has been created', numberofRequestCreated });
       })
-      .catch((err => res.status(400).json({ err, message: 'Unable to make request user' })));
+      .catch((err => res.status(400).json({ err, message: 'Unable to make request' })));
   }
 
   /**
@@ -93,7 +96,7 @@ class requestController {
     }
     if (status === false) {
       return res.status(401).json({
-        message: 'Only business owner can delete a business',
+        message: 'Only request owner can delete a request',
         error: true
       });
     }
