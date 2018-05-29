@@ -49,7 +49,8 @@
     "babel-node": "babel-node --presets=env",
     "schemaset" : "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/ddl",
     "fk_ddl": "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/fk_ddl",
-    "test": "npm run schemaset && npm run fk_ddl && npm run testmain"
+    "test": "npm run schemaset && npm run fk_ddl && npm run testmain",
+    "checker": "npm run schemaset && npm run fk_ddl"
   },
   "engines": {
     "node": "8.10.0",

@@ -29,18 +29,6 @@ dbconnect.connect()
   .then(() => {
     winston.info('User Id foreign key has been created form request message table');
   })
-  .then(() => {
-    const insertquery = `INSERT INTO registereduser(firstname, lastname, email, mobile, password)
-      VALUES ('Inivie', 'Bob', 'iniv@gmx.com', '08035672921',
-      '$2b$10$zALOeppbhmwCuDPbwrfkBeP2aCXbfrdkiEHQaQGnA3T20RN8vWCqu')`;
-    dbconnect.query(insertquery);
-    winston.info('User Id foreign key has been created form request message table');
-  })
-  .then(() => {
-    const sqlStatus = `INSERT INTO status(name)
-           VALUES ('Pending')`;
-    dbconnect.query(sqlStatus);
-  })
   .catch((err) => {
     winston.info(`Error Adding Foreign Key constraints ${err}`);
   });
