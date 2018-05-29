@@ -118,11 +118,11 @@ class requestController {
   static modifyUserRequest(req, res) {
     const id = parseInt(req.params.requestId, 10);
     const bindingParameters = [req.body.fault, req.body.brand, req.body.modelnumber,
-      req.body.description, req.body.other, id, req.decodedUserData.id];
-    const sql = 'UPDATE request SET fault=$1, brand=$2, modelnumber=$3, description=$4, other=$5 WHERE id = $6, status=1 and userid =$7';
+      req.body.description, req.body.other, id, 2, req.decodedUserData.id];
+    const sql = 'UPDATE request SET fault=$1, brand=$2, modelnumber=$3, description=$4, other=$5 WHERE id = $6 AND statusid <=$7 AND userid =$8';
     db.query(sql, bindingParameters)
       .then((updatedRequest) => {
-        if (updatedRequest.rowCount < 0) {
+        if (updatedRequest.rowCount < 1) {
           return res.status(401).json({ message: 'You are Unauthorized to edit this request' });
         }
         const modifiedRequest = updatedRequest.rows;
