@@ -17,10 +17,9 @@ class requestController {
   static createRequest(req, res) {
     db.connect()
       .then(() => {
-        const userid = parseInt(req.decodedUserData.id, 10);
         const sql = 'INSERT INTO request(fault, brand, modelnumber, userid, description, other, statusid) VALUES ( $1, $2, $3, $4, $5, $6, $7)';
         const bindingParamaters = [req.body.fault, req.body.brand, req.body.modelnumber,
-          userid, req.body.description, 'timeofday()', '1'];
+          req.decodedUserData.id, req.body.description, 'timeofday()', 1];
           // continue the chain by returning result to the next then block
         return db.query(sql, bindingParamaters);
       })
@@ -28,7 +27,7 @@ class requestController {
         const numberofRequestCreated = requestRecieved.rowCount;
         return res.status(201).json({ message: 'Request  has been created', numberofRequestCreated });
       })
-      .catch((err => res.status(400).json({ err, message: 'Unable to register user' })));
+      .catch((err => res.status(400).json({ err, message: 'Unable to make request user' })));
   }
 
   /**
@@ -39,19 +38,23 @@ class requestController {
   * @returns {object} Success message with the request list or error message
   */
   static getUserRequests(req, res) {
-    const authentcationTokenId = parseInt(req.decodedUserData.id, 10);
-    const userRequests = [];
-    for (let i = 0; i < Requests.length; i += 1) {
-      if (Requests[i].userid === authentcationTokenId) {
-        userRequests.push(Requests[i]);
-      }
-    }
-
-    if (userRequests.length === 0) {
-      return res.status(401).json({ message: 'No request for this user' });
-    }
-    return res.status(200).json({ message: 'Displaying user requests', userRequests });
+    const bindingParameter = [req.decodedUserData.id];
+    const sql = 'select * from request where userid = $1';
+    db.query(sql, bindingParameter)
+      .then((userRequests) => {
+        if (userRequests.rowCount < 1) {
+          return res.status(401).json({ message: 'No request for this user' });
+        }
+        res.status(200).json({ message: 'Displaying user requests', userRequests });
+      });
+    // const authentcationTokenId = parseInt(req.decodedUserData.id, 10);
+    // const userRequests = [];
+    // for (let i = 0; i < Requests.length; i += 1) {
+    //   if (Requests[i].userid === authentcationTokenId) {
+    //     userRequests.push(Requests[i]);
+    //   }
   }
+
   /**
 * @static
 * @description List single request by the logged in user
