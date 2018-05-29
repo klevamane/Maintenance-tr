@@ -13,10 +13,10 @@ describe('POST USER /user', () => {
   // doBeforeEach();
   it('should create a new user', (done) => {
     const user = {
-      firstname: 'breventh',
-      email: 'exampleuser@user.com',
+      firstname: 'kleventh',
+      email: 'exampleusertwo@user.com',
       lastname: 'Jonji',
-      mobile: '08025912897',
+      mobile: '08025912890',
       password: 'password123',
     };
     chai.request(app)
