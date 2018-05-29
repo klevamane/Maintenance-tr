@@ -9,6 +9,7 @@ const registeredUserTableQuery = `CREATE TABLE "registereduser" (
     "mobile" character varying(11) NOT NULL UNIQUE,
     "password" character varying(200) NOT NULL,
     "isadmin" BOOLEAN NOT NULL DEFAULT 'false',
+    "isactive" character varying(250),
     "resetpassword" character varying(250),
     "createdon" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT registereduser_pk PRIMARY KEY ("id")
@@ -25,7 +26,7 @@ const createRequestTableQuery = `CREATE TABLE "request" (
 "description" character varying(250) NOT NULL,
 "other" character varying(250),
 "statusid" serial NOT NULL,
-"createdon" TIMESTAMP NOT NULL,
+"createdon" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 CONSTRAINT request_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
