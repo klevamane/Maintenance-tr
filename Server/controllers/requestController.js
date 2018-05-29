@@ -119,7 +119,7 @@ class requestController {
     const id = parseInt(req.params.requestId, 10);
     const bindingParameters = [req.body.fault, req.body.brand, req.body.modelnumber,
       req.body.description, req.body.other, id, req.decodedUserData.id];
-    const sql = 'UPDATE request SET fault=$1, brand=$2, modelnumber=$3, description=$4, other=$5 WHERE id = $6 and userid =$7';
+    const sql = 'UPDATE request SET fault=$1, brand=$2, modelnumber=$3, description=$4, other=$5 WHERE id = $6, status=1 and userid =$7';
     db.query(sql, bindingParameters)
       .then((updatedRequest) => {
         if (updatedRequest.rowCount < 0) {
