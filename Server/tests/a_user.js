@@ -17,7 +17,7 @@ describe('POST USER /user', () => {
       email: 'exampleuser@user.com',
       lastname: 'Jonji',
       mobile: '08025912897',
-      password: 'Password123',
+      password: 'password123',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
