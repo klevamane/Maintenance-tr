@@ -158,7 +158,7 @@ describe('POST USER REQUEST FILE', () => {
       description: 'description'
     };
     chai.request(app)
-      .put('/api/v1/users/requests/1')
+      .put('/api/v1/users/requests/10')
       .set('Authorization', `Bearer ${authenticationToken}`)
       .send(request)
       .end((err, res) => {
