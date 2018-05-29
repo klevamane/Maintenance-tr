@@ -33,7 +33,7 @@ describe('POST USER REQUEST FILE', () => {
     const request = {
       fault: 'Broken Screen',
       brand: 'LGG',
-      modelNumber: '77263',
+      modelnumber: '77263',
       description: 'description'
     };
     chai.request(app)
