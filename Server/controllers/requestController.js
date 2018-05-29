@@ -26,11 +26,11 @@ class requestController {
       .then((requestRecieved) => {
         const numberofRequestCreated = requestRecieved.rowCount;
         if (numberofRequestCreated < 1) {
-          return res.status(400).json({ messgae: 'Unable to make request' });
+          return res.status(400).json({ messgae: 'Unable to make request inner' });
         }
         return res.status(201).json({ message: 'Request has been created', numberofRequestCreated });
       })
-      .catch((err => res.status(400).json({ err, message: 'Unable to make request' })));
+      .catch((err => res.status(400).json({ err, message: 'Unable to make request outer' })));
   }
 
   /**
