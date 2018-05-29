@@ -8,20 +8,20 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 let authenticationToken;
-let requestToken;
+// let requestToken;
 
-before((done) => {
-  chai.request(app)
-    .post('/api/v1/auth/login')
-    .send({
-      email: 'iniv@gmx.com',
-      password: 'Password123',
-    })
-    .end((err, res) => {
-      requestToken = res.body.token;
-      done();
-    });
-});
+// before((done) => {
+//   chai.request(app)
+//     .post('/api/v1/auth/login')
+//     .send({
+//       email: 'iniv@gmx.com',
+//       password: 'Password123',
+//     })
+//     .end((err, res) => {
+//       requestToken = res.body.token;
+//       done();
+//     });
+// });
 
 describe('POST USER REQUEST FILE', () => {
   // doBeforeAll();
@@ -30,7 +30,7 @@ describe('POST USER REQUEST FILE', () => {
       email: 'exampleuser@user.com',
       password: 'password123',
     };
-    winston.info(`request token ${requestToken}`);
+    winston.info(`request token ${authenticationToken}`);
     chai.request(app)
       .post('/api/v1/auth/login')
       .send(user)
@@ -53,7 +53,7 @@ describe('POST USER REQUEST FILE', () => {
     };
     chai.request(app)
       .post('/api/v1/users/requests')
-      .set('Authorization', `Bearer ${requestToken}`)
+      .set('Authorization', `Bearer ${authenticationToken}`)
       .send(request)
       .end((err, res) => {
         expect(res).to.have.status(201);
