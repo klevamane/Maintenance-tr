@@ -41,8 +41,8 @@ describe('POST USER REQUEST FILE', () => {
       .set('Authorization', `Bearer ${authenticationToken}`)
       .send(request)
       .end((err, res) => {
-        expect(res.body.message).to.equal('Request has been created');
         expect(res).to.have.status(201);
+        expect(res.body.message).to.equal('Request has been created');
         expect(res.body).to.be.a('object');
         done();
       });
