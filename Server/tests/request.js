@@ -12,7 +12,7 @@ describe('POST USER REQUEST FILE', () => {
   // doBeforeAll();
   it('Should Authenticate user for request', (done) => {
     const user = {
-      email: 'klevag@gmail.com',
+      email: 'exampleuser@user.com',
       password: 'password123',
     };
     chai.request(app)
