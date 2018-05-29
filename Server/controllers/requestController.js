@@ -25,9 +25,12 @@ class requestController {
       })
       .then((requestRecieved) => {
         const numberofRequestCreated = requestRecieved.rowCount;
-        return res.status(201).json({ message: 'Request  has been created', numberofRequestCreated });
+        if (numberofRequestCreated < 1) {
+          return res.status(400).json({ messgae: 'Unable to make request inner' });
+        }
+        return res.status(201).json({ message: 'Request has been created', numberofRequestCreated });
       })
-      .catch((err => res.status(400).json({ err, message: 'Unable to make request user' })));
+      .catch((err => res.status(400).json({ err, message: 'Unable to make request outer' })));
   }
 
   /**
@@ -45,14 +48,9 @@ class requestController {
         if (userRequests.rowCount < 1) {
           return res.status(401).json({ message: 'No request for this user' });
         }
-        res.status(200).json({ message: 'Displaying user requests', userRequests });
+        const allUserRequests = userRequests.rows;
+        res.status(200).json({ message: 'Displaying user requests', allUserRequests });
       });
-    // const authentcationTokenId = parseInt(req.decodedUserData.id, 10);
-    // const userRequests = [];
-    // for (let i = 0; i < Requests.length; i += 1) {
-    //   if (Requests[i].userid === authentcationTokenId) {
-    //     userRequests.push(Requests[i]);
-    //   }
   }
 
   /**
@@ -64,12 +62,17 @@ class requestController {
   */
   static getUserRequestById(req, res) {
     const id = parseInt(req.params.requestId, 10);
-    const requestGottenById = Requests.filter(element =>
-      ((element.userid === req.decodedUserData.id) && (element.id === id)));
-    if (requestGottenById.length !== 1) {
-      return res.status(404).json({ error: 'Request not found' });
-    }
-    return res.status(200).json({ message: 'Request found', requestGottenById });
+    const bindingParameters = [req.decodedUserData.id, id];
+    const sql = 'select * from request where userid = $1 and id = $2';
+    db.query(sql, bindingParameters)
+      .then((request) => {
+        if (request.rowCount < 1) {
+          return res.status(404).json({ error: 'Request not found' });
+        }
+        const requestFoundById = request.rows;
+        return res.status(200).json({ message: 'Request found', requestFoundById });
+      })
+      .catch(err => res.status(400).json({ err, message: 'something is wrong' }));
   }
 
   /**
@@ -93,7 +96,7 @@ class requestController {
     }
     if (status === false) {
       return res.status(401).json({
-        message: 'Only business owner can delete a business',
+        message: 'Only request owner can delete a request',
         error: true
       });
     }
