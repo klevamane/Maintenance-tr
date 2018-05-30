@@ -103,7 +103,7 @@ describe('REQUEST FILE', () => {
     const request = {
       fault: 'Broken mouthpiece',
       brand: 'Lenovo',
-      modelnumber: '77263* @!#@ ^',
+      modelNumber: '77263* @!#@ ^',
       description: 'description'
     };
     chai.request(app)
@@ -111,8 +111,8 @@ describe('REQUEST FILE', () => {
       .set('Authorization', `Bearer ${authenticationToken}`)
       .send(request)
       .end((err, res) => {
-        expect(res).to.have.status(400);
         expect(res.body.error).to.equal('Model number should contain only Alphabets and numbers');
+        expect(res).to.have.status(400);
         expect(res.body).to.be.a('object');
         done();
       });
