@@ -43,7 +43,6 @@ describe('REQUEST FILE', () => {
   });
 
   it('New request created', (done) => {
-    winston.info(`the auth-token is ${authenticationToken}`);
     const request = {
       fault: 'Broken Screen',
       brand: 'LGG',
