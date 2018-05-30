@@ -73,7 +73,7 @@ describe('ADMIN CONTROLLER', () => {
       .put('/api/v1/requests/1/approve')
       .set('Authorization', `Bearer ${adminAuthToken}`)
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(400);
         expect(res.body.message).to.equal('The request has already been approved');
         expect(res.body).to.be.a('object');
         done();

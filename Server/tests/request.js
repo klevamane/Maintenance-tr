@@ -107,7 +107,7 @@ describe('REQUEST FILE', () => {
 
   it('Get request by Id requests of a logged in user', (done) => {
     chai.request(app)
-      .get('/api/v1/users/requests/6')
+      .get('/api/v1/users/requests/1')
       .set('authorization', `Bearer ${authenticationToken}`)
       .end((err, res) => {
         expect(res.body.message).to.equal('Request found');
@@ -138,7 +138,7 @@ describe('REQUEST FILE', () => {
       description: 'description'
     };
     chai.request(app)
-      .put('/api/v1/users/requests/5')
+      .put('/api/v1/users/requests/2')
       .set('Authorization', `Bearer ${authenticationToken}`)
       .send(request)
       .end((err, res) => {
