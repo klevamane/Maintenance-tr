@@ -64,11 +64,9 @@ exports.checkIfRequestIsApprovable = (req, res, next) => {
   const sql = 'select count(*) from request where id = $1 and statusid = $2';
   // binding parameter value must be an array else error is thrown
   const bindingParameter = [requestid, 1];
-  winston.info(`The param is ${requestid}`);
   db.query(sql, bindingParameter)
     .then((result) => {
       // check the value retured by the sql statement
-      winston.info(`count is ${result.rows[0].count}`);
       if (result.rows[0].count < 1) {
         return res.status(400).json({ message: 'The request has already been approved' });
       }

@@ -42,6 +42,82 @@ describe('REQUEST FILE', () => {
       });
   });
 
+  it('fault should contain only Alphabets and numbers', (done) => {
+    const request = {
+      fault: 'Broken %& @',
+      brand: 'LGG',
+      modelnumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .post('/api/v1/users/requests')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.error).to.equal('fault should contain only Alphabets and numbers');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('Brand should contain only Alphabets and numbers', (done) => {
+    const request = {
+      fault: 'Broken mouthpiece',
+      brand: 'L&# @!',
+      modelnumber: '77263',
+      description: 'description'
+    };
+    chai.request(app)
+      .post('/api/v1/users/requests')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.error).to.equal('Brand should contain only Alphabets and numbers');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+
+  it('Description should contain only Alphabets and numbers', (done) => {
+    const request = {
+      fault: 'Broken mouthpiece',
+      brand: 'Lenovo',
+      modelnumber: '77263',
+      description: 'descri@#ption ^'
+    };
+    chai.request(app)
+      .post('/api/v1/users/requests')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.error).to.equal('Description should contain only Alphabets and numbers');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+  it('Model number should contain only Alphabets and numbers', (done) => {
+    const request = {
+      fault: 'Broken mouthpiece',
+      brand: 'Lenovo',
+      modelNumber: '77263* @!#@ ^',
+      description: 'description'
+    };
+    chai.request(app)
+      .post('/api/v1/users/requests')
+      .set('Authorization', `Bearer ${authenticationToken}`)
+      .send(request)
+      .end((err, res) => {
+        expect(res.body.error).to.equal('Model number should contain only Alphabets and numbers');
+        expect(res).to.have.status(400);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
   it('New request created', (done) => {
     const request = {
       fault: 'Broken Screen',

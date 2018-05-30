@@ -37,6 +37,7 @@ const requestMessageTableQuery = `CREATE TABLE "requestmessage" (
 "requestid" serial NOT NULL,
 "userid" uuid NOT NULL,
 "comment" character varying(250) NOT NULL,
+"createdon" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 CONSTRAINT requestmessage_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -55,6 +56,7 @@ const contactUsTableQuery = `CREATE TABLE "contactus" (
 "name" character varying(200) NOT NULL,
 "email" character varying(100) NOT NULL,
 "message" TEXT NOT NULL,
+"createdon" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 CONSTRAINT contactus_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
