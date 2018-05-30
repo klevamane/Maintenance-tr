@@ -104,7 +104,7 @@ describe('REQUEST FILE', () => {
       fault: 'Broken mouthpiece',
       brand: 'Lenovo',
       modelnumber: '77263#@ ^',
-      description: 'description ^'
+      description: 'description'
     };
     chai.request(app)
       .post('/api/v1/users/requests')
