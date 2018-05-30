@@ -23,7 +23,7 @@ let authenticationToken;
 //     });
 // });
 
-describe('POST USER REQUEST FILE', () => {
+describe('REQUEST FILE', () => {
   // doBeforeAll();
   it('Should Authenticate user for request', (done) => {
     const user = {
@@ -43,7 +43,6 @@ describe('POST USER REQUEST FILE', () => {
   });
 
   it('New request created', (done) => {
-    winston.info(`the auth-token is ${authenticationToken}`);
     const request = {
       fault: 'Broken Screen',
       brand: 'LGG',
@@ -120,7 +119,7 @@ describe('POST USER REQUEST FILE', () => {
 
   it('Should return request not found', (done) => {
     chai.request(app)
-      .get('/api/v1/users/requests/20')
+      .get('/api/v1/users/requests/90')
       .set('authorization', `Bearer ${authenticationToken}`)
       .end((err, res) => {
         expect(res.body.error).to.equal('Request not found');

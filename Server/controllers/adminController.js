@@ -43,7 +43,7 @@ class adminController extends usercontroller {
         const modifiedRequest = updatedRequest.rows;
         res.status(200).json({ message: 'Request has been approved', modifiedRequest });
       })
-      .catch(err => res.status(400).json({ err, message: 'Unable to update request' }));
+      .catch(err => res.status(400).json({ err }));
   }
 
   /**

@@ -51,7 +51,7 @@
     "fk_ddl": "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/fk_ddl",
     "test": "npm run schemaset && npm run fk_ddl && npm run testmain",
     "checker": "npm run schemaset && npm run fk_ddl",
-    "localtest": "npm run schemaset && npm run fk_ddl && npm run tes-dl"
+    "localtest": "npm run schemaset && npm run fk_ddl && npm run test-dl"
   },
   "engines": {
     "node": "8.10.0",
