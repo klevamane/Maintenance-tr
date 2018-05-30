@@ -99,7 +99,6 @@ describe('REQUEST FILE', () => {
         done();
       });
   });
-  
   it('Model number should contain only Alphabets and numbers', (done) => {
     const request = {
       fault: 'Broken mouthpiece',
