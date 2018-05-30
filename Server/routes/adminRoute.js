@@ -3,7 +3,7 @@ import admincontroller from '../controllers/adminController';
 import { checkAuthentication } from '../middlewares/authentication';
 import {
   checkIfUserIsAdmin, checkIfRequestIsApprovable, checkIfRequestExists,
-  checkIfRequestIsDisApprovable, checkIfRequestIsResolvable 
+  checkIfRequestIsDisApprovable, checkIfRequestIsResolvable
 } from '../middlewares/helpers';
 
 const routes = express.Router();

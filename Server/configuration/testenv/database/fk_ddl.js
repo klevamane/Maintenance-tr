@@ -32,7 +32,7 @@ dbconnect.query(reguseridFk0)
   .then(() => {
     const insertquery = `INSERT INTO registereduser(firstname, lastname, email, mobile, password, isadmin)
       VALUES ('onengi', 'Bob', 'admin@gmx.com', '08035672922',
-      '$2b$10$zALOeppbhmwCuDPbwrfkBeP2aCXbfrdkiEHQaQGnA3T20RN8vWCqu, true')`;
+      '$2b$10$zALOeppbhmwCuDPbwrfkBeP2aCXbfrdkiEHQaQGnA3T20RN8vWCqu', true)`;
     dbconnect.query(insertquery);
     winston.info('User Id foreign key has been created form request message table');
   })

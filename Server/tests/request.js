@@ -23,7 +23,7 @@ let authenticationToken;
 //     });
 // });
 
-describe('POST USER REQUEST FILE', () => {
+describe('REQUEST FILE', () => {
   // doBeforeAll();
   it('Should Authenticate user for request', (done) => {
     const user = {
@@ -108,7 +108,7 @@ describe('POST USER REQUEST FILE', () => {
 
   it('Get request by Id requests of a logged in user', (done) => {
     chai.request(app)
-      .get('/api/v1/users/requests/1')
+      .get('/api/v1/users/requests/6')
       .set('authorization', `Bearer ${authenticationToken}`)
       .end((err, res) => {
         expect(res.body.message).to.equal('Request found');
@@ -120,7 +120,7 @@ describe('POST USER REQUEST FILE', () => {
 
   it('Should return request not found', (done) => {
     chai.request(app)
-      .get('/api/v1/users/requests/20')
+      .get('/api/v1/users/requests/90')
       .set('authorization', `Bearer ${authenticationToken}`)
       .end((err, res) => {
         expect(res.body.error).to.equal('Request not found');
@@ -139,7 +139,7 @@ describe('POST USER REQUEST FILE', () => {
       description: 'description'
     };
     chai.request(app)
-      .put('/api/v1/users/requests/2')
+      .put('/api/v1/users/requests/5')
       .set('Authorization', `Bearer ${authenticationToken}`)
       .send(request)
       .end((err, res) => {

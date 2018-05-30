@@ -120,11 +120,11 @@ exports.checkIfRequestExists = (req, res, next) => {
     .then((result) => {
       // check the value retured by the sql statement
       if (result.rows[0].count < 1) {
-        return res.status(400).json({ message: 'The request does not exist' });
+        return res.status(404).json({ message: 'The request does not exist' });
       }
       next();
     })
-    .catch((err => res.status(400).json({ err, message: 'Bad reqest' })));
+    .catch((err => res.status(400).json({ err, message: 'Bad request' })));
 };
 
 // Validation schema to be used as a blueprint in implementing validation

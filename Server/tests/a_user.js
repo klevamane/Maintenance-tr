@@ -30,6 +30,7 @@ describe('POST USER /user', () => {
       });
   });
 
+
   it('Mobile number should be of nigerian format', (done) => {
     const user = {
       firstname: 'Bestman',
