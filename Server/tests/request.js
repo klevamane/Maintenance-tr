@@ -103,7 +103,7 @@ describe('REQUEST FILE', () => {
     const request = {
       fault: 'Broken mouthpiece',
       brand: 'Lenovo',
-      modelnumber: '77263#@ ^',
+      modelnumber: '77263* @!#@ ^',
       description: 'description'
     };
     chai.request(app)
