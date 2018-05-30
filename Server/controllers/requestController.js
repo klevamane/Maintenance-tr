@@ -19,7 +19,7 @@ class requestController {
       .then(() => {
         const sql = 'INSERT INTO request(fault, brand, modelnumber, userid, description, other, statusid) VALUES ( $1, $2, $3, $4, $5, $6, $7)';
         const bindingParamaters = [req.body.fault, req.body.brand, req.body.modelnumber,
-          req.decodedUserData.id, req.body.description, 'timeofday()', 1];
+          req.decodedUserData.id, req.body.description, req.body.other, 1];
           // continue the chain by returning result to the next then block
         return db.query(sql, bindingParamaters);
       })

@@ -59,6 +59,74 @@ exports.checkIfUserIsAdmin = (req, res, next) => {
     });
 };
 
+exports.checkIfRequestIsApprovable = (req, res, next) => {
+  const requestid = parseInt(req.params.requestId, 10);
+  const sql = 'select count(*) from request where id = $1 and statusid = $2';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [requestid, 1];
+  winston.info(`The param is ${requestid}`);
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      // check the value retured by the sql statement
+      winston.info(`count is ${result.rows[0].count}`);
+      if (result.rows[0].count < 1) {
+        return res.status(400).json({ message: 'The request has already been approved' });
+      }
+      next();
+    })
+    .catch((err => res.status(400).json({ err, message: 'Unable to approve request' })));
+};
+
+
+exports.checkIfRequestIsDisApprovable = (req, res, next) => {
+  const requestid = parseInt(req.params.requestId, 10);
+  const sql = 'select count(*) from request where id = $1 and (statusid = $2 or statusid = $3)';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [requestid, 3, 4];
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      // check the value retured by the sql statement
+      if (result.rows[0].count > 0) {
+        return res.status(400).json({ message: 'You cannot disapprove a request that has already been resolved or disapproved' });
+      }
+      next();
+    })
+    .catch((err => res.status(400).json({ err, message: 'Unable to Disapprove the request' })));
+};
+
+exports.checkIfRequestIsResolvable = (req, res, next) => {
+  const requestid = parseInt(req.params.requestId, 10);
+  const sql = 'select count(*) from request where id = $1 and statusid = $2';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [requestid, 2];
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      // check the value retured by the sql statement
+      if (result.rows[0].count < 1) {
+        return res.status(400).json({ message: 'You can only resolve a request that is pending' });
+      }
+      next();
+    })
+    .catch((err => res.status(400).json({ err, message: 'Unable to resolve the request' })));
+};
+
+
+exports.checkIfRequestExists = (req, res, next) => {
+  const requestid = parseInt(req.params.requestId, 10);
+  const sql = 'select count(*) from request where id = $1';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [requestid];
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      // check the value retured by the sql statement
+      if (result.rows[0].count < 1) {
+        return res.status(400).json({ message: 'The request does not exist' });
+      }
+      next();
+    })
+    .catch((err => res.status(400).json({ err, message: 'Bad reqest' })));
+};
+
 // Validation schema to be used as a blueprint in implementing validation
 exports.validateRegisterUSerSchema = {
   email: Joi.string().email().required(),

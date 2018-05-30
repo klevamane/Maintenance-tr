@@ -55,7 +55,8 @@ class adminController extends usercontroller {
   */
   static disapproveUserRequest(req, res) {
     const id = parseInt(req.params.requestId, 10);
-    const bindingParameters = [1, id];
+    const bindingParameters = [3, id];
+    // Use join statement to resolve foreign key name by using tablename.columnname
     const sql = `UPDATE request set statusid = $1  from status where request.id =$2
          and (status.name != 'Dissaproved' or status.name != 'resolved')`;
     db.query(sql, bindingParameters)
@@ -66,6 +67,30 @@ class adminController extends usercontroller {
         res.status(200).json({ message: 'Request has been rejected' });
       })
       .catch(err => res.status(400).json({ err, message: 'Unable to reject request' }));
+  }
+
+
+  /**
+* @static
+* @description Modify the state to request of a registered user in user to Resolved
+* @param  {object} req gets values passed to the api
+* @param  {object} res sends the disapproved request
+* @returns {object} Sends the output with success message and status code
+  */
+  static resolveUserRequest(req, res) {
+    const id = parseInt(req.params.requestId, 10);
+    const bindingParameters = [4, id];
+    // Use join statement to resolve foreign key name by using tablename.columnname
+    const sql = `UPDATE request set statusid = $1  from status where request.id =$2
+       and (status.name != 'Dissaproved' or status.name != 'resolved')`;
+    db.query(sql, bindingParameters)
+      .then((resolvedRequest) => {
+        if (resolvedRequest.rowCount < 1) {
+          return res.status(304).json({ message: 'Unable to resolve the request' });
+        }
+        res.status(200).json({ message: 'Request has been resolved' });
+      })
+      .catch(err => res.status(400).json({ err, message: 'Unable to resolve request' }));
   }
 
 
