@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import User from '../models/user';
 import db from '../connection';
-
+import winston from 'winston';
 
 exports.checkIfEmailAlreadyExist = (req, res, next) => {
   const sql = 'select * from registereduser where email = $1';
@@ -43,6 +43,21 @@ exports.checkIfMobileAlreadyExist = (req, res, next) => {
     });
 };
 
+// Admin checker
+exports.checkIfUserIsAdmin = (req, res, next) => {
+  // returns a value with key as count
+  const sql = 'select count(*) from registereduser where id = $1 and isadmin = $2';
+  // binding parameter value must be an array else error is thrown
+  const bindingParameter = [req.decodedUserData.id, true];
+  db.query(sql, bindingParameter)
+    .then((result) => {
+      // check the value retured by the sql statement
+      if (result.rows[0].count < 1) {
+        return res.status(401).json({ message: 'You are not authorized to access this page' });
+      }
+      next();
+    });
+};
 
 // Validation schema to be used as a blueprint in implementing validation
 exports.validateRegisterUSerSchema = {
