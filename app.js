@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 import userRoutes from './Server/routes/userRoute';
 import requestRoutes from './Server/routes/requestRoute';
+import adminRoutes from './Server/routes/adminRoute';
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Routes
 app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/users', requestRoutes);
+app.use('/api/v1', adminRoutes);
 
 
 app.get('*', (req, res, next) => {

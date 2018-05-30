@@ -31,7 +31,22 @@ dbconnect.query(reguseridFk0)
   })
   .then(() => {
     const sqlStatus = `INSERT INTO status(name)
+           VALUES ('Inactive')`;
+    dbconnect.query(sqlStatus);
+  })
+  .then(() => {
+    const sqlStatus = `INSERT INTO status(name)
            VALUES ('Pending')`;
+    dbconnect.query(sqlStatus);
+  })
+  .then(() => {
+    const sqlStatus = `INSERT INTO status(name)
+           VALUES ('Disapproved')`;
+    dbconnect.query(sqlStatus);
+  })
+  .then(() => {
+    const sqlStatus = `INSERT INTO status(name)
+           VALUES ('Resolved')`;
     dbconnect.query(sqlStatus);
   })
   .catch((err) => {
