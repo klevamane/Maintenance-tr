@@ -85,10 +85,10 @@ class adminController extends usercontroller {
        and (status.name != 'Dissaproved' or status.name != 'resolved')`;
     db.query(sql, bindingParameters)
       .then((resolvedRequest) => {
-        if (resolvedRequest.rowCount < 1) {
-          return res.status(304).json({ message: 'Unable to resolve the request' });
-        }
-        res.status(200).json({ message: 'Request has been resolved' });
+        //    if (resolvedRequest.rowCount < 1) {
+        //      return res.status(304).json({ message: 'Unable to resolve the request' });
+        res.status(200).json({ message: 'Request has been resolved', resolvedRequest });
+        // }
       })
       .catch(err => res.status(400).json({ err, message: 'Unable to resolve request' }));
   }
