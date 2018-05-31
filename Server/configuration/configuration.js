@@ -26,11 +26,11 @@ const configuration = {
   },
 
   production: {
-    user: process.env.PRODDBUSER,
-    password: process.env.PRODDBPSWD,
-    database: process.env.PRODDB,
-    host: process.env.PRODDBHOST,
-    port: process.env.PRODDBSERVERPORT,
+    user: process.env.MTUSER,
+    password: process.env.MTDBPSW,
+    database: process.env.MTDB,
+    host: process.env.MTHOST,
+    port: process.env.MTPORT,
     max: 10,
     idleTimeoutMillis: 3000
   }
