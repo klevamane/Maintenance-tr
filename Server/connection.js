@@ -10,6 +10,9 @@ if (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'test') {
 } else {
   connectionConfig = test;
 }
+if (process.env.NODE_ENV === 'production') {
+  connectionConfig = 'production';
+}
 const connectionSettings = configuration[connectionConfig];
 const db = new Pool(connectionSettings);
 export default db;
