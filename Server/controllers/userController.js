@@ -24,14 +24,10 @@ class usercontroller {
         return res.status(500).json({ error: err });
       }
 
-      db.connect()
-        .then(() => {
-          const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password) VALUES ( $1, $2, $3, $4, $5)';
-          const bindingParamaters =
-            [req.body.firstname, req.body.lastname, req.body.email, req.body.mobile, hash];
-          // continue the chain by returning result to the next then block
-          return db.query(sql, bindingParamaters);
-        })
+      const bindingParamaters =
+      [req.body.firstname, req.body.lastname, req.body.email, req.body.mobile, hash];
+      const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password) VALUES ( $1, $2, $3, $4, $5)';
+      db.query(sql, bindingParamaters)
         .then((user) => {
           const numberofCreatedUsers = user.rowCount;
           return res.status(201).json({ message: 'User has been registered', numberofCreatedUsers });

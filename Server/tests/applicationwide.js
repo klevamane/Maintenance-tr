@@ -20,7 +20,7 @@ describe('POST USER REQUEST FILE', () => {
       .get('/api/v1/user/1')
       .end((err, res) => {
         expect(res.body.message).to.equal('Something went wrong');
-        expect(res).to.have.status(501);
+        expect(res).to.have.status(404);
         expect(res.body).to.be.a('object');
         done();
       });
