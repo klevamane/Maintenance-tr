@@ -30,6 +30,7 @@ const configuration = {
     password: process.env.PRODDBPSWD,
     database: process.env.PRODDB,
     host: process.env.PRODDBHOST,
+    port: process.env.PRODDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 3000
   }
