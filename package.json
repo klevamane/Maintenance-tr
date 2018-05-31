@@ -50,6 +50,7 @@
     "schemaset" : "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/ddl",
     "fk_ddl": "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/fk_ddl",
     "test": "npm run schemaset && npm run fk_ddl && npm run testmain",
+    "prechecker": "npm run ./node_modules/.bin/babel-node ./Server/configuration/testenv/database/beforelocal",
     "checker": "npm run schemaset && npm run fk_ddl",
     "localtest": "npm run schemaset && npm run fk_ddl && npm run test-dl"
   },
