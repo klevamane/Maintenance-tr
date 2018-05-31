@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import winston from 'winston';
 
 exports.checkAuthentication = (req, res, next) => {
   try {

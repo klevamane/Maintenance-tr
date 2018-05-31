@@ -9,8 +9,6 @@ chai.use(chaiHttp);
 
 // CREATE
 describe('POST USER /user', () => {
-  // runBeforeAll();
-  // doBeforeEach();
   it('should create a new user', (done) => {
     const user = {
       firstname: 'kleventh',

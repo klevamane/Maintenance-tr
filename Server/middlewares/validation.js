@@ -3,7 +3,7 @@ import { validateRegisterUSerSchema, validateAuthenticateUserSchema, validateNew
 
 
 export const validateCreateUser = (req, res, next) => {
-  // Use schema blue print to validate req variables
+  // Use schema blueprint to validate req variables
   const { error, value } = Joi.validate(req.body, validateRegisterUSerSchema);
   if (error) {
     switch (error.details[0].context.key) {
@@ -46,7 +46,7 @@ export const validateAuthenticateUser = (req, res, next) => {
 };
 
 export const validateNewRequest = (req, res, next) => {
-  // Use schema (validateAuthenticateUserSchema) blue print to validate req object variables
+  // Use schema (validateAuthenticateUserSchema) as a blueprint to validate req object variables
   const { error, value } = Joi.validate(req.body, validateNewRequestSchema);
   if (error) {
     switch (error.details[0].context.key) {

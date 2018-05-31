@@ -2,7 +2,6 @@ import chaiHttp from 'chai-http';
 import chai from 'chai';
 import winston from 'winston';
 import app from './../../app';
-// import Users from './../models/user';
 
 const { expect } = chai;
 chai.use(chaiHttp);
@@ -10,7 +9,6 @@ chai.use(chaiHttp);
 let adminAuthToken;
 
 describe('ADMIN CONTROLLER', () => {
-  // doBeforeAll();
   it('Should Authenticate Admin user', (done) => {
     const user = {
       email: 'admin@gmx.com',
