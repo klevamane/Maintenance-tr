@@ -9,7 +9,7 @@ describe('POST USER REQUEST FILE', () => {
     chai.request(app)
       .get('/api/v1/auth/not')
       .end((err, res) => {
-        expect(res).to.have.status(501);
+        expect(res).to.have.status(404);
         expect(res.body).to.be.a('object');
         done();
       });
