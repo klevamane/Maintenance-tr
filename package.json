@@ -35,8 +35,8 @@
     "codeclimate-test-reporter": "^0.5.0"
   },
   "scripts": {
-    "start2": "babel-node ./app.js",
-    "start": "nodemon --exec npm run babel-node -- ./app.js",
+    "start": "babel-node ./app.js",
+    "start2": "nodemon --exec npm run babel-node -- ./app.js",
     "dev": "nodemon --exec npm run babel-node -- ./app.js",
     "test2": "mocha '.Server/test' --exit --compilers js:babel-register --timeout 20000",
     "maintest": "nyc --reporter=html --reporter=text mocha --require babel-register Server/tests/*",
@@ -50,6 +50,7 @@
     "schemaset" : "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/ddl",
     "fk_ddl": "./node_modules/.bin/babel-node ./Server/configuration/testenv/database/fk_ddl",
     "test": "npm run schemaset && npm run fk_ddl && npm run testmain",
+    "prechecker": "npm run ./node_modules/.bin/babel-node ./Server/configuration/testenv/database/beforelocal",
     "checker": "npm run schemaset && npm run fk_ddl",
     "localtest": "npm run schemaset && npm run fk_ddl && npm run test-dl"
   },
