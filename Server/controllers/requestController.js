@@ -1,5 +1,3 @@
-import winston from 'winston';
-import Requests from '../models/request';
 import db from '../connection';
 
 /**
@@ -42,7 +40,8 @@ class requestController {
   */
   static getUserRequests(req, res) {
     const bindingParameter = [req.decodedUserData.id];
-    const sql = 'select * from request where userid = $1';
+    // const sql = 'select * from request where userid = $1';
+    const sql = 'select request.id, fault, brand, modelnumber, description, other,userid, name, createdon from request INNER JOIN status ON status.id = request.statusid where userid = $1 ORDER BY createdon DESC';
     db.query(sql, bindingParameter)
       .then((userRequests) => {
         if (userRequests.rowCount < 1) {
@@ -74,38 +73,6 @@ class requestController {
       })
       .catch(err => res.status(400).json({ err, message: 'something is wrong' }));
   }
-
-  // /**
-  //      * @static
-  //      * @description Deletes a user request, the request must be deleted only by the owner
-  //      * @param  {object} req gets values passed to the api
-  //      * @param  {object} res sends result as output
-  //      * @returns {object} Success message with the business updated or error message
-  //      */
-  // static deleteRequest(req, res) {
-  //   let status = false;
-  //   let requestPosition;
-  //   const requestOwnerId = parseInt(req.decodedUserData.id, 10);
-  //   const requestId = parseInt(req.params.requestId, 10);
-  //   for (let i = 0; i < Requests.length; i += 1) {
-  //     if (Requests[i].id === requestId && Requests[i].userid === requestOwnerId) {
-  //       requestPosition = i;
-  //       status = true;
-  //       break;
-  //     }
-  //   }
-  //   if (status === false) {
-  //     return res.status(401).json({
-  //       message: 'Only request owner can delete a request',
-  //       error: true
-  //     });
-  //   }
-  //   Requests.splice(requestPosition, 1);
-  //   return res.status(200).json({
-  //     message: 'The request has been deleted',
-  //     Requests,
-  //   });
-  // }
 
   /**
 * @static

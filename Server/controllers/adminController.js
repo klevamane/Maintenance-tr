@@ -13,7 +13,8 @@ class adminController extends usercontroller {
   * @returns {object} Success message with the request list or error message
   */
   static getUserRequests(req, res) {
-    db.query('select fault, brand, modelnumber, description, other,userid, name, createdon from request INNER JOIN status ON status.id = request.statusid ORDER BY createdon DESC')
+    // user tablename.columname to avoid ambiguity for similar column names
+    db.query('select request.id, fault, brand, modelnumber, description, other,userid, name, createdon from request INNER JOIN status ON status.id = request.statusid ORDER BY createdon DESC')
       .then((listOfeveryUsersRequests) => {
         if (listOfeveryUsersRequests.rowCount < 1) {
           return res.status(302).json({ message: 'No request found' });
@@ -69,7 +70,6 @@ class adminController extends usercontroller {
       .catch(err => res.status(400).json({ err, message: 'Unable to reject request' }));
   }
 
-
   /**
 * @static
 * @description Modify the state to request of a registered user in user to Resolved
@@ -85,44 +85,10 @@ class adminController extends usercontroller {
        and (status.name != 'Dissaproved' or status.name != 'resolved')`;
     db.query(sql, bindingParameters)
       .then((resolvedRequest) => {
-        //    if (resolvedRequest.rowCount < 1) {
-        //      return res.status(304).json({ message: 'Unable to resolve the request' });
         res.status(200).json({ message: 'Request has been resolved', resolvedRequest });
         // }
       })
       .catch(err => res.status(400).json({ err, message: 'Unable to resolve request' }));
   }
-
-
-//   /**
-//      * Register a new Admin user on the platform
-//      * @static
-//      * @description create a new user
-//      * @param  {object} req gets values passed to the api
-//      * @param  {object} res sends result as output
-//      * @returns {object} Success message with the user created or error message
-//      * @memberOf
-//      */
-//   static registerUser(req, res) {
-//     bcrypt.hash(req.body.password, 10, (err, hash) => {
-//       if (err) {
-//         return res.status(500).json({ error: err });
-//       }
-
-//       db.connect()
-//         .then(() => {
-//           const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password, isadmin) VALUES ( $1, $2, $3, $4, $5)';
-//           const bindingParamaters =
-//             [req.body.firstname, req.body.lastname, req.body.email, req.body.mobile, hash, true];
-//           // continue the chain by returning result to the next then block
-//           return db.query(sql, bindingParamaters);
-//         })
-//         .then((user) => {
-//           const numberofCreatedUsers = user.rowCount;
-//           return res.status(201).json({ message: 'Admin User has been registered', numberofCreatedUsers });
-//         })
-//         .catch((err => res.status(400).json({ err, message: 'Unable to register a new admin' })));
-//     });
-//   }
 }
 export default adminController;

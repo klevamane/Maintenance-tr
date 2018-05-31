@@ -1,7 +1,5 @@
 import Joi from 'joi';
-import User from '../models/user';
 import db from '../connection';
-import winston from 'winston';
 
 exports.checkIfEmailAlreadyExist = (req, res, next) => {
   const sql = 'select * from registereduser where email = $1';
