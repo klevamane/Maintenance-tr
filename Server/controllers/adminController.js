@@ -17,7 +17,7 @@ class adminController extends usercontroller {
     db.query('select request.id, fault, brand, modelnumber, description, other,userid, name, createdon from request INNER JOIN status ON status.id = request.statusid ORDER BY createdon DESC')
       .then((listOfeveryUsersRequests) => {
         if (listOfeveryUsersRequests.rowCount < 1) {
-          return res.status(302).json({ message: 'No request found' });
+          return res.status(404).json({ message: 'No request found' });
         }
         const allRequests = listOfeveryUsersRequests.rows;
         res.status(302).json({ message: 'All requests', allRequests });
