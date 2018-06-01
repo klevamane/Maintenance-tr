@@ -26,7 +26,8 @@ class requestController {
         if (numberofRequestCreated < 1) {
           return res.status(400).json({ messgae: 'Unable to make request inner' });
         }
-        return res.status(201).json({ message: 'Request has been created', numberofRequestCreated });
+        res.status(201).json({ message: 'Request has been created', numberofRequestCreated });
+        db.release();
       })
       .catch((err => res.status(400).json({ err, message: 'Unable to make request outer' })));
   }
