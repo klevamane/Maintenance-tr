@@ -39,30 +39,7 @@ describe('ADMIN CONTROLLER', () => {
       });
   });
 
-  it('Should return the list of all users', (done) => {
-    chai.request(app)
-      .get('/api/v1/users/users')
-      .set('Authorization', `Bearer ${adminAuthToken}`)
-      .end((err, res) => {
-        expect(res).to.have.status(302);
-        expect(res.body.message).to.equal('List of users');
-        expect(res.body).to.be.a('object');
-        done();
-      });
-  });
-
-  it('Should return Bad request', (done) => {
-    chai.request(app)
-      .put('/api/v1/requests/@/approve')
-      .set('Authorization', `Bearer ${adminAuthToken}`)
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body.message).to.equal('Bad request');
-        expect(res.body).to.be.a('object');
-        done();
-      });
-  });
-
+  
   it('Request has been approved', (done) => {
     winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
