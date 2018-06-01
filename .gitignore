@@ -1,3 +1,6 @@
 node_modules
 .nyc_output
-admin2.html
+.DS_STORE
+text.txt
+.env
+
