@@ -11,7 +11,7 @@ exports.checkIfEmailAlreadyExist = (req, res, next) => {
         return res.status(302).json({ message: 'User with the same email already exist' });
       }
       next();
-    });
+    }).catch(err => res.status(400).json({ err, message: 'Bad request' }));
 };
 
 exports.checkIfLoginEmailExist = (req, res, next) => {
@@ -25,7 +25,7 @@ exports.checkIfLoginEmailExist = (req, res, next) => {
         return res.status(406).json({ message: 'Invalid email or password' });
       }
       next();
-    });
+    }).catch(err => res.status(400).json({ err, message: 'Invalid Authentication' }));
 };
 
 exports.checkIfRequestIdParamIsValid = (req, res, next) => {
@@ -50,7 +50,7 @@ exports.checkIfMobileAlreadyExist = (req, res, next) => {
         return res.status(302).json({ message: 'The mobile number is in already used by another client' });
       }
       next();
-    });
+    }).catch(err => res.status(400).json({ err, message: 'Invalid Mobile details' }));
 };
 
 // Admin checker
@@ -66,7 +66,7 @@ exports.checkIfUserIsAdmin = (req, res, next) => {
         return res.status(401).json({ message: 'You are not authorized to access this page' });
       }
       next();
-    });
+    }).catch(err => res.status(400).json({ err, message: 'Unauthorized' }));
 };
 
 exports.checkIfRequestIsApprovable = (req, res, next) => {
