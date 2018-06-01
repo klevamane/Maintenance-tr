@@ -11,6 +11,4 @@ routes.get('/requests', checkAuthentication, requestController.getUserRequests);
 routes.get('/requests/:requestId', checkAuthentication, checkIfRequestIdParamIsValid, requestController.getUserRequestById);
 routes.put('/requests/:requestId', checkAuthentication, checkIfRequestIdParamIsValid, validateNewRequest, requestController.modifyUserRequest);
 // routes.delete('/requests/:requestId', checkAuthentication, requestController.deleteRequest);
-routes.get('/all', userController.listUser);
-
 export default routes;

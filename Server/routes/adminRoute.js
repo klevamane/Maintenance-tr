@@ -22,4 +22,5 @@ routes.put(
   '/requests/:requestId/resolve', checkAuthentication, checkIfUserIsAdmin, checkIfRequestIdParamIsValid,
   checkIfRequestExists, checkIfRequestIsResolvable, admincontroller.resolveUserRequest
 );
+routes.get('/users/users', checkAuthentication, checkIfUserIsAdmin, admincontroller.listAllUsers);
 export default routes;
