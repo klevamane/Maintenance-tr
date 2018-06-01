@@ -69,7 +69,8 @@ class requestController {
           return res.status(404).json({ error: 'Request not found' });
         }
         const requestFoundById = request.rows;
-        return res.status(200).json({ message: 'Request found', requestFoundById });
+        res.status(200).json({ message: 'Request found', requestFoundById });
+        db.release();
       })
       .catch(err => res.status(400).json({ err, message: 'something is wrong' }));
   }
@@ -94,6 +95,7 @@ class requestController {
         }
         const modifiedRequest = updatedRequest.rows;
         res.status(200).json({ message: 'Request has been modified', modifiedRequest });
+        db.release();
       })
       .catch(err => res.status(400).json({ err, message: 'Unable to update request' }));
   }

@@ -30,7 +30,8 @@ class usercontroller {
       db.query(sql, bindingParamaters)
         .then((user) => {
           const numberofCreatedUsers = user.rowCount;
-          return res.status(201).json({ message: 'User has been registered', numberofCreatedUsers });
+          res.status(201).json({ message: 'User has been registered', numberofCreatedUsers });
+          db.release();
         })
         .catch((err => res.status(400).json({ err, message: 'Unable to register user' })));
     });
@@ -82,10 +83,11 @@ class usercontroller {
               token
             });
           }
-          return res.status(401).json({ message: 'Invalid email or password' });
+          res.status(401).json({ message: 'Invalid email or password' });
+          db.release();
         });
       })
-      .catch((err => res.status(400).json({ err, message: 'Invalid email or password' })));
+      .catch((err => res.status(400).json({ err, message: 'Invalid email or password' }))); 
   }
 }
 // }

@@ -21,6 +21,7 @@ class adminController extends usercontroller {
         }
         const allRequests = listOfeveryUsersRequests.rows;
         res.status(302).json({ message: 'All requests', allRequests });
+        db.release();
       })
       .catch((err => res.status(400).json({ err, message: 'Unable to List users' })));
   }
@@ -43,6 +44,7 @@ class adminController extends usercontroller {
         }
         const modifiedRequest = updatedRequest.rows;
         res.status(200).json({ message: 'Request has been approved', modifiedRequest });
+        db.release();
       })
       .catch(err => res.status(400).json({ err }));
   }
@@ -66,6 +68,7 @@ class adminController extends usercontroller {
           return res.status(304).json({ message: 'Unable reject the request' });
         }
         res.status(200).json({ message: 'Request has been rejected' });
+        db.release();
       })
       .catch(err => res.status(400).json({ err, message: 'Unable to reject request' }));
   }
@@ -86,6 +89,7 @@ class adminController extends usercontroller {
     db.query(sql, bindingParameters)
       .then((resolvedRequest) => {
         res.status(200).json({ message: 'Request has been resolved', resolvedRequest });
+        db.release();
         // }
       })
       .catch(err => res.status(400).json({ err, message: 'Unable to resolve request' }));
