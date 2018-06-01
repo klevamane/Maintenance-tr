@@ -40,7 +40,7 @@
     "test2": "mocha '.Server/test' --exit --compilers js:babel-register --timeout 20000",
     "maintest": "nyc --reporter=html --reporter=text mocha --require babel-register Server/tests/*",
     "testmain": "nyc mocha --require babel-register Server/tests/* --exit",
-    "test-dl": "cross-env NODE_ENV=test mocha --require babel-register Server/tests/* --exit",
+    "test-dl": "mocha --require babel-register Server/tests/* --exit",
     "test-dev": "nyc mocha ./server --exit --compilers js:babel-register --timeout 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "codeclimate-report": "codeclimate-test-reporter < ./coverage/lcov.info",
