@@ -40,7 +40,6 @@ describe('ADMIN CONTROLLER', () => {
   });
 
   it('Should return the list of all users', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .get('/api/v1/users/users')
       .set('Authorization', `Bearer ${adminAuthToken}`)
@@ -53,7 +52,6 @@ describe('ADMIN CONTROLLER', () => {
   });
 
   it('Should return Bad request', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .put('/api/v1/requests/@/approve')
       .set('Authorization', `Bearer ${adminAuthToken}`)
