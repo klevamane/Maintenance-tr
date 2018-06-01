@@ -28,6 +28,18 @@ exports.checkIfLoginEmailExist = (req, res, next) => {
     });
 };
 
+exports.checkIfRequestIdParamIsValid = (req, res, next) => {
+  try {
+    const requestId = parseInt(req.params.requestId, 10);
+    if (!Number.isInteger(requestId) || requestId > 1000000) {
+      return res.status(400).json({ message: 'Invalid request Id parameter' });
+    }
+    next();
+  } catch (err) {
+    res.status(403).json('Forbidden');
+  }
+};
+
 exports.checkIfMobileAlreadyExist = (req, res, next) => {
   const sql = 'select * from registereduser where mobile = $1';
   // binding parameter value must be an array else error is thrown
@@ -125,7 +137,7 @@ exports.checkIfRequestExists = (req, res, next) => {
 
 // Validation schema to be used as a blueprint in implementing validation
 exports.validateRegisterUSerSchema = {
-  email: Joi.string().email().required(),
+  email: Joi.string().email().max(30).required(),
   firstname: Joi.string().max(15).regex(/^[a-zA-Z]+$/).required(),
   lastname: Joi.string().max(15).regex(/^[a-zA-Z]+$/).required(),
   password: Joi.string().min(6).max(15).required(),
