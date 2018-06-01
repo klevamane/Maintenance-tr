@@ -44,21 +44,14 @@ class usercontroller {
      * @returns {object} Success message with the user created or error message
      * @memberOf
      */
-  static listUser(req, res) {
-    // Parameterized query to avoid sql injection
-    db.connect()
-      .then(() => {
-        // const sql = 'select * from registereduser where id = $1';
-        const sql = 'select * from registereduser';
-        // continue the chain by returning result to the next then block
-        // return db.query(sql, bindingParamater);
-        return db.query(sql);
-      })
+  static listAllUsers(req, res) {
+    const sql = 'select id, firstname, lastname, email, mobile, isadmin from registereduser';
+    db.query(sql)
       .then((result) => {
-        const users = result.rows;
-        return res.status(302).json({ message: 'List of clients', users });
+        const listOfAllUsers = result.rows;
+        return res.status(302).json({ message: 'List of users', listOfAllUsers });
       })
-      .catch(err => res.status(400).json({ err, message: 'something is wrong' }));
+      .catch(err => res.status(400).json({ err, message: 'Could not list users' }));
   }
 
 

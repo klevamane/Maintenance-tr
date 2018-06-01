@@ -18,7 +18,7 @@ const configuration = {
   test: {
     user: 'user',
     password: 'user',
-    database: 'testdb',
+    database: 'testdb2',
     host: '127.0.0.1',
     //  port: process.env.TESTDBSERVERPORT,
     max: 10,
