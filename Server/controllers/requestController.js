@@ -62,7 +62,7 @@ class requestController {
   static getUserRequestById(req, res) {
     const id = parseInt(req.params.requestId, 10);
     const bindingParameters = [req.decodedUserData.id, id];
-    const sql = 'select * from request where userid = $1 and id = $2';
+    const sql = 'select request.id, fault, brand, modelnumber, description, other,userid, name as status, createdon from request INNER JOIN status ON status.id = request.statusid where userid = $1 and request.id = $2';
     db.query(sql, bindingParameters)
       .then((request) => {
         if (request.rowCount < 1) {
