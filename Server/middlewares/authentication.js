@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-
+// Authentication checker
 exports.checkAuthentication = (req, res, next) => {
   try {
     // Access the token from header and excluding the Bearer and space
