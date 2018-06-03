@@ -550,3 +550,14 @@ table {
   table tr:nth-child(odd) {
     background-color:  rgb(227, 231, 238);
 }
+
+#big-care {
+    font-weight: 400;
+}
+
+#reset-psw {
+    padding: 15px 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+}
