@@ -290,7 +290,7 @@ nav .brand #logo1 {
  
 /* Implement as long as screen is not less than 768px */
   @media (min-width: 576px) {
-     #leave {
+     .leave {
         padding-left: 530px;
     }
   }
@@ -304,22 +304,23 @@ nav .brand #logo1 {
         display: grid;
         grid-template-columns: 1fr;
     }
-    #leave {
+    .leave {
         padding: -950px;
     }
   }
 
+  
 
   @media (max-width: 606px) {
-    #leave {
+    .leave {
         padding: -950px;
     }
   }
   
   /* Implement as long as screen is not greater than 768px */
   @media (max-width: 768px) {
-    #leave {
-        padding: -950px;
+    .leave {
+        padding: 0px;
     } 
     
     .nav-toggle {
@@ -350,8 +351,8 @@ nav .brand #logo1 {
     .container {
       max-width: 960px;
     }
-    #leave {
-        padding-left: 750px;
+    .leave {
+        padding-left: 850px;
     }
   }
   
@@ -359,8 +360,8 @@ nav .brand #logo1 {
     .container {
       max-width: 1140px;
     }
-    #leave {
-        padding-left: 900px;
+    .leave {
+        padding-left: 1000px;
     }
   }
   
