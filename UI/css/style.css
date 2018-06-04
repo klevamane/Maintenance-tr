@@ -111,6 +111,15 @@ form select {
 .marg-top50y{
     margin-top: 50px;
 }
+.marg-top70y{
+    margin-top: 70px;
+}
+.marg-top80y{
+    margin-top: 80px;
+}
+.marg-top100y{
+    margin-top: 100px;
+}
 .marg-bot10y{
     margin-bottom: 10px;
 }
