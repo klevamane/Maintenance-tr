@@ -288,6 +288,13 @@ nav .brand #logo1 {
     }
   }
  
+/* Implement as long as screen is not less than 768px */
+  @media (min-width: 576px) {
+     #leave {
+        padding-left: 530px;
+    }
+  }
+
 
   @media (max-width: 576px) {
     .container {
@@ -297,10 +304,24 @@ nav .brand #logo1 {
         display: grid;
         grid-template-columns: 1fr;
     }
+    #leave {
+        padding: -950px;
+    }
+  }
+
+
+  @media (max-width: 606px) {
+    #leave {
+        padding: -950px;
+    }
   }
   
   /* Implement as long as screen is not greater than 768px */
   @media (max-width: 768px) {
+    #leave {
+        padding: -950px;
+    } 
+    
     .nav-toggle {
         display: block;
     }
@@ -329,11 +350,17 @@ nav .brand #logo1 {
     .container {
       max-width: 960px;
     }
+    #leave {
+        padding-left: 750px;
+    }
   }
   
   @media (min-width: 1200px) {
     .container {
       max-width: 1140px;
+    }
+    #leave {
+        padding-left: 900px;
     }
   }
   
