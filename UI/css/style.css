@@ -108,6 +108,9 @@ form select {
     margin-top: 40px;
 }
 
+.marg-top50y{
+    margin-top: 50px;
+}
 .marg-bot10y{
     margin-bottom: 10px;
 }
@@ -261,6 +264,10 @@ nav .brand {
 nav .brand #logo1 {
     color: #fff;
 }
+
+.pull-nav-li-right {
+    float: right;
+}
 /* Container media Query */
 
 .container {
@@ -270,12 +277,17 @@ nav .brand #logo1 {
     margin-right: auto;
     margin-left: auto;
   }
-  
-  @media (min-width: 576px) {
+  /* Implement as long as screen is not less than 768px */
+  @media (min-width: 776px) {
     .container {
       max-width: 540px;
     }
+
+   .container ul#navul li#signout {
+        float: right;
+    }
   }
+ 
 
   @media (max-width: 576px) {
     .container {
@@ -561,3 +573,4 @@ table {
     text-align: center;
     font-size: 14px;
 }
+
