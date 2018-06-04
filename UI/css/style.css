@@ -108,6 +108,18 @@ form select {
     margin-top: 40px;
 }
 
+.marg-top50y{
+    margin-top: 50px;
+}
+.marg-top70y{
+    margin-top: 70px;
+}
+.marg-top80y{
+    margin-top: 80px;
+}
+.marg-top100y{
+    margin-top: 100px;
+}
 .marg-bot10y{
     margin-bottom: 10px;
 }
@@ -261,6 +273,10 @@ nav .brand {
 nav .brand #logo1 {
     color: #fff;
 }
+
+.pull-nav-li-right {
+    float: right;
+}
 /* Container media Query */
 
 .container {
@@ -270,12 +286,24 @@ nav .brand #logo1 {
     margin-right: auto;
     margin-left: auto;
   }
-  
-  @media (min-width: 576px) {
+  /* Implement as long as screen is not less than 768px */
+  @media (min-width: 776px) {
     .container {
       max-width: 540px;
     }
+
+   .container ul#navul li#signout {
+        float: right;
+    }
   }
+ 
+/* Implement as long as screen is not less than 768px */
+  @media (min-width: 576px) {
+     .leave {
+        padding-left: 530px;
+    }
+  }
+
 
   @media (max-width: 576px) {
     .container {
@@ -285,10 +313,25 @@ nav .brand #logo1 {
         display: grid;
         grid-template-columns: 1fr;
     }
+    .leave {
+        padding: -950px;
+    }
+  }
+
+  
+
+  @media (max-width: 606px) {
+    .leave {
+        padding: -950px;
+    }
   }
   
   /* Implement as long as screen is not greater than 768px */
   @media (max-width: 768px) {
+    .leave {
+        padding: 0px;
+    } 
+    
     .nav-toggle {
         display: block;
     }
@@ -317,11 +360,17 @@ nav .brand #logo1 {
     .container {
       max-width: 960px;
     }
+    .leave {
+        padding-left: 850px;
+    }
   }
   
   @media (min-width: 1200px) {
     .container {
       max-width: 1140px;
+    }
+    .leave {
+        padding-left: 1000px;
     }
   }
   
@@ -550,3 +599,15 @@ table {
   table tr:nth-child(odd) {
     background-color:  rgb(227, 231, 238);
 }
+
+#big-care {
+    font-weight: 400;
+}
+
+#reset-psw {
+    padding: 15px 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
