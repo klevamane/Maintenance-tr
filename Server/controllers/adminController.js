@@ -1,3 +1,4 @@
+import winston from 'winston';
 import usercontroller from './userController';
 import db from '../connection';
 /**
@@ -22,7 +23,10 @@ class adminController extends usercontroller {
         const allRequests = listOfeveryUsersRequests.rows;
         res.status(302).json({ message: 'All requests', allRequests });
       })
-      .catch((err => res.status(400).json({ err, message: 'Unable to List users' })));
+      .catch(((err) => {
+        winston.info(err);
+        res.status(400).json({ message: 'Unable to List all requests owned by this user' });
+      }));
   }
 
   /**
@@ -44,7 +48,10 @@ class adminController extends usercontroller {
         const modifiedRequest = updatedRequest.rows;
         res.status(200).json({ message: 'Request has been approved', modifiedRequest });
       })
-      .catch(err => res.status(400).json({ err }));
+      .catch(((err) => {
+        winston.info(err);
+        res.status(400).json({ message: 'Unable to approve the is users request' });
+      }));
   }
 
   /**
@@ -67,7 +74,39 @@ class adminController extends usercontroller {
         }
         res.status(200).json({ message: 'Request has been rejected' });
       })
-      .catch(err => res.status(400).json({ err, message: 'Unable to reject request' }));
+      .catch((err) => {
+        winston.info(err);
+        res.status(400).json({ message: 'Unable to disapporve user request' });
+      });
+  }
+
+  /**
+  * @static
+  * @description Delete a user
+  * @param  {object} req gets values passed to the api
+  * @param  {object} res sends result as output
+  * @returns {object} Success message with the with 200 status code
+  */
+  static deleteUser(req, res) {
+    const sql = 'delete from registereduser where id = $1';
+    const bindingParameter = [req.params.userId];
+    db.connect()
+      .then((client) => {
+        const result = client.query(sql, bindingParameter);
+        client.release();
+        return result;
+      })
+      .then((deletedUser) => {
+        winston.info(deletedUser);
+        if (deletedUser.rowCount > 0) {
+          return res.status(200).json({ message: 'The user has been deleted' });
+        }
+        res.status(404).json({ message: 'Unable to delete the user' });
+      })
+      .catch(((err) => {
+        winston.info(err);
+        return res.status(400).json({ message: 'The delete operation was not successful' });
+      }));
   }
 
   /**

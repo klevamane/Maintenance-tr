@@ -1,3 +1,4 @@
+import winston from 'winston';
 import jwt from 'jsonwebtoken';
 
 exports.checkAuthentication = (req, res, next) => {
@@ -13,6 +14,7 @@ exports.checkAuthentication = (req, res, next) => {
     req.decodedUserData = decoded;
     next();
   } catch (error) {
+    winston.info(error);
     return res.status(401).json({
       message: 'Invalid email or password; token is missing'
     });

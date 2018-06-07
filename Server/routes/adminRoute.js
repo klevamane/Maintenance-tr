@@ -23,4 +23,6 @@ routes.put(
   checkIfRequestExists, checkIfRequestIsResolvable, admincontroller.resolveUserRequest
 );
 routes.get('/users/users', checkAuthentication, checkIfUserIsAdmin, admincontroller.listAllUsers);
+
+routes.delete('/users/:userId/delete', checkAuthentication, checkIfUserIsAdmin, admincontroller.deleteUser);
 export default routes;

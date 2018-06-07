@@ -4,7 +4,7 @@ dotenv.config();
 
 // Setup configuration based on environment
 const configuration = {
-  development: {
+  /*  development: {
     user: process.env.LOCALDBUSER,
     password: process.env.LOCALDBPSWD,
     database: 'dbtester',
@@ -13,6 +13,18 @@ const configuration = {
     port: process.env.LOCALDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 3000
+  }, */
+
+  development: {
+    user: process.env.PRODDBUSER,
+    password: process.env.PRODDBPSWD,
+    database: process.env.PRODDB,
+    // database: 'testonly',
+    host: process.env.PRODDBSERVE,
+    port: process.env.PRODDPORT,
+    max: 5,
+    idleTimeoutMillis: 6000,
+    connectionTimeoutMillis: 9000
   },
   // test environment configuration
   test: {
@@ -31,8 +43,9 @@ const configuration = {
     database: process.env.MTDB,
     host: process.env.MTHOST,
     port: process.env.MTPORT,
-    max: 10,
-    idleTimeoutMillis: 3000
+    max: 5,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000,
   }
 };
 
