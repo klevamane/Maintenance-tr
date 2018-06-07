@@ -122,7 +122,12 @@ class adminController extends usercontroller {
     // Use join statement to resolve foreign key name by using tablename.columnname
     const sql = `UPDATE request set statusid = $1  from status where request.id =$2
        and (status.name != 'Dissaproved' or status.name != 'resolved')`;
-    db.query(sql, bindingParameters)
+    db.connect()
+      .then((client) => {
+        const result = client.query(sql, bindingParameters);
+        client.release();
+        return result;
+      })
       .then((resolvedRequest) => {
         res.status(200).json({ message: 'Request has been resolved', resolvedRequest });
         // }
