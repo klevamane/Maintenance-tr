@@ -4,18 +4,18 @@ dotenv.config();
 
 // Setup configuration based on environment
 const configuration = {
-  /*  development: {
+  development: {
     user: process.env.LOCALDBUSER,
     password: process.env.LOCALDBPSWD,
-    database: 'dbtester',
+    database: 'testdb',
     // database: 'testonly',
     host: process.env.LOCALDBHOST,
     port: process.env.LOCALDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 3000
-  }, */
+  },
 
-  development: {
+  proddev: {
     user: process.env.PRODDBUSER,
     password: process.env.PRODDBPSWD,
     database: process.env.PRODDB,

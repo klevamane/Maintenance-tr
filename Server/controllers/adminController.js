@@ -88,7 +88,7 @@ class adminController extends usercontroller {
   * @returns {object} Success message with the with 200 status code
   */
   static deleteUser(req, res) {
-    const sql = 'delete from registereduser where id = $1';
+    const sql = 'delete from registereduser where id = $1 RETURNING *';
     const bindingParameter = [req.params.userId];
     db.connect()
       .then((client) => {

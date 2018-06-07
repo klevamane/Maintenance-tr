@@ -16,7 +16,7 @@ class requestController {
   static createRequest(req, res) {
     db.connect()
       .then((client) => {
-        const sql = 'INSERT INTO request(fault, brand, modelnumber, userid, description, other, statusid) VALUES ( $1, $2, $3, $4, $5, $6, $7)';
+        const sql = 'INSERT INTO request(fault, brand, modelnumber, userid, description, other, statusid) VALUES ( $1, $2, $3, $4, $5, $6, $7) RETURNING *';
         const bindingParamaters = [req.body.fault, req.body.brand, req.body.modelnumber,
           req.decodedUserData.id, req.body.description, req.body.other, 1];
           // continue the chain by returning result to the next then block
@@ -25,15 +25,15 @@ class requestController {
         return requestTobeCreated;
       })
       .then((requestRecieved) => {
-        const numberofRequestCreated = requestRecieved.rowCount;
-        if (numberofRequestCreated < 1) {
+        const newRequest = requestRecieved.rows[0];
+        if (requestRecieved.rowCount < 1) {
           return res.status(400).json({ messgae: 'Unable to make request' });
         }
-        return res.status(201).json({ message: 'Request has been created', numberofRequestCreated });
+        return res.status(201).json({ message: 'Request has been created', newRequest });
       })
-      .catch((err => {
+      .catch(((err) => {
         winston.info(err);
-        res.status(400).json({ message: 'Unable to process request information' })
+        res.status(400).json({ message: 'Unable to process request information' });
       }));
   }
 
@@ -49,11 +49,11 @@ class requestController {
     // const sql = 'select * from request where userid = $1';
     const sql = 'select request.id, fault, brand, modelnumber, description, other,userid, name as status, createdon from request INNER JOIN status ON status.id = request.statusid where userid = $1 ORDER BY createdon DESC';
     db.connect()
-    .then((client) => {
-      const initialRequestList = client.query(sql, bindingParameter)
-      client.release();
-      return initialRequestList;
-    })
+      .then((client) => {
+        const initialRequestList = client.query(sql, bindingParameter);
+        client.release();
+        return initialRequestList;
+      })
       .then((userRequests) => {
         if (userRequests.rowCount < 1) {
           return res.status(401).json({ message: 'No request for this user' });
@@ -61,9 +61,9 @@ class requestController {
         const allUserRequests = userRequests.rows;
         res.status(200).json({ message: 'Displaying user requests', allUserRequests });
       })
-      .catch((err => {
+      .catch(((err) => {
         winston.info(err);
-        res.status(400).json({ message: 'Unable to retrieve the details of all users' })
+        res.status(400).json({ message: 'Unable to retrieve the details of all users' });
       }));
   }
 
@@ -77,15 +77,15 @@ class requestController {
   static getUserRequestById(req, res) {
     const id = parseInt(req.params.requestId, 10);
     const bindingParameters = [req.decodedUserData.id, id];
-   // const sql = 'select * from request where userid = $1 and id = $2';
-   const sql = 'select request.id, fault, brand, modelnumber, description, other,userid, name as status, createdon from request INNER JOIN status ON status.id = request.statusid where userid = $1 and request.id = $2';
-  db.connect()
-  .then((client) => {
-    const InitialSingleUserRequest = client.query(sql, bindingParameters);
-    client.release();
-    return InitialSingleUserRequest;
-  })
-  .then((request) => {
+    // const sql = 'select * from request where userid = $1 and id = $2';
+    const sql = 'select request.id, fault, brand, modelnumber, description, other,userid, name as status, createdon from request INNER JOIN status ON status.id = request.statusid where userid = $1 and request.id = $2';
+    db.connect()
+      .then((client) => {
+        const InitialSingleUserRequest = client.query(sql, bindingParameters);
+        client.release();
+        return InitialSingleUserRequest;
+      })
+      .then((request) => {
         if (request.rowCount < 1) {
           return res.status(404).json({ error: 'Request not found' });
         }
@@ -109,11 +109,11 @@ class requestController {
       req.body.description, req.body.other, id, 2, req.decodedUserData.id];
     const sql = 'UPDATE request SET fault=$1, brand=$2, modelnumber=$3, description=$4, other=$5 WHERE id = $6 AND statusid <=$7 AND userid =$8';
     db.connect()
-    .then((client) => {
-      const modifiedUserRequest = client.query(sql, bindingParameters);
-      client.release();
-      return modifiedUserRequest;
-    })
+      .then((client) => {
+        const modifiedUserRequest = client.query(sql, bindingParameters);
+        client.release();
+        return modifiedUserRequest;
+      })
       .then((updatedRequest) => {
         if (updatedRequest.rowCount < 1) {
           return res.status(401).json({ message: 'You are Unauthorized to edit this request' });
@@ -121,9 +121,9 @@ class requestController {
         const modifiedRequest = updatedRequest.rows;
         res.status(200).json({ message: 'Request has been modified', modifiedRequest });
       })
-      .catch((err => {
+      .catch(((err) => {
         winston.info(err);
-        res.status(400).json({ message: 'Unable to Modify user details' })
+        res.status(400).json({ message: 'Unable to Modify user details' });
       }));
   }
 }
