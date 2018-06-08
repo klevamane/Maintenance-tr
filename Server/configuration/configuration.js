@@ -26,7 +26,7 @@ const configuration = {
     idleTimeoutMillis: 6000,
     connectionTimeoutMillis: 9000
   },
-  // test environment configuration
+ // test environment configuration
   test: {
     user: 'user',
     password: 'user',
@@ -34,7 +34,8 @@ const configuration = {
     host: '127.0.0.1',
     //  port: process.env.TESTDBSERVERPORT,
     max: 10,
-    idleTimeoutMillis: 3000
+    idleTimeoutMillis: 6000,
+    connectionTimeoutMillis: 9000
   },
 
   production: {
@@ -43,9 +44,9 @@ const configuration = {
     database: process.env.MTDB,
     host: process.env.MTHOST,
     port: process.env.MTPORT,
-    max: 5,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
+    max: 10,
+    idleTimeoutMillis: 6000,
+    connectionTimeoutMillis: 9000
   }
 };
 
