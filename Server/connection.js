@@ -4,7 +4,7 @@ import configuration from '../Server/configuration/configuration';
 
 const { Pool } = pg;
 let connectionConfig;
-if (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test' ||) {
   connectionConfig = 'development';
 } else if (process.env.NODE_ENV === 'production') {
   connectionConfig = 'production';
