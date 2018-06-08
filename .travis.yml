@@ -1,6 +1,7 @@
 language: node_js
 node_js:
  - "6"
+
 notifications:
  email: false
 services:
@@ -8,6 +9,12 @@ services:
 cache:
  directories:
    - node_modules
+before_script:
+  - psql -U postgres -a -f travis.sql
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 before_install:
   - npm install -g mocha
   - npm install
@@ -19,6 +26,8 @@ after_success:
  - npm run coverage
  - npm run codeclimate-report
  - npm run check-coverage
+ - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 env:
-  #global:
- - NODE_ENV=test
+ global:
+  - CC_TEST_REPORTER_ID=f07127f3df314d9840650484f020f6bcd6007f043956c590fc951318b30c29ef
+  - NODE_ENV=test
