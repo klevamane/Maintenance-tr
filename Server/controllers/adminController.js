@@ -1,3 +1,4 @@
+import winston from 'winston';
 import usercontroller from './userController';
 import db from '../connection';
 /**
@@ -14,7 +15,12 @@ class adminController extends usercontroller {
   */
   static getUserRequests(req, res) {
     // user tablename.columname to avoid ambiguity for similar column names
-    db.query('select request.id, fault, brand, modelnumber, description, other,userid, name, createdon from request INNER JOIN status ON status.id = request.statusid ORDER BY createdon DESC')
+    db.connect()
+      .then((client) => {
+        const everyUsersRequests = db.query('select request.id, fault, brand, modelnumber, description, other,userid, name, createdon from request INNER JOIN status ON status.id = request.statusid ORDER BY createdon DESC');
+        client.release();
+        return everyUsersRequests;
+      })
       .then((listOfeveryUsersRequests) => {
         if (listOfeveryUsersRequests.rowCount < 1) {
           return res.status(404).json({ message: 'No request found' });
@@ -22,7 +28,10 @@ class adminController extends usercontroller {
         const allRequests = listOfeveryUsersRequests.rows;
         res.status(302).json({ message: 'All requests', allRequests });
       })
-      .catch((err => res.status(400).json({ err, message: 'Unable to List users' })));
+      .catch(((err) => {
+        winston.info(err);
+        res.status(400).json({ message: 'Unable to List all requests' });
+      }));
   }
 
   /**
@@ -44,7 +53,10 @@ class adminController extends usercontroller {
         const modifiedRequest = updatedRequest.rows;
         res.status(200).json({ message: 'Request has been approved', modifiedRequest });
       })
-      .catch(err => res.status(400).json({ err }));
+      .catch(((err) => {
+        winston.info(err);
+        res.status(400).json({ message: 'Unable to approve the users request' });
+      }));
   }
 
   /**
@@ -67,7 +79,39 @@ class adminController extends usercontroller {
         }
         res.status(200).json({ message: 'Request has been rejected' });
       })
-      .catch(err => res.status(400).json({ err, message: 'Unable to reject request' }));
+      .catch((err) => {
+        winston.info(err);
+        res.status(400).json({ message: 'Unable to disapporve user request' });
+      });
+  }
+
+  /**
+  * @static
+  * @description Delete a user
+  * @param  {object} req gets values passed to the api
+  * @param  {object} res sends result as output
+  * @returns {object} Success message with the with 200 status code
+  */
+  static deleteUser(req, res) {
+    const sql = 'delete from registereduser where id = $1 RETURNING *';
+    const bindingParameter = [req.params.userId];
+    db.connect()
+      .then((client) => {
+        const result = client.query(sql, bindingParameter);
+        client.release();
+        return result;
+      })
+      .then((deletedUser) => {
+        winston.info(deletedUser);
+        if (deletedUser.rowCount > 0) {
+          return res.status(200).json({ message: 'The user has been deleted' });
+        }
+        res.status(404).json({ message: 'Unable to delete the user' });
+      })
+      .catch(((err) => {
+        winston.info(err);
+        return res.status(400).json({ message: 'The delete operation was not successful' });
+      }));
   }
 
   /**
@@ -83,7 +127,12 @@ class adminController extends usercontroller {
     // Use join statement to resolve foreign key name by using tablename.columnname
     const sql = `UPDATE request set statusid = $1  from status where request.id =$2
        and (status.name != 'Dissaproved' or status.name != 'resolved')`;
-    db.query(sql, bindingParameters)
+    db.connect()
+      .then((client) => {
+        const result = client.query(sql, bindingParameters);
+        client.release();
+        return result;
+      })
       .then((resolvedRequest) => {
         res.status(200).json({ message: 'Request has been resolved', resolvedRequest });
         // }

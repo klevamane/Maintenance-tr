@@ -26,13 +26,28 @@ class usercontroller {
 
       const bindingParamaters =
       [req.body.firstname, req.body.lastname, req.body.email, req.body.mobile, hash];
-      const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password) VALUES ( $1, $2, $3, $4, $5)';
-      db.query(sql, bindingParamaters)
-        .then((user) => {
-          const numberofCreatedUsers = user.rowCount;
-          return res.status(201).json({ message: 'User has been registered', numberofCreatedUsers });
+      // const bind2 = ['onengrichfavour@email.com'];
+      const sql = 'INSERT INTO registereduser(firstname, lastname, email, mobile, password) VALUES ( $1, $2, $3, $4, $5) RETURNING *';
+
+      db.connect()
+        .then((client) => {
+          const result = client.query(sql, bindingParamaters);
+          client.release();
+          return result;
+        }).then((result) => {
+          const user = {
+            id: result.rows[0].id,
+            firstname: result.rows[0].firstname,
+            lastname: result.rows[0].lastname,
+            email: result.rows[0].email,
+            mobile: result.rows[0].mobile
+          };
+          return res.status(201).json({ message: 'User has been registered', user });
         })
-        .catch((err => res.status(400).json({ err, message: 'Unable to register user' })));
+        .catch(((err) => {
+          winston.info(err);
+          return res.status(400).json({ message: 'Unable to register a new user' });
+        }));
     });
   }
   /**
@@ -65,11 +80,13 @@ class usercontroller {
 */
   static authenticateUser(req, res) {
     db.connect()
-      .then(() => {
+      .then((client) => {
         const sql = 'select * from registereduser where email =$1 LIMIT 1 ';
         const bindingParamaters = [req.body.email];
         // continue the chain by returning result to the next then block
-        return db.query(sql, bindingParamaters);
+        const value = client.query(sql, bindingParamaters);
+        client.release();
+        return value;
       })
       .then((user) => {
         const storedPassword = user.rows[0].password;
@@ -85,7 +102,10 @@ class usercontroller {
           return res.status(401).json({ message: 'Invalid email or password' });
         });
       })
-      .catch((err => res.status(400).json({ err, message: 'Invalid email or password' })));
+      .catch(((err) => {
+        winston.info(err);
+        res.status(400).json({ message: 'Unable to process login information' });
+      }));
   }
 }
 // }
