@@ -28,7 +28,6 @@ describe('POST USER /user', () => {
       .send(user)
       .end((err, res) => {
         newlycreateduser = res.body.user;
-        winston.info(`This is the newly created user ${newlycreateduser.id}`);
         expect(res).to.have.status(201);
         expect(res.body.message).to.equal('User has been registered');
         expect(res.body).to.be.a('object');
@@ -372,9 +371,6 @@ describe('REQUEST FILE', () => {
       .send(request)
       .end((err, res) => {
         newRequestId = res.body.newRequest.id;
-        winston.info(`THis is the newrequesId ${newRequestId}`);
-        winston.info(`THis is the newreques no id ${newRequestId}`);
-        winston.info(`THis is the straight up ${newRequestId}`);
         expect(res).to.have.status(201);
         expect(res.body.message).to.equal('Request has been created');
         expect(res.body).to.be.a('object');
@@ -522,7 +518,6 @@ describe('ADMIN CONTROLLER', () => {
   // APPROVE USERS REQUESTS
 
   it('Should return Request does not exist', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .put('/api/v1/requests/500/approve')
       .set('Authorization', `Bearer ${adminAuthToken}`)
@@ -535,7 +530,6 @@ describe('ADMIN CONTROLLER', () => {
   });
 
   it('Request has been approved', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .put(`/api/v1/requests/${newRequestId}/approve`)
       .set('Authorization', `Bearer ${adminAuthToken}`)
@@ -548,7 +542,6 @@ describe('ADMIN CONTROLLER', () => {
   });
 
   it('Request already approved', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .put(`/api/v1/requests/${newRequestId}/approve`)
       .set('Authorization', `Bearer ${adminAuthToken}`)
@@ -561,7 +554,6 @@ describe('ADMIN CONTROLLER', () => {
   });
 
   it('Unable to approve the user request', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .put('/api/v1/requests/600/approve')
       .set('Authorization', `Bearer ${adminAuthToken}`)
@@ -574,7 +566,6 @@ describe('ADMIN CONTROLLER', () => {
   });
 
   it('Invalid request Id paramerter', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .put('/api/v1/requests/abcddassx/approve')
       .set('Authorization', `Bearer ${adminAuthToken}`)
@@ -587,7 +578,6 @@ describe('ADMIN CONTROLLER', () => {
   });
 
   it('The request does not exist', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .put('/api/v1/requests/894.6/approve')
       .set('Authorization', `Bearer ${adminAuthToken}`)
@@ -603,7 +593,6 @@ describe('ADMIN CONTROLLER', () => {
   // DELETE A USER BY ADMIN
 
   it('Should delete a user', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .delete(`/api/v1/users/${newlycreateduser.id}/delete`)
       .set('Authorization', `Bearer ${adminAuthToken}`)
@@ -616,7 +605,6 @@ describe('ADMIN CONTROLLER', () => {
   });
 
   it('Should delete a user', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .delete(`/api/v1/users/${newlycreateduser.id}/delete`)
       .set('Authorization', `Bearer ${adminAuthToken}`)
@@ -629,7 +617,6 @@ describe('ADMIN CONTROLLER', () => {
   });
 
   it('Should Indicate unable delete a user', (done) => {
-    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
     chai.request(app)
       .delete(`/api/v1/users/${600}/delete`)
       .set('Authorization', `Bearer ${adminAuthToken}`)
