@@ -45,18 +45,18 @@ class adminController extends usercontroller {
     const id = parseInt(req.params.requestId, 10);
     const bindingParameters = [2, id, 1];
     const sql = 'UPDATE request SET statusid = $1 WHERE id = $2 and statusid = $3';
-    db.query(sql, bindingParameters)
+    db.connect()
+      .then((client) => {
+        const result = client.query(sql, bindingParameters);
+        client.release();
+        return result;
+      })
       .then((updatedRequest) => {
         if (updatedRequest.rowCount < 1) {
           return res.status(401).json({ message: 'Unable approve the request' });
         }
-        const modifiedRequest = updatedRequest.rows;
-        res.status(200).json({ message: 'Request has been approved', modifiedRequest });
-      })
-      .catch(((err) => {
-        winston.info(err);
-        res.status(400).json({ message: 'Unable to approve the users request' });
-      }));
+        res.status(200).json({ message: 'Request has been approved' });
+      });
   }
 
   /**
@@ -72,16 +72,14 @@ class adminController extends usercontroller {
     // Use join statement to resolve foreign key name by using tablename.columnname
     const sql = `UPDATE request set statusid = $1  from status where request.id =$2
          and (status.name != 'Dissaproved' or status.name != 'resolved')`;
-    db.query(sql, bindingParameters)
-      .then((updatedRequest) => {
-        if (updatedRequest.rowCount < 1) {
-          return res.status(304).json({ message: 'Unable reject the request' });
-        }
-        res.status(200).json({ message: 'Request has been rejected' });
+    db.connect()
+      .then((client) => {
+        const result = db.query(sql, bindingParameters);
+        client.release();
+        return result;
       })
-      .catch((err) => {
-        winston.info(err);
-        res.status(400).json({ message: 'Unable to disapporve user request' });
+      .then(() => {
+        res.status(200).json({ message: 'Request has been rejected' });
       });
   }
 
@@ -136,8 +134,7 @@ class adminController extends usercontroller {
       .then((resolvedRequest) => {
         res.status(200).json({ message: 'Request has been resolved', resolvedRequest });
         // }
-      })
-      .catch(err => res.status(400).json({ err, message: 'Unable to resolve request' }));
+      });
   }
 }
 export default adminController;

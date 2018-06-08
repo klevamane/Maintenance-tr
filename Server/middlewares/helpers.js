@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import winston from 'winston';
 import db from '../connection';
+import { error } from 'util';
 
 
 exports.checkIfEmailAlreadyExist = (req, res, next) => {
