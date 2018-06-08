@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
 } else if (process.env.NODE_ENV === 'production') {
   connectionConfig = 'production';
 } else {
-  connectionConfig = test;
+  connectionConfig = 'test';
 }
 // if (process.env.NODE_ENV === 'production') {
 //  connectionConfig = 'production';
