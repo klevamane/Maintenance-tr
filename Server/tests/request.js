@@ -9,6 +9,7 @@ chai.use(chaiHttp);
 let authenticationToken;
 let newRequestId;
 let newlycreateduser;
+let initialAdminToken;
 
 /** *******************************
  * USER
@@ -30,6 +31,38 @@ describe('POST USER /user', () => {
         winston.info(`This is the newly created user ${newlycreateduser.id}`);
         expect(res).to.have.status(201);
         expect(res.body.message).to.equal('User has been registered');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  // ADMIN LOGIN TO TEST NO REQUESTS FOR ALL USERS
+
+  it('Should Authenticate Admin user', (done) => {
+    const user = {
+      email: 'admin@gmx.com',
+      password: 'Password123',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        initialAdminToken = res.body.token;
+        expect(res.body.message).to.equal('User has been authenticated');
+        expect(res).to.have.status(202);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  // GET ALL USERS REQUESTS
+  it('Unable to Get all requests of a logged in user', (done) => {
+    chai.request(app)
+      .get('/api/v1/requests')
+      .set('authorization', `Bearer ${initialAdminToken}`)
+      .end((err, res) => {
+        expect(res.body.message).to.equal('No request found');
+        expect(res).to.have.status(404);
         expect(res.body).to.be.a('object');
         done();
       });
@@ -381,7 +414,6 @@ describe('REQUEST FILE', () => {
       });
   });
 
-
   it('Get request by Id requests of a logged in user', (done) => {
     chai.request(app)
       .get(`/api/v1/users/requests/${newRequestId}`)
@@ -452,6 +484,7 @@ THIS IS THE ADMIN REQUES SECTION
 *************************** */
 
 let adminAuthToken;
+// ADMIN LOGIN
 
 describe('ADMIN CONTROLLER', () => {
   it('Should Authenticate Admin user', (done) => {
@@ -470,6 +503,23 @@ describe('ADMIN CONTROLLER', () => {
         done();
       });
   });
+
+
+  // // GET ALL USERS REQUESTS
+  // it('Unable to Get all requests of a logged in user', (done) => {
+  //   chai.request(app)
+  //     .get('/api/v1/requests')
+  //     .set('authorization', `Bearer ${adminAuthToken}`)
+  //     .end((err, res) => {
+  //       expect(res.body.message).to.equal('All requests');
+  //       expect(res).to.have.status(200);
+  //       expect(res.body).to.be.a('object');
+  //       done();
+  //     });
+  // });
+
+
+  // APPROVE USERS REQUESTS
 
   it('Should return Request does not exist', (done) => {
     winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
@@ -509,6 +559,48 @@ describe('ADMIN CONTROLLER', () => {
         done();
       });
   });
+
+  it('Unable to approve the user request', (done) => {
+    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
+    chai.request(app)
+      .put('/api/v1/requests/600/approve')
+      .set('Authorization', `Bearer ${adminAuthToken}`)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.message).to.equal('The request does not exist');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('Invalid request Id paramerter', (done) => {
+    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
+    chai.request(app)
+      .put('/api/v1/requests/abcddassx/approve')
+      .set('Authorization', `Bearer ${adminAuthToken}`)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.message).to.equal('Invalid request Id parameter');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('The request does not exist', (done) => {
+    winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);
+    chai.request(app)
+      .put('/api/v1/requests/894.6/approve')
+      .set('Authorization', `Bearer ${adminAuthToken}`)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.message).to.equal('The request does not exist');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+
+  // DELETE A USER BY ADMIN
 
   it('Should delete a user', (done) => {
     winston.info(`ADMIN USER TOKEN ${adminAuthToken}`);

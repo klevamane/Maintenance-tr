@@ -15,7 +15,12 @@ class adminController extends usercontroller {
   */
   static getUserRequests(req, res) {
     // user tablename.columname to avoid ambiguity for similar column names
-    db.query('select request.id, fault, brand, modelnumber, description, other,userid, name, createdon from request INNER JOIN status ON status.id = request.statusid ORDER BY createdon DESC')
+    db.connect()
+      .then((client) => {
+        const everyUsersRequests = db.query('select request.id, fault, brand, modelnumber, description, other,userid, name, createdon from request INNER JOIN status ON status.id = request.statusid ORDER BY createdon DESC');
+        client.release();
+        return everyUsersRequests;
+      })
       .then((listOfeveryUsersRequests) => {
         if (listOfeveryUsersRequests.rowCount < 1) {
           return res.status(404).json({ message: 'No request found' });
@@ -25,7 +30,7 @@ class adminController extends usercontroller {
       })
       .catch(((err) => {
         winston.info(err);
-        res.status(400).json({ message: 'Unable to List all requests owned by this user' });
+        res.status(400).json({ message: 'Unable to List all requests' });
       }));
   }
 
@@ -50,7 +55,7 @@ class adminController extends usercontroller {
       })
       .catch(((err) => {
         winston.info(err);
-        res.status(400).json({ message: 'Unable to approve the is users request' });
+        res.status(400).json({ message: 'Unable to approve the users request' });
       }));
   }
 

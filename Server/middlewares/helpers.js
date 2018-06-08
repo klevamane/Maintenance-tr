@@ -176,7 +176,12 @@ exports.checkIfRequestExists = (req, res, next) => {
   const sql = 'select count(*) from request where id = $1';
   // binding parameter value must be an array else error is thrown
   const bindingParameter = [requestid];
-  db.query(sql, bindingParameter)
+  db.connect()
+    .then((client) => {
+      const requestAvailabilityresult = db.query(sql, bindingParameter);
+      client.release();
+      return requestAvailabilityresult;
+    })
     .then((result) => {
       // check the value retured by the sql statement
       if (result.rows[0].count < 1) {

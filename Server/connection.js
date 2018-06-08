@@ -6,14 +6,14 @@ const { Pool } = pg;
 let connectionConfig;
 if (process.env.NODE_ENV !== 'production' || process.env.NODE_ENV !== 'test') {
   connectionConfig = 'development';
-} else if (process.env.NODE_ENV !== test || process.env.NODE_ENV !== 'development') {
+} else if (process.env.NODE_ENV === 'production') {
   connectionConfig = 'production';
 } else {
   connectionConfig = test;
 }
-if (process.env.NODE_ENV === 'production') {
-  connectionConfig = 'production';
-}
+// if (process.env.NODE_ENV === 'production') {
+//  connectionConfig = 'production';
+// }
 const connectionSettings = configuration[connectionConfig];
 const db = new Pool(connectionSettings);
 
