@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import winston from 'winston';
 import logger from 'morgan';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import userRoutes from './Server/routes/userRoute';
 import requestRoutes from './Server/routes/requestRoute';
@@ -18,6 +19,7 @@ app.use(logger('dev'));
 // Middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
 // Routes
 app.get('/', (req, res) => {
