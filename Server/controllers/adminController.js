@@ -100,7 +100,7 @@ class adminController extends usercontroller {
         return result;
       })
       .then((deletedUser) => {
-        winston.info(deletedUser);
+      //  winston.info(deletedUser);
         if (deletedUser.rowCount > 0) {
           return res.status(200).json({ message: 'The user has been deleted' });
         }

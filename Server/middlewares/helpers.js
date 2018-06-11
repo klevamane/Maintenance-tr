@@ -36,7 +36,7 @@ exports.checkIfLoginEmailExist = (req, res, next) => {
           if (result.rowCount === 0) {
             // Indicate invalid email or password so the user won't be sure which is wrong
             // client.release();
-            return res.status(406).json({ message: 'Invalid email or password' });
+            return res.status(406).json({ error: 'Invalid email or password' });
           }
           client.release();
           next();
