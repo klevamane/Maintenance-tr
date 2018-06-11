@@ -239,7 +239,7 @@ describe('POST USER /Login', () => {
       .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
-        expect(res.body.message).to.equal('Invalid email or password');
+        expect(res.body.error).to.equal('Invalid email or password');
         expect(res).to.have.status(406);
         expect(res.body).to.be.a('object');
         done();
@@ -255,7 +255,7 @@ describe('POST USER /Login', () => {
       .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
-        expect(res.body.message).to.equal('Invalid email or password');
+        expect(res.body.error).to.equal('Invalid email or password');
         expect(res).to.have.status(406);
         expect(res.body).to.be.a('object');
         done();
