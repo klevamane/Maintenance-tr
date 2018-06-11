@@ -21,7 +21,7 @@ exports.checkIfEmailAlreadyExist = (req, res, next) => {
       next();
     }).catch(((err) => {
       winston.info(err);
-      res.status(400).json({ message: 'Unable to process' });
+      res.status(400).json({ error: 'Unable to process' });
     }));
 };
 
