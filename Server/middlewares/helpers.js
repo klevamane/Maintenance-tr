@@ -93,7 +93,7 @@ exports.checkIfUserIsAdmin = (req, res, next) => {
     .then((result) => {
       // check the value retured by the sql statement
       if (result.rows[0].count < 1) {
-        return res.status(401).json({ message: 'You are not authorized to access this page' });
+        return res.status(401).json({ error: 'You are not authorized to access this page' });
       }
       next();
     });
@@ -113,7 +113,7 @@ exports.checkIfRequestIsApprovable = (req, res, next) => {
     .then((result) => {
       // check the value retured by the sql statement
       if (result.rows[0].count < 1) {
-        return res.status(400).json({ message: 'The request has already been approved' });
+        return res.status(400).json({ error: 'The request has already been approved' });
       }
       next();
     })
@@ -186,7 +186,7 @@ exports.checkIfRequestExists = (req, res, next) => {
     .then((result) => {
       // check the value retured by the sql statement
       if (result.rows[0].count < 1) {
-        return res.status(404).json({ message: 'The request does not exist' });
+        return res.status(404).json({ error: 'The request does not exist' });
       }
       next();
     })
