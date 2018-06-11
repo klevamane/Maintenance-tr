@@ -39,15 +39,21 @@ function login(e) {
         dataObject = data;
         theAuthorizationToken = dataObject.token;
         const istheUserAnAdmin = dataObject.isadmin;
+        const currentUserId = dataObject.userid;
+        // Construct data to be stored eg in localstorage to enable other pages access
+        // Unique data
+        const dataToBeAccessedByOtherPages = {
+          theAuthorizationToken,
+          istheUserAnAdmin,
+          currentUserId
+        };
         // Check if the user is an admin user
         if (istheUserAnAdmin === false || istheUserAnAdmin === 'false') {
-          // localstorage.setItem('usertkn', theAuthorizationToken);
-          let dataToBeAccessedByOtherPages = {
-            theAuthorizationToken,
-            istheUserAnAdmin
-          };
+          // set local storage variable name to be accessed by other pages
+          localStorage.setItem('dataAccessibleToOtherPages', dataToBeAccessedByOtherPages);
           window.location.replace('./User.html');
         } else {
+          localStorage.setItem('dataAccessibleToOtherPages', dataToBeAccessedByOtherPages);  
           window.location.replace('./admin.html');
         }
       }
