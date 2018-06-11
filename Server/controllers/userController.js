@@ -90,13 +90,15 @@ class usercontroller {
       })
       .then((user) => {
         const storedPassword = user.rows[0].password;
+        const isadmin = user.rows[0].isadmin;
         bcrypt.compare(req.body.password, storedPassword, (err, result) => {
           if (result) {
             // Ensure to put the secretekey in your environment variable
             const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * process.env.TOKENEXPIRY });
             return res.status(202).json({
               message: 'User has been authenticated',
-              token
+              token,
+              isadmin
             });
           }
           return res.status(401).json({ error: 'Invalid email or password' });

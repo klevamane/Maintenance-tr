@@ -31,17 +31,19 @@ exports.checkIfLoginEmailExist = (req, res, next) => {
   const sql = 'select * from registereduser where email = $1 LIMIT 1';
   db.connect()
     .then((client) => {
-      client.query(sql, bindingParameter)
-        .then((result) => {
-          if (result.rowCount === 0) {
-            // Indicate invalid email or password so the user won't be sure which is wrong
-            // client.release();
-            return res.status(406).json({ error: 'Invalid email or password' });
-          }
-          client.release();
-          next();
-        });
-    }).catch(((err) => {
+      const result = client.query(sql, bindingParameter);
+      client.release();
+      return result;
+    })
+    .then((result) => {
+      if (result.rowCount === 0) {
+        // Indicate invalid email or password so the user won't be sure which is wrong
+        // This is especially for to protect agains a malicious user
+        return res.status(406).json({ error: 'Invalid email or password' });
+      }
+      next();
+    })
+    .catch(((err) => {
       winston.info(err);
       res.status(400).json({ message: 'Unable to process initial login' });
     }));
