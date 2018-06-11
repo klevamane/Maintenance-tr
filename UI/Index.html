@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link href="css/toastr.min.css" rel="stylesheet">
+
     <title>login</title>
 </head>
 <body id="primary-background" class="indexbg nobody-margin">
@@ -57,7 +59,7 @@
                         <label for="company">Password</label>
                         <input type="password" name="password" id="password" required>
                    </div>
-                   <p class="marg10"><button type="submit">Log In</button></p>
+                   <p class="marg10"><button type="submit" id="submit">Log In</button></p>
                    <p><small><a href="./recover.html">Forgot password? click here</a><span><a href="./Signup.html" class="text-right-side">Signup</a></span></small></p> 
                       
         </form>
@@ -74,6 +76,35 @@
         });
         
     });
+
+
+    let sumbitButton = document.getElementById('submit').addEventListener('click',login);
+
+function login(e) {
+    e.preventDefault();
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
+    
+    emailvalue = email.value;
+    passwordvalue = password.value;
+    // console.log(`email and password ${emailvalue} and ${passwordvalue}`);
+    fetch('https://maintenancetr.herokuapp.com/api/v1/auth/login', { 
+        method: 'POST',
+        body: JSON.stringify({
+            email: emailvalue,
+            password: passwordvalue
+        }),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+      .catch((err) => console.log(err));
+}
+</script>
     </script>
+    <script src="js/toastr.min.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import winston from 'winston';
 import logger from 'morgan';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import userRoutes from './Server/routes/userRoute';
 import requestRoutes from './Server/routes/requestRoute';
@@ -16,6 +17,7 @@ const port = process.env.PORT || 3000;
 app.use(logger('dev'));
 
 // Middlewares
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
