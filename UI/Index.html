@@ -78,7 +78,7 @@
     });
 
 
-let sumbitButton = document.getElementById('submit').addEventListener('click',login);
+/* let sumbitButton = document.getElementById('submit').addEventListener('click',login);
 let theAuthorizationToken;
 function login(e) {
     e.preventDefault();
@@ -108,16 +108,26 @@ function login(e) {
                // console.log(`Displaying errors ${displayError[0]}`);
                 toastr.error(displayError);
                 
-            }
-            // get the jwt authorization token
+            } else {
+                // get the jwt authorization token
             dataObject = data;
             theAuthorizationToken = dataObject.token;
-            redirect:window.location.replace('./User.html')
-        })
+            const istheUserAnAdmin = dataObject.isadmin;
+            // Check if the user is an admin user
+                if(istheUserAnAdmin === false || istheUserAnAdmin === 'false') {
+                    localstorage.setItem('usertkn', theAuthorizationToken)
+                    redirect:window.location.replace('./User.html');
+                }
+                else {
+                    redirect:window.location.replace('./admin.html');
+                }
+                
+            }
+      })
       .catch((err) => console.log(err));
-}
+} */
 </script>
-    </script>
+<script src="js/custom.js"></script>
     <script src="js/toastr.js"></script>
 </body>
 </html>
