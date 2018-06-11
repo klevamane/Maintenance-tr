@@ -23,7 +23,7 @@ class adminController extends usercontroller {
       })
       .then((listOfeveryUsersRequests) => {
         if (listOfeveryUsersRequests.rowCount < 1) {
-          return res.status(404).json({ message: 'No request found' });
+          return res.status(404).json({ error: 'No request found' });
         }
         const allRequests = listOfeveryUsersRequests.rows;
         res.status(302).json({ message: 'All requests', allRequests });
@@ -100,11 +100,11 @@ class adminController extends usercontroller {
         return result;
       })
       .then((deletedUser) => {
-        winston.info(deletedUser);
+      //  winston.info(deletedUser);
         if (deletedUser.rowCount > 0) {
           return res.status(200).json({ message: 'The user has been deleted' });
         }
-        res.status(404).json({ message: 'Unable to delete the user' });
+        res.status(404).json({ error: 'Unable to delete the user' });
       })
       .catch(((err) => {
         winston.info(err);
@@ -131,8 +131,8 @@ class adminController extends usercontroller {
         client.release();
         return result;
       })
-      .then((resolvedRequest) => {
-        res.status(200).json({ message: 'Request has been resolved', resolvedRequest });
+      .then(() => {
+        res.status(200).json({ message: 'Request has been resolved' });
         // }
       });
   }

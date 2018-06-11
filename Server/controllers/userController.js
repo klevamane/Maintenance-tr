@@ -46,7 +46,7 @@ class usercontroller {
         })
         .catch(((err) => {
           winston.info(err);
-          return res.status(400).json({ message: 'Unable to register a new user' });
+          return res.status(400).json({ error: 'Unable to register a new user' });
         }));
     });
   }
@@ -66,7 +66,7 @@ class usercontroller {
         const listOfAllUsers = result.rows;
         return res.status(302).json({ message: 'List of users', listOfAllUsers });
       })
-      .catch(err => res.status(400).json({ err, message: 'Could not list users' }));
+      .catch(err => res.status(400).json({ err, error: 'Could not list users' }));
   }
 
 
@@ -93,18 +93,18 @@ class usercontroller {
         bcrypt.compare(req.body.password, storedPassword, (err, result) => {
           if (result) {
             // Ensure to put the secretekey in your environment variable
-            const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * 25 });
+            const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * process.env.TOKENEXPIRY });
             return res.status(202).json({
               message: 'User has been authenticated',
               token
             });
           }
-          return res.status(401).json({ message: 'Invalid email or password' });
+          return res.status(401).json({ error: 'Invalid email or password' });
         });
       })
       .catch(((err) => {
         winston.info(err);
-        res.status(400).json({ message: 'Unable to process login information' });
+        res.status(400).json({ error: 'Unable to process login information' });
       }));
   }
 }

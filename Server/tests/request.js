@@ -59,7 +59,7 @@ describe('POST USER /user', () => {
       .get('/api/v1/requests')
       .set('authorization', `Bearer ${initialAdminToken}`)
       .end((err, res) => {
-        expect(res.body.message).to.equal('No request found');
+        expect(res.body.error).to.equal('No request found');
         expect(res).to.have.status(404);
         expect(res.body).to.be.a('object');
         done();
@@ -239,7 +239,7 @@ describe('POST USER /Login', () => {
       .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
-        expect(res.body.message).to.equal('Invalid email or password');
+        expect(res.body.error).to.equal('Invalid email or password');
         expect(res).to.have.status(406);
         expect(res.body).to.be.a('object');
         done();
@@ -255,7 +255,7 @@ describe('POST USER /Login', () => {
       .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
-        expect(res.body.message).to.equal('Invalid email or password');
+        expect(res.body.error).to.equal('Invalid email or password');
         expect(res).to.have.status(406);
         expect(res.body).to.be.a('object');
         done();
@@ -453,19 +453,12 @@ describe('REQUEST FILE', () => {
       });
   });
 
-  it('User request has been modified', (done) => {
-    const request = {
-      fault: 'Broken Screen',
-      brand: 'LGG',
-      modelNumber: '77263',
-      description: 'description'
-    };
+  it('Check if user is an Admin - Non Admin user cannot access admin route', (done) => {
     chai.request(app)
-      .put('/api/v1/users/requests/10')
+      .get('/api/v1/requests')
       .set('Authorization', `Bearer ${authenticationToken}`)
-      .send(request)
       .end((err, res) => {
-        expect(res.body.message).to.equal('You are Unauthorized to edit this request');
+        expect(res.body.error).to.equal('You are not authorized to access this page');
         expect(res).to.have.status(401);
         expect(res.body).to.be.a('object');
         done();
@@ -522,7 +515,7 @@ describe('ADMIN CONTROLLER', () => {
       .set('Authorization', `Bearer ${adminAuthToken}`)
       .end((err, res) => {
         expect(res).to.have.status(404);
-        expect(res.body.message).to.equal('The request does not exist');
+        expect(res.body.error).to.equal('The request does not exist');
         expect(res.body).to.be.a('object');
         done();
       });
@@ -546,19 +539,33 @@ describe('ADMIN CONTROLLER', () => {
       .set('Authorization', `Bearer ${adminAuthToken}`)
       .end((err, res) => {
         expect(res).to.have.status(400);
-        expect(res.body.message).to.equal('The request has already been approved');
+        expect(res.body.error).to.equal('The request has already been approved');
         expect(res.body).to.be.a('object');
         done();
       });
   });
 
-  it('Unable to approve the user request', (done) => {
+
+  // DISAPPROVE A REQUEST
+  it('Disapprove the user request', (done) => {
     chai.request(app)
-      .put('/api/v1/requests/600/approve')
+      .put(`/api/v1/requests/${newRequestId}/disapprove`)
       .set('Authorization', `Bearer ${adminAuthToken}`)
       .end((err, res) => {
-        expect(res).to.have.status(404);
-        expect(res.body.message).to.equal('The request does not exist');
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.equal('Request has been rejected');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('Cannot Approve a rejected request', (done) => {
+    chai.request(app)
+      .put(`/api/v1/requests/${newRequestId}/approve`)
+      .set('Authorization', `Bearer ${adminAuthToken}`)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.error).to.equal('The request has already been approved');
         expect(res.body).to.be.a('object');
         done();
       });
@@ -582,7 +589,7 @@ describe('ADMIN CONTROLLER', () => {
       .set('Authorization', `Bearer ${adminAuthToken}`)
       .end((err, res) => {
         expect(res).to.have.status(404);
-        expect(res.body.message).to.equal('The request does not exist');
+        expect(res.body.error).to.equal('The request does not exist');
         expect(res.body).to.be.a('object');
         done();
       });
@@ -603,13 +610,13 @@ describe('ADMIN CONTROLLER', () => {
       });
   });
 
-  it('Should delete a user', (done) => {
+  it('Unable to delete an already deleted user', (done) => {
     chai.request(app)
       .delete(`/api/v1/users/${newlycreateduser.id}/delete`)
       .set('Authorization', `Bearer ${adminAuthToken}`)
       .end((err, res) => {
         expect(res).to.have.status(404);
-        expect(res.body.message).to.equal('Unable to delete the user');
+        expect(res.body.error).to.equal('Unable to delete the user');
         expect(res.body).to.be.a('object');
         done();
       });

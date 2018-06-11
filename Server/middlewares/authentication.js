@@ -16,7 +16,7 @@ exports.checkAuthentication = (req, res, next) => {
   } catch (error) {
     winston.info(error);
     return res.status(401).json({
-      message: 'Invalid email or password; token is missing'
+      error: 'Invalid email or password'
     });
   }
 };
