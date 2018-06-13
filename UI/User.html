@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link href="css/toastr.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>Sign up</title>
 </head>
@@ -20,7 +20,7 @@
             <div class="container">
                 <span class="brand"><span id="logo1">Kleva</span><span id="logo2">fix'</span></span>
                 <ul id="navul" class="navul leave">
-                    <li id="leave"><a href="./Index.html">Signout</a></li>
+                    <li><a href="./Index.html" id="signout" onclick="signout()">Signout</a></li>
         
                 </ul>
             </div>
@@ -28,7 +28,7 @@
     <div class="container">
         <div class="seperator">
             <div class="card-fluid marg-top30y">
-                <form action="">
+                <form action="#" id="requestform">
                     <div class="form-header">
                         <div>
                             <span id="logo1">Make a reques</span>
@@ -76,17 +76,17 @@
                         <label for="type">Type</label>
                         <select class="dropdown" name="type" id="type">
                                 <option selected>Choose..</option>
-                                <option value="Broken screen">Maintenance</option>
-                                <option value="Water damage">Repair</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Repair">Repair</option>
                            </select>    
                     </div>
                     <div class="form-group marg10">
                         <label for="password">Describe the issue</label>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea name="description" id="description" cols="30" rows="10"></textarea>
                     </div>
 
                     <p class="marg10">
-                        <button type="submit">Make request</button>
+                        <button type="submit" id="usersubmit">Make request</button>
                     </p>
 
                 </form>
@@ -153,20 +153,100 @@
                 </div>
                
             </div>
-            
-           
     </div>
+<script src="./js/checkifloggedin.js"></script>
 <script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/createrequest.js"></script>
+<script src="js/toastr.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+
+let storedData =JSON.parse(localStorage['dataAccessibleToOtherPages']);
+
+  $(document).ready(function(){
         $('.handlebar').click(function(){
             $('#navul').toggleClass('active'); 
         });
         
     });
+
+  //  let sumbitButton = document.getElementById('usersubmit').addEventListener('click',userarea);
+// let theAuthorizationToken;
+function userarea(e) {
+    e.preventDefault();
+    let brand = document.getElementById('firstname').value;
+    let modelnumber = document.getElementById('modelnumber').value;
+    let fault = document.getElementById('fault').value;
+    let type = document.getElementById('type').value;
+    let description = document.getElementById('description').value;
+    
+    //emailvalue = email.value;
+    //passwordvalue = password.value;
+    // console.log(`email and password ${emailvalue} and ${passwordvalue}`);
+    fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', { 
+        method: 'POST',
+        body: JSON.stringify({
+            brand,
+            modelnumber,
+            fault,
+            type,
+            description
+        }),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then((response) => response.json())
+        .then((data) => {
+            // check if the output data is a validation error / an error
+            const errorExists = Object.keys(data);
+            if(errorExists[0] === 'error') {
+               // console.log('displaying from inside');
+                // extract the object value from the key, to determine the validation error throw by the api validator
+                const displayError = Object.values(data);
+               // console.log(`Displaying errors ${displayError[0]}`);
+                toastr.error(displayError);
+            } else {
+                // get the jwt authorization token
+            dataObject = data;
+            theAuthorizationToken = dataObject.token;
+            // const istheUserAnAdmin = dataObject.isadmin;
+            const outputMessage = dataObject.message;
+                toastr.success(outputMessage);
+            }
+        })
+        .catch(err => {
+            toastr.error('Unable to process request');
+            console.log(err)
+        });
+                     
+    }
+
+    function pageOnload() {
+        let storedData =JSON.parse(localStorage['dataAccessibleToOtherPages']);
+        if(storedData === null || storedData === '') {
+            window.location.replace('./Index.html');
+        }
+        console.log(`CHECKING FOR STORED DATA ${storedData}`);
+        console.log(JSON.stringify(storedData));
+        console.log(`Token ${storedData.token}`)
+        fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', { 
+        method: 'GET',
+        // headers: new Headers({
+        //     'Content-Type': 'application/json'
+        // })
+        headers: {'Authorization': 'Bearear ' + storedData.token}
+    }).then((response) => response.json())
+        .then((data) => {
+            if(data.message === 'Invalid email or password' || !data.message) {
+            window.location.replace('./Index.html');
+        }
+            
+            console.log(data);
+        });
+    }
+    window.onload = pageOnload;
     </script>
+    <script src="./js/signout.js"></script>
 
 </body>
-
 </html>

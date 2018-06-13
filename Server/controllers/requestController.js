@@ -56,7 +56,7 @@ class requestController {
       })
       .then((userRequests) => {
         if (userRequests.rowCount < 1) {
-          return res.status(401).json({ message: 'No request for this user' });
+          return res.status(404).json({ message: 'No request for this user' });
         }
         const allUserRequests = userRequests.rows;
         res.status(200).json({ message: 'Displaying user requests', allUserRequests });
