@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link href="css/toastr.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>Sign up</title>
 </head>
@@ -28,7 +28,7 @@
     <div class="container">
         <div class="seperator">
             <div class="card-fluid marg-top30y">
-                <form action="">
+                <form action="#" id="requestform">
                     <div class="form-header">
                         <div>
                             <span id="logo1">Make a reques</span>
@@ -76,13 +76,13 @@
                         <label for="type">Type</label>
                         <select class="dropdown" name="type" id="type">
                                 <option selected>Choose..</option>
-                                <option value="Broken screen">Maintenance</option>
-                                <option value="Water damage">Repair</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Repair">Repair</option>
                            </select>    
                     </div>
                     <div class="form-group marg10">
                         <label for="password">Describe the issue</label>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea name="description" id="description" cols="30" rows="10"></textarea>
                     </div>
 
                     <p class="marg10">
@@ -153,11 +153,11 @@
                 </div>
                
             </div>
-            
-           
     </div>
 <script src="./js/checkifloggedin.js"></script>
 <script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/createrequest.js"></script>
+<script src="js/toastr.js"></script>
 
 <script type="text/javascript">
 
@@ -170,7 +170,7 @@ let storedData =JSON.parse(localStorage['dataAccessibleToOtherPages']);
         
     });
 
-    let sumbitButton = document.getElementById('usersubmit').addEventListener('click',userarea);
+  //  let sumbitButton = document.getElementById('usersubmit').addEventListener('click',userarea);
 // let theAuthorizationToken;
 function userarea(e) {
     e.preventDefault();
