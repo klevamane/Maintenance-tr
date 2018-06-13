@@ -53,7 +53,7 @@ class adminController extends usercontroller {
       })
       .then((updatedRequest) => {
         if (updatedRequest.rowCount < 1) {
-          return res.status(401).json({ message: 'Unable approve the request' });
+          return res.status(400).json({ message: 'Unable approve the request' });
         }
         res.status(200).json({ message: 'Request has been approved' });
       });

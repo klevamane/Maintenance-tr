@@ -42,23 +42,29 @@ function login(e) {
         const currentUserId = dataObject.userid;
         // Construct data to be stored eg in localstorage to enable other pages access
         // Unique data
+
+        console.log(`Current user ${currentUserId} isAdmin? ${istheUserAnAdmin}
+        the token ${theAuthorizationToken}`);
         const dataToBeAccessedByOtherPages = {
-          theAuthorizationToken,
-          istheUserAnAdmin,
-          currentUserId
+          token: theAuthorizationToken,
+          isAdmin: istheUserAnAdmin,
+          userid: currentUserId
         };
+        console.log(dataToBeAccessedByOtherPages);
         // Check if the user is an admin user
         if (istheUserAnAdmin === false || istheUserAnAdmin === 'false') {
           // set local storage variable name to be accessed by other pages
-          localStorage.setItem('dataAccessibleToOtherPages', dataToBeAccessedByOtherPages);
+          window.localStorage.setItem('dataAccessibleToOtherPages', JSON.stringify(dataToBeAccessedByOtherPages));
           window.location.replace('./User.html');
         } else {
-          localStorage.setItem('dataAccessibleToOtherPages', dataToBeAccessedByOtherPages);
+          window.localStorage.setItem('dataAccessibleToOtherPages', dataToBeAccessedByOtherPages);
           window.location.replace('./admin.html');
         }
       }
     })
-    .catch(err => console.log(err));
+    .catch((err) => { toastr.warning('Kindly check your Internet connection');
+      console.log(err)
+    });
 }
 
 // function signup(e) {

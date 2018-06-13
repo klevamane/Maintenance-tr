@@ -86,7 +86,7 @@
                     </div>
 
                     <p class="marg10">
-                        <button type="submit">Make request</button>
+                        <button type="submit" id="usersubmit">Make request</button>
                     </p>
 
                 </form>
@@ -156,17 +156,99 @@
             
            
     </div>
+<script src="./js/checkifloggedin.js"></script>
 <script src="./js/jquery-3.3.1.min.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+
+let storedData =JSON.parse(localStorage['dataAccessibleToOtherPages']);
+
+  $(document).ready(function(){
         $('.handlebar').click(function(){
             $('#navul').toggleClass('active'); 
         });
         
     });
+
+    let sumbitButton = document.getElementById('usersubmit').addEventListener('click',userarea);
+// let theAuthorizationToken;
+function userarea(e) {
+    e.preventDefault();
+    let brand = document.getElementById('firstname').value;
+    let modelnumber = document.getElementById('modelnumber').value;
+    let fault = document.getElementById('fault').value;
+    let type = document.getElementById('type').value;
+    let description = document.getElementById('description').value;
+    
+    //emailvalue = email.value;
+    //passwordvalue = password.value;
+    // console.log(`email and password ${emailvalue} and ${passwordvalue}`);
+    fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', { 
+        method: 'POST',
+        body: JSON.stringify({
+            brand,
+            modelnumber,
+            fault,
+            type,
+            description
+        }),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then((response) => response.json())
+        .then((data) => {
+            // check if the output data is a validation error / an error
+            const errorExists = Object.keys(data);
+            if(errorExists[0] === 'error') {
+               // console.log('displaying from inside');
+                // extract the object value from the key, to determine the validation error throw by the api validator
+                const displayError = Object.values(data);
+               // console.log(`Displaying errors ${displayError[0]}`);
+                toastr.error(displayError);
+            } else {
+                // get the jwt authorization token
+            dataObject = data;
+            theAuthorizationToken = dataObject.token;
+            // const istheUserAnAdmin = dataObject.isadmin;
+            const outputMessage = dataObject.message;
+                toastr.success(outputMessage);
+            }
+        })
+        .catch(err => {
+            toastr.error('Unable to process request');
+            console.log(err)
+        });
+                     
+    }
+
+
+
+
+    function pageOnload() {
+        let storedData =JSON.parse(localStorage['dataAccessibleToOtherPages']);
+        if(storedData === null || storedData === '') {
+            window.location.replace('./Index.html');
+        }
+        console.log(`CHECKING FOR STORED DATA ${storedData}`);
+        console.log(JSON.stringify(storedData));
+        console.log(`Token ${storedData.token}`)
+        fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', { 
+        method: 'GET',
+        // headers: new Headers({
+        //     'Content-Type': 'application/json'
+        // })
+        headers: {'Authorization': 'Bearear ' + storedData.token}
+    }).then((response) => response.json())
+        .then((data) => {
+            if(data.message === 'Invalid email or password' || !data.message) {
+            window.location.replace('./Index.html');
+        }
+            
+            console.log(data);
+        });
+    }
+    window.onload = pageOnload;
     </script>
 
 </body>
-
 </html>
