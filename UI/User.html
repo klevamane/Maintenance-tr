@@ -20,7 +20,7 @@
             <div class="container">
                 <span class="brand"><span id="logo1">Kleva</span><span id="logo2">fix'</span></span>
                 <ul id="navul" class="navul leave">
-                    <li id="leave"><a href="./Index.html">Signout</a></li>
+                    <li><a href="./Index.html" id="signout" onclick="signout()">Signout</a></li>
         
                 </ul>
             </div>
@@ -221,9 +221,6 @@ function userarea(e) {
                      
     }
 
-
-
-
     function pageOnload() {
         let storedData =JSON.parse(localStorage['dataAccessibleToOtherPages']);
         if(storedData === null || storedData === '') {
@@ -249,6 +246,7 @@ function userarea(e) {
     }
     window.onload = pageOnload;
     </script>
+    <script src="./js/signout.js"></script>
 
 </body>
 </html>

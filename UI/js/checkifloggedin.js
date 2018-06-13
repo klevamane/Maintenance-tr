@@ -1,9 +1,21 @@
-const retrievedUserDataFromLocalStorage = localStorage.getItem('dataAccessibleToOtherPages');
-const token = JSON.parse(retrievedUserDataFromLocalStorage).token;
-if (token === null || token === '') {
-    window.location.replace('./Index.html');
+let errorDetection;
+let retrievedUserDataFromLocalStorage;
+let token;
+try{
+  retrievedUserDataFromLocalStorage = localStorage.getItem('dataAccessibleToOtherPages');
+  token = JSON.parse(retrievedUserDataFromLocalStorage).token;
 }
-else {
+catch(err) {
+  console.log(err)
+  window.location.replace('./Index.html');
+  errorDetection = true;
+}
+// if (token === null || token === '') {
+//     window.location.replace('./Index.html');
+// }
+// else {
+if(errorDetection !== true) {
+
   const headers = new Headers({'Content-Type': 'application/json'});
   headers.append('Authorization', `Bearer ${token}`);
     fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
@@ -15,5 +27,4 @@ else {
   }
   })
   .catch(error => console.log(err));
- 
 }
