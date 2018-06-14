@@ -4,8 +4,8 @@ const requestForm = document.getElementById('requestform');
     event.preventDefault();
     let checker;
     // getuser data from client
-    retrievedUserDataFromLocalStorage = localStorage.getItem('dataAccessibleToOtherPages');
-    token = JSON.parse(retrievedUserDataFromLocalStorage).token;
+   const retrievedUserDataFromLocalStorage = localStorage.getItem('dataAccessibleToOtherPages');
+   const token = JSON.parse(retrievedUserDataFromLocalStorage).token;
     let faultValue = document.getElementById('fault');
     let fault = faultValue.options[faultValue.selectedIndex].value;
     let brand = document.getElementById('brand').value;
@@ -37,7 +37,7 @@ const requestForm = document.getElementById('requestform');
             // Error exists if checker !== true
             if(checker !== true) {
             // extract the object value from the key, to determine the validation error throw by the api validator
-            const displayError = Object.values(data);
+            const displayError = Object.values(result);
             toastr.error(displayError);
             }
         })

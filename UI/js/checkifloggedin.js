@@ -18,7 +18,7 @@ if(errorDetection !== true) {
 
   const headers = new Headers({'Content-Type': 'application/json'});
   headers.append('Authorization', `Bearer ${token}`);
-  fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
+  fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests/1', {
     method: 'GET',
     headers
 }).then((response) => {

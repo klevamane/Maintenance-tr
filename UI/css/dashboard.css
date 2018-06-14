@@ -13,6 +13,11 @@
     padding-top: 10px;
 }
 
+.userdashbord-card-dimension {
+    max-height: 60%;
+    width: 40% !important;
+}
+
 .card-fluid {
     width: 80%;
     margin-right: auto;
@@ -50,17 +55,55 @@
     display: block;
     width: 100%;
 }
+
+.userrequests-card {
+    width: 50%;
+}
+.pad20 {
+    padding: 20px;
+}
 .pad10 {
     padding: 10px;
 }
+
 .pad5 {
     padding: 5px;
 }
+
+    .anchorbtn {
+        background-color: rgb(243, 163, 13);
+        border-radius: 5px;
+        color: white;
+        padding: .5em;
+        text-decoration: none;
+      }
+      
+      .anchorbtn:focus,
+      .anchorbtn:hover {
+        background-color: rgb(178, 75, 34);
+        color: White;
+      }
+      
+      .content {
+        display: none;
+        margin: 1em 0;
+      }
+      
+      .content.active,
+      .no-js .content {
+        display: block;
+      }
 
 .status-quo {
     padding: 5px;
     border-radius: 3px;
     border:1px solid #ced4da;
+}
+.status-pill-inactive {
+    background: rgb(0, 0, 0);
+    padding: 3px;
+    color: white;
+    border-radius: 2px;
 }
 .status-pill-rejected {
     background: red;

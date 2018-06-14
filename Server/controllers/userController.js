@@ -92,10 +92,16 @@ class usercontroller {
         const storedPassword = user.rows[0].password;
         const isadmin = user.rows[0].isadmin;
         const userid = user.rows[0].id;
+        const id = user.rows[0].id;
+        const payload = {
+          id,
+          isadmin
+        };
         bcrypt.compare(req.body.password, storedPassword, (err, result) => {
           if (result) {
             // Ensure to put the secretekey in your environment variable
-            const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * process.env.TOKENEXPIRY });
+           // const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * process.env.TOKENEXPIRY });
+           const token = jwt.sign({ payload }, 'secreteKey', { expiresIn: 60 * process.env.TOKENEXPIRY });
             return res.status(202).json({
               message: 'User has been authenticated',
               token,
