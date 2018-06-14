@@ -11,7 +11,7 @@ const requestForm = document.getElementById('requestform');
     let brand = document.getElementById('brand').value;
     let modelnumber = document.getElementById('model').value;
     let description = document.getElementById('description').value;
-    let otherValue = document.getElementById('type')
+    let otherValue = document.getElementById('type');
     let other = otherValue.options[otherValue.selectedIndex].value;
 
     const headers = new Headers({'Content-Type': 'application/json'});
@@ -31,6 +31,9 @@ const requestForm = document.getElementById('requestform');
                toastr.success('Request has been created');
                checker = true;
                requestForm.reset();
+           }
+           if(response.status === 401) {
+               window.location.replace('./Index.html');
            } 
            return response.json();
         }).then((result) => {

@@ -66,24 +66,3 @@ function login(e) {
       console.log(err)
     });
 }
-
-// function signup(e) {
-//     const email = document.getElementById('email');
-//     const password = document.getElementById('password');
-//     const
-
-//     emailvalue = email.value;
-//     passwordvalue = password.value;
-//     // console.log(`email and password ${emailvalue} and ${passwordvalue}`);
-//     fetch('https://maintenancetr.herokuapp.com/api/v1/auth/login', {
-//       method: 'POST',
-//       body: JSON.stringify({
-//         email: emailvalue,
-//         password: passwordvalue
-//       }),
-//       headers: new Headers({
-//         'Content-Type': 'application/json'
-//       })
-//     }).then(response => response.json())
-//       .then((data) => {
-// }

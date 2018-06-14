@@ -1,7 +1,8 @@
+let token
 //window.onload = getuserRequests();
 try{
     let retrievedUserDataFromLocalStorage = localStorage.getItem('dataAccessibleToOtherPages');
-    let token = JSON.parse(retrievedUserDataFromLocalStorage).token;
+    token = JSON.parse(retrievedUserDataFromLocalStorage).token;
   }
   catch(err) {
     console.log(err)
