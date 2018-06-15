@@ -378,9 +378,20 @@ nav .brand #logo1 {
   }
   
 
-
-
-
+.anchorbtn {
+        background-color: var(--primaryOrange);
+        border-radius: 5px;
+        color: #fff;
+        padding: .5em;
+        text-decoration: none;
+      }
+      
+      .anchorbtn:focus,
+      .anchorbtn:hover {
+        background-color: rgb(182, 177, 169);
+        color: White;
+      }
+    
 
 
 
@@ -614,3 +625,6 @@ table {
     font-size: 14px;
 }
 
+.pull-right {
+    float: right;
+}

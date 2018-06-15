@@ -1,4 +1,4 @@
-var newRequestSubmitButton = document.getElementById('usersubmit');
+let newRequestSubmitButton = document.getElementById('usersubmit');
 newRequestSubmitButton.addEventListener('click',function(event) {
 const requestForm = document.getElementById('requestform');
     event.preventDefault();
@@ -14,7 +14,6 @@ const requestForm = document.getElementById('requestform');
     let otherValue = document.getElementById('type');
     let other = otherValue.options[otherValue.selectedIndex].value;
 
-    console.log(`TOKEN OHHHHHHH: ${token}`);
     let headers = new Headers;
     // Remember to use content-type application/json header
     // to avoid vaidation issues in post

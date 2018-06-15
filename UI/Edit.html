@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="css/toastr.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Sign up</title>
+</head>
+
+<body id="primary-background" class="nobody-margin">
+        <nav>
+                <div class="nav-toggle">
+                        <i class="fa fa-bars handlebar"></i>
+                    </div>
+            <div class="container">
+                <span class="brand"><span id="logo1">Kleva</span><span id="logo2">fix'</span></span>
+                <ul id="navul" class="navul leave">
+                    <li><a href="./Index.html" id="signout" onclick="signout()" >Signout</a></li>
+        
+                </ul>
+            </div>
+        </nav>
+    <div class="container">
+        <div>
+                
+            <div class="card-fluid marg-top30y userdashbord-card-dimension">
+                <a href="./userrequests.html" class="anchorbtn" style="margin-left: 95px">Click her to view all your requests <i class="fa fa-arrow-circle-right"></i></a>
+                <form action="#" id="requestform">
+                    <div class="form-header">
+                        <div>
+                            <span id="logo1">Edit a reques</span>
+                            <span id="logo2">t</span>
+                        </div>
+                        <div class="cardlogo-icon">
+                            <span>
+                                <a href="#">
+                                    <i class="fa fa-calendar"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <span>
+                        <hr/>
+                    </span>
+                    <div class="form-group marg10">
+                        <label for="name">Brand</label>
+                        <input type="text" name="brand" id="brand">
+                    </div>
+                    <div class="form-group marg10">
+                        <label for="model">Model Number</label>
+                        <input type="text" name="model" id="model">
+                    </div>
+                    <div class="form-group marg10">
+                        <label for="fault">Fault</label>
+                        <select class="dropdown" name="fault" id="fault">
+                            <option selected>Choose..</option>
+                            <option value="Broken screen">Broken screen</option>
+                            <option value="Water damage">Water damage</option>
+                            <option value="Unlocking Operator">Unlocking Operator</option>
+                            <option value="Screen Issues">Screen Issues</option>
+                            <option value="Proximity Sensor">Proximity Sensor</option>
+                            <option value="Front camera">Front camera</option>
+                            <option value="Rear camera">Rear camera</option>
+                            <option value="Keyboard">Keyboard</option>
+                            <option value="Recover files">Recover files</option>
+                            <option value="Flash">Flash</option>
+                            <option value="Battery replacement">Battery replacement</option>
+                            <option value="network issues">Wireless network issues</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group marg10">
+                        <label for="type">Type</label>
+                        <select class="dropdown" name="type" id="type">
+                                <option selected>Choose..</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Repair">Repair</option>
+                           </select>    
+                    </div>
+                    <div class="form-group marg10">
+                        <label for="password">Describe the issue</label>
+                        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                    </div>
+                    <p class="marg10">
+                        <button type="submit" id="updatebtn">Update request</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- <script src="./js/checkifloggedin.js"></script> -->
+<script src="./js/authorizationchecker.js"></script>
+<script src="./js/editRequest.js"></script>
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="js/toastr.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+        $('.handlebar').click(function(){
+            $('#navul').toggleClass('active'); 
+        });   
+    });
+</script>
+<script src="./js/signout.js"></script>
+
+</body>
+</html>

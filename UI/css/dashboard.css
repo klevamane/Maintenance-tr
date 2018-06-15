@@ -81,19 +81,6 @@
 .pad30-top {
     padding-top: 30px;
 }
-    .anchorbtn {
-        background-color: rgb(243, 163, 13);
-        border-radius: 5px;
-        color: white;
-        padding: .5em;
-        text-decoration: none;
-      }
-      
-      .anchorbtn:focus,
-      .anchorbtn:hover {
-        background-color: rgb(178, 75, 34);
-        color: White;
-      }
       
       .content {
         display: none;
@@ -110,8 +97,8 @@
     border-radius: 3px;
     border:1px solid #ced4da;
 }
-.status-pill-inactive {
-    background: rgb(0, 0, 0);
+.status-pill-pending {
+    background: rgb(97, 169, 202);
     padding: 3px;
     color: white;
     border-radius: 2px;
@@ -129,7 +116,7 @@
     color: white;
     border-radius: 2px;
 }
-.status-pill-pending {
+.status-pill-inactive {
     background: #959faa;
     padding: 3px;
     color: white;
