@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="css/toastr.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Sign up</title>
+</head>
+
+<body id="primary-background" class="nobody-margin">
+        <nav>
+                <div class="nav-toggle">
+                        <i class="fa fa-bars handlebar"></i>
+                    </div>
+            <div class="container">
+                <span class="brand"><span id="logo1">Kleva</span><span id="logo2">fix'</span></span>
+                <ul id="navul" class="navul leave">
+                    
+                    <li><a href="./Index.html" id="signout" onclick="signout()">Signout</a></li>
+        
+                </ul>
+            </div>
+        </nav>
+    <div class="container">    
+            <div>
+                <h2 class="card-h2">Request Made</h2>
+                <hr>
+
+                <span>Filter by</span>
+                <span>
+                    <select name="" class="status-quo">
+                        <option value="">Resolved</option>
+                        <option value="">Disapproved</option>
+                        <option value="">Pending</option>
+                        <option value="">Inactive</option>
+                    </select>
+                </span>
+                <a href="./User.html" class="anchorbtn"><i class="fa fa-arrow-circle-left"></i> Back to make a request</a>
+                <!-- CARD REQUEST 1 -->
+                <div id="cardplaceholder"> 
+               
+                </div> <!--End of card placeholder-->
+                    <!-- End of Card 2 -->
+                    
+                </div>
+               
+            </div>
+    </div>
+<script src="./js/authorizationchecker.js"></script>
+<script src="./js/userrequest.js"></script>
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="js/toastr.js"></script>
+
+<script type="text/javascript">
+
+let storedData =JSON.parse(localStorage['dataAccessibleToOtherPages']);
+
+  $(document).ready(function(){
+        $('.handlebar').click(function(){
+            $('#navul').toggleClass('active'); 
+        });
+        
+    });
+
+    </script>
+    <script src="./js/signout.js"></script>
+
+</body>
+</html>
