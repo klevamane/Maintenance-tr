@@ -20,7 +20,7 @@
         <div class="container">
             
             <ul id="navul" class="navul">
-                <li><a href="./User.html">Dashboard</a></li>
+                <li><a href="./User.html">Create a new request <i class="fa fa-book"></i></a></li>
                 <li id="signout"><a href="./Index.html">Signout</a></li>
 
             </ul>
@@ -36,7 +36,11 @@
                 
 
                 <!-- CARD REQUEST 1 -->
+            <a href="./userrequests.html" class="anchorbtn display-block-inline marg-top20y">View all requests <i class="fa fa-align-justify"></i></a>    
+            <div id="viewrequestplachholder">
+                    
                 <div class="card-fluid pad10 marg-top100y">
+                    
                     <span>
                         <strong>Heading</strong>
                     </span>
@@ -45,11 +49,10 @@
                         sed culpa esse?
                     </p>
                     <hr>
-                    
                     <span class="status-pill-rejected">Disapproved</span>
                     <span class="status-date"> 12 May</span>
-                    
                 </div>
+            </div>
         
                 </div>
                
@@ -57,8 +60,9 @@
             
            
     </div>
+<script src="./js/authorizationchecker.js"></script>    
 <script src="./js/jquery-3.3.1.min.js"></script>
-
+<script src="./js/oneuserRequest.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('.handlebar').click(function(){

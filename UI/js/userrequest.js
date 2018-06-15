@@ -57,7 +57,7 @@ try{
     })
   .catch(err => console.log(err));
 
-  //
+  // Store the card Id in localstorage
   function getcardid(retrievedId) {
-    window.localStorage.setItem('requestid', JSON.stringify(retrievedId));  
+    window.localStorage.setItem('requestid', retrievedId);
   }

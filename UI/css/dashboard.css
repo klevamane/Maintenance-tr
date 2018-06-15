@@ -70,6 +70,17 @@
     padding: 5px;
 }
 
+.pad10-top {
+    padding-top: 10px;
+}
+
+.pad20-top {
+    padding-top: 20px;
+}
+
+.pad30-top {
+    padding-top: 30px;
+}
     .anchorbtn {
         background-color: rgb(243, 163, 13);
         border-radius: 5px;
