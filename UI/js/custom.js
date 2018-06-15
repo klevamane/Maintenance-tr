@@ -15,8 +15,10 @@ function login(e) {
   emailvalue = email.value;
   passwordvalue = password.value;
   // console.log(`email and password ${emailvalue} and ${passwordvalue}`);
-  fetch('https://maintenancetr.herokuapp.com/api/v1/auth/login', {
+ // fetch('https://maintenancetr.herokuapp.com/api/v1/auth/login', {
+ fetch('http://localhost:3000/api/v1/auth/login', {
     method: 'POST',
+ 
     body: JSON.stringify({
       email: emailvalue,
       password: passwordvalue

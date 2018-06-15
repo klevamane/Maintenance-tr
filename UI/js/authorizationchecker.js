@@ -16,15 +16,15 @@ const currentTime = Math.floor(Date.now()/1000);
 if(tokenIssuedTimeInSeconds <= currentTime &&  tokenExpiryInSeconds >= currentTime) {
     console.log('Valid user');
 }
-else {
+ else {
     console.log('welcome')
     window.location.replace('./Index.html');
-}
+    }
 }
 catch(e) {
-console.log(e);
+    console.log(e);
 // returning to index may be as a result of the required data is not available
 // In the local storage, which indicates that the user has not been authenticated
 // there for cannot access the page and should be redirected to the index
-window.location.replace('./Index.html');
+    window.location.replace('./Index.html');
 }

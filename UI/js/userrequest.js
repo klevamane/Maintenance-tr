@@ -9,7 +9,8 @@ try{
     errorDetection = true;
   }
 
-  fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
+ // fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
+    fetch('http://localhost:3000/api/v1/users/requests', { 
     method: 'GET',
     headers: {'Authorization': 'Bearer ' + token}
 }).then(response => response.json())
@@ -32,8 +33,7 @@ try{
                 }
                 timeStamp = new Date(item.createdon);
                 dateTime = timeStamp.toDateString();
-    
-                theOutput +=`<a href="./Request-info.html" class="card-redirect-tag">
+                theOutput +=`<a href="./Request-info.html" class="card-redirect-tag" id="${item.id}" onClick="getcardid(this.id)">
                     <div class="card-fluid pad20 marg-top10y userrequests-card">
                         <span>
                             <strong>${item.fault}</strong>
@@ -56,3 +56,8 @@ try{
         //console.log(data.allUserRequests.length);
     })
   .catch(err => console.log(err));
+
+  function getcardid(retrievedId) {
+      console.log('WELCOMMME OHHHHH');
+    window.localStorage.setItem('requestid', JSON.stringify(retrievedId));  
+  }
