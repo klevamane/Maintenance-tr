@@ -59,7 +59,7 @@ function login(e) {
           window.localStorage.setItem('dataAccessibleToOtherPages', JSON.stringify(dataToBeAccessedByOtherPages));
           window.location.replace('./User.html');
         } else {
-          window.localStorage.setItem('dataAccessibleToOtherPages', dataToBeAccessedByOtherPages);
+          window.localStorage.setItem('dataAccessibleToOtherPages', JSON.stringify(dataToBeAccessedByOtherPages));
           window.location.replace('./admin.html');
         }
       }
