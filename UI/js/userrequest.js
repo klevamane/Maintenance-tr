@@ -57,7 +57,7 @@ try{
     })
   .catch(err => console.log(err));
 
+  //
   function getcardid(retrievedId) {
-      console.log('WELCOMMME OHHHHH');
     window.localStorage.setItem('requestid', JSON.stringify(retrievedId));  
   }
