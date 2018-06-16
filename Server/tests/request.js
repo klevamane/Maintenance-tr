@@ -332,7 +332,7 @@ describe('REQUEST FILE', () => {
       .set('Authorization', `Bearer ${authenticationToken}`)
       .send(request)
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(201);
         expect(res.body.error).to.equal('Description should contain only Alphabets and numbers');
         expect(res.body).to.be.a('object');
         done();
