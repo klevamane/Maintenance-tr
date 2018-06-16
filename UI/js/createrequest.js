@@ -1,7 +1,7 @@
 let newRequestSubmitButton = document.getElementById('usersubmit');
 newRequestSubmitButton.addEventListener('click',function(event) {
-const requestForm = document.getElementById('requestform');
     event.preventDefault();
+    const requestForm = document.getElementById('requestform');
     let checker;
     // getuser data from client
    const retrievedUserDataFromLocalStorage = localStorage.getItem('dataAccessibleToOtherPages');
@@ -14,9 +14,8 @@ const requestForm = document.getElementById('requestform');
     let otherValue = document.getElementById('type');
     let other = otherValue.options[otherValue.selectedIndex].value;
 
-    let headers = new Headers;
     // Remember to use content-type application/json header
-    // to avoid vaidation issues in post
+    // to avoid va;idation issues in post
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', `Bearer ${token}`);
         fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
@@ -47,5 +46,5 @@ const requestForm = document.getElementById('requestform');
             const displayError = Object.values(result);
             toastr.error(displayError);
             }
-        })
+        }).catch(err => console.log(err));
 });

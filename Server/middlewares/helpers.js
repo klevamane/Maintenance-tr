@@ -206,7 +206,7 @@ exports.validateRegisterUSerSchema = {
 
 // Validation schema to be used as a blueprint in implementing validation
 exports.validateNewRequestSchema = {
-  description: Joi.string().max(250).regex(/^[a-zA-Z0-9 ]+$/),
+  description: Joi.string().max(250),
   other: Joi.string().max(30).regex(/^[a-zA-Z0-9 ]+$/),
   brand: Joi.string().max(30).regex(/^[a-zA-Z0-9 ]+$/).required(),
   modelNumber: Joi.string().max(20).regex(/^[a-zA-Z0-9 ]+$/),
