@@ -32,7 +32,7 @@ try{
                 }
                 timeStamp = new Date(item.createdon);
                 dateTime = timeStamp.toDateString();
-                theOutput +=`<a href="./Request-info.html" class="card-redirect-tag" id="${item.id}" onClick="getcardid(this.id)">
+                theOutput +=`<a href="./Request-info.html" class="card-redirect-tag" id="${item.id}" onClick="getcardid(this.id)" title="Click to view details">
                     <div class="card-fluid pad20 marg-top10y userrequests-card">
                         <span>
                             <strong>${item.fault}</strong>
