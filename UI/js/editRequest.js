@@ -12,8 +12,7 @@ try{
     errorDetection = true;
   }
 
- // fetch(`https://maintenancetr.herokuapp.com/api/v1/users/requests/${requestId}`, {
-    fetch(`http://localhost:3000/api/v1/users/requests/${requestId}`, { 
+ fetch(`https://maintenancetr.herokuapp.com/api/v1/users/requests/${requestId}`, {
     method: 'GET',
     headers: {'Authorization': 'Bearer ' + token}
 }).then(response => response.json())
@@ -58,8 +57,7 @@ try{
     // to avoid vaidation issues in post
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', `Bearer ${token}`);
-    //fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
-        fetch(`http://localhost:3000/api/v1/users/requests/${requestId}`, {
+        fetch(`https://maintenancetr.herokuapp.com/api/v1/users/requests/${requestId}`, {
         method: 'PUT',
         body: JSON.stringify({
           brand,

@@ -34,6 +34,41 @@ class adminController extends usercontroller {
       }));
   }
 
+
+  
+  /**
+* @static
+* @description List single request by the logged in user
+* @param  {object} req gets values passed to the api
+* @param  {object} res sends result as output
+* @returns {object} Success message with request or error message
+  */
+  static getUserRequestById(req, res) {
+    const id = parseInt(req.params.requestId, 10);
+    const bindingParameters = [id];
+    // const sql = 'select * from request where userid = $1 and id = $2';
+    const sql = 'select request.id, fault, brand, modelnumber, description, other,userid, name as status, createdon from request INNER JOIN status ON status.id = request.statusid where request.id = $1';
+    db.connect()
+      .then((client) => {
+        const InitialSingleUserRequest = client.query(sql, bindingParameters);
+        client.release();
+        return InitialSingleUserRequest;
+      })
+      .then((request) => {
+        if (request.rowCount < 1) {
+          return res.status(404).json({ error: 'Request not found' });
+        }
+        const requestFoundById = request.rows;
+        return res.status(200).json({ message: 'Request found', requestFoundById });
+      })
+      .catch((err) => {
+        winston.info(err);
+        res.status(400).json({ message: 'something is wrong' });
+      });
+    }
+
+
+
   /**
 * @static
 * @description Modify the initial request of a registered user in user to pending

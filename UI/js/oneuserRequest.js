@@ -11,8 +11,7 @@ try{
     errorDetection = true;
   }
 
- // fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
-    fetch(`http://localhost:3000/api/v1/users/requests/${requestId}`, { 
+    fetch(`https://maintenancetr.herokuapp.com/api/v1/users/requests/${requestId}`, {
     method: 'GET',
     headers: {'Authorization': 'Bearer ' + token}
 }).then(response => response.json())
@@ -41,6 +40,7 @@ try{
                 <span>
                     <strong>${completedata.requestFoundById[0].fault}</strong>
                 </span>
+                <hr>
                 <p>${completedata.requestFoundById[0].description}
                 </p>
                 <hr>

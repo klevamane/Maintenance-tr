@@ -319,6 +319,12 @@ nav .brand #logo1 {
     .leave {
         padding: -950px;
     }
+
+    .anchorbtn {
+        padding: .1em;
+        font-size: 10px;
+
+      }
   }
 
   
@@ -327,6 +333,12 @@ nav .brand #logo1 {
     .leave {
         padding: -950px;
     }
+    
+    .anchorbtn {
+        padding: .1em;
+        font-size: 10px;
+
+      }
   }
   
   /* Implement as long as screen is not greater than 768px */
@@ -384,6 +396,7 @@ nav .brand #logo1 {
         color: #fff;
         padding: .5em;
         text-decoration: none;
+        font-size: 12px;
       }
       
       .anchorbtn:focus,
@@ -627,4 +640,13 @@ table {
 
 .pull-right {
     float: right;
+}
+
+.adminrequestheader {
+    
+    color:var(--primaryOrange);
+}
+
+#description {
+    resize: none;
 }

@@ -8,24 +8,24 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link href="css/toastr.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>Sign up</title>
 </head>
 
 <body id="primary-background" class="nobody-margin">
-    <nav>
-            <div class="nav-toggle">
-                    <i class="fa fa-bars handlebar"></i>
-                </div>
-        <div class="container">
-            
-            <ul id="navul" class="navul">
-                <li><a href="./admin.html">Admin Dashboard</a></li>
-                <li id="signout"><a href="./Index.html">Signout</a></li>
-
-            </ul>
-        </div>
-    </nav>
+        <nav>
+                <div class="nav-toggle">
+                        <i class="fa fa-bars handlebar"></i>
+                    </div>
+            <div class="container">
+                <span class="brand"><span id="logo1">Kleva</span><span id="logo2">fix'</span></span>
+                <ul id="navul" class="navul leave">
+                    <li><a href="./Index.html" id="signout" onclick="signout()" >Signout</a></li>
+        
+                </ul>
+            </div>
+        </nav>
     <div class="container">
        
 
@@ -34,41 +34,36 @@
                 <hr>
                 <span>Action</span>
                 <span>
-                    <select name="" class="status-quo">
-                        <option value="" selected>Choose</option>
-                        <option value="">Approve</option>
-                        <option value="">Disapprove</option>
-                        <option value="">Resolve</option>
+                    <select name="" class="status-quo" id="statusselection">
+                        <option selected>Choose</option>
+                        <option value="2">Approve</option>
+                        <option value="3">Disapprove</option>
+                        <option value="4">Resolve</option>
                     </select>
                 </span>
                 
-                <button> Submit</button>
+                <button id="makedecision"> Submit</button>
+                <button id="backtoallrequests"> <i class="fa fa-arrow-circle-o-left"></i> Back</button>
 
                 <!-- CARD REQUEST 1 -->
-                <div class="card-fluid pad10 marg-top70y">
-                    <span>
-                        <strong>Heading</strong>
-                    </span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, molestiae. Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Sapiente sit illo soluta iste alias perspiciatis itaque architecto
-                        sed culpa esse?
-                    </p>
-                    <hr>
-                    
-                    <span class="status-pill-pending">Inactive</span>
-                    <span class="status-date"> 12 May</span>
+                <div>
+                <div class="card-fluid pad10 marg-top70y" id="cardplaceholder">
                     
                 </div>
+            </div>
                 <div class="container">
                 </div>
-                
                 </div>
-               
             </div>
             
            
     </div>
+<script src="./js/authorizationchecker.js"></script>
+<script src="./js/onlyAdminCanAccess.js"></script>
+<script src="./js/adminViewSingleRequest.js"></script>    
 <script src="./js/jquery-3.3.1.min.js"></script>
+<script src="js/toastr.js"></script>
+<script src="js/signout.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){

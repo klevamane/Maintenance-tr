@@ -21,7 +21,7 @@
     <div class="container">
         <span class="brand"><span id="logo1">Kleva</span><span id="logo2">fix'</span></span>
         <ul id="navul" class=" leave">
-            <li id="leave"><a href="./Index.html">Signout</a></li>
+                <li><a href="./Index.html" id="signout" onclick="signout()" >Signout</a></li>
 
         </ul>
     </div>
@@ -32,6 +32,7 @@
             
             <div>
                 <h2 class="card-h2">Request Infomation</h2>
+               <!-- 
                 <span>Filter by</span>
             <span>
                 <select name="" class="status-quo">
@@ -41,6 +42,7 @@
                     <option value="">Inactive</option>
                 </select>
             </span>
+        -->
                 <hr>
 
                 <table>
@@ -48,6 +50,7 @@
                         <thead class="table-head">
                           <tr>
                             <th scope="col">Request Id</th>
+                            <th scope="col">User ID</th>
                             <th scope="col">Brand</th>
                             <th scope="col">Type</th>
                             <th scope="col">Status</th>
@@ -57,41 +60,11 @@
                           </tr>
                         </thead>
                         <tbody id="tablebody">
-                          <tr>
-                          <a href=""></a><td data-label="Request Id">1</td> </a>
-                            <td data-label="Brand">Haier Thermocool</td>
-                            <td data-label="Type">Maintenance</td>
-                            <td data-label="Status">Pending</td>
-                            <td data-label="Status"><a href="./Request-info.html" class="btn view-detail">view</a></td>
-                            <td data-label="Cancel"><button class="danger"><i class="fa fa-trash"> Cancel Request</i></button></td>
-                          </tr>
-                          <tr>
-                            <td scope="row" data-label="Request Id">2</td>
-                            <td data-label="Brand">LG</td>
-                            <td data-label="Type">Maintenance</td>
-                            <td data-label="Status">Pending</td>
-                            <td data-label="Status"><a href="./Request-info.html" class="btn view-detail">view</a></td>
-                            <td data-label="Cancel"><button class="danger"><i class="fa fa-trash"> Cancel Request</i></button></td>
-                          </tr>
-                          <tr>
-                            <td scope="row" data-label="Request Id">3</td>
-                            <td data-label="Brand">Hitachi</td>
-                            <td data-label="Type">Repair</td>
-                            <td data-label="Status">Pending</td>
-                            <td data-label="Status"><a href="./Request-info.html" class="btn view-detail">view</a></td>
-                            <td data-label="Cancel"><button class="danger"><i class="fa fa-trash"> Cancel Request</i></button></td>
-                          </tr>
-                          <tr>
-                            <td scope="row" data-label="Request Id">4</td>
-                            <td data-label="Brand">Apple</td>
-                            <td data-label="Type">Repair</td>
-                            <td data-label="Status">Inactive</td>
-                            <td data-label="Status"><a href="./Request-info.html" class="btn view-detail">view</a></td>
-                            <td data-label="Cancel"><button class="danger"><i class="fa fa-trash"> Cancel Request</i></button></td>
-                          </tr>
+                          
                         </tbody>
                       </table>                
                 </a>
+                <!--
                     <div class="list">
                             <ul class="pagination">
                                     <li class="disabled"><a href="#!"><i class="fa fa-angle-left"></i></a></li>
@@ -103,7 +76,7 @@
                                     <li><a href="#!"><i class="fa fa-angle-right"></i></a></li>
                                   </ul>
                     </div>
-                
+                -->
                 </div>
                
             </div>
@@ -112,10 +85,11 @@
     </div>
 
 <script src="./js/authorizationchecker.js"></script>
+<script src="./js/onlyAdminCanAccess.js"></script>
 <script src="./js/adminRequests.js"></script>
 <script src="./js/jquery-3.3.1.min.js"></script>
 <script src="js/toastr.js"></script>
-
+<script src="./js/signout.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){

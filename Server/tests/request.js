@@ -320,7 +320,7 @@ describe('REQUEST FILE', () => {
   });
 
 
-  it('Description should contain only Alphabets and numbers', (done) => {
+  it('Description should contain string', (done) => {
     const request = {
       fault: 'Broken mouthpiece',
       brand: 'Lenovo',
@@ -332,9 +332,7 @@ describe('REQUEST FILE', () => {
       .set('Authorization', `Bearer ${authenticationToken}`)
       .send(request)
       .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body.error).to.equal('Description should contain only Alphabets and numbers');
-        expect(res.body).to.be.a('object');
+        expect(res).to.have.status(201);
         done();
       });
   });
