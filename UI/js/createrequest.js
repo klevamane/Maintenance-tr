@@ -19,8 +19,7 @@ const requestForm = document.getElementById('requestform');
     // to avoid vaidation issues in post
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', `Bearer ${token}`);
-    //fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
-        fetch('http://localhost:3000/api/v1/users/requests', {
+        fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
         method: 'POST',
         body: JSON.stringify({
           brand,

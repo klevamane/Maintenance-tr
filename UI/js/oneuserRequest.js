@@ -11,8 +11,7 @@ try{
     errorDetection = true;
   }
 
- // fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
-    fetch(`http://localhost:3000/api/v1/users/requests/${requestId}`, { 
+    fetch(`https://maintenancetr.herokuapp.com/api/v1/users/requests/${requestId}`, {
     method: 'GET',
     headers: {'Authorization': 'Bearer ' + token}
 }).then(response => response.json())
@@ -35,27 +34,25 @@ try{
                 else {
                     statusIconIndicator = 'status-pill-accepted';
                 }
-                let other = (completedata.requestFoundById[0].other === null)? '': completedata.requestFoundById[0].other;
                 timeStamp = new Date(completedata.requestFoundById[0].createdon);
                 dateTime = timeStamp.toDateString();
-                theOutput +=`<span>
-                <strong class="adminrequestheader">${completedata.requestFoundById[0].fault}</strong>
+                theOutput +=`<div class="card-fluid pad10 marg-top50y">
+                <span>
+                    <strong>${completedata.requestFoundById[0].fault}</strong>
+                </span>
                 <hr>
-                <h4>${completedata.requestFoundById[0].brand}</h4>
-                <h5>Type: <span id="maintenanceheeading">${other}</span></h5>
-            </span>
-            <p>${completedata.requestFoundById[0].description}
-            </p>
-            <hr>
-            
-            <span class="${statusIconIndicator}">${completedata.requestFoundById[0].status}</span>
-            <span class="status-date">${dateTime}</span>`;
+                <p>${completedata.requestFoundById[0].description}
+                </p>
+                <hr>
+                <span class="${statusIconIndicator}">${completedata.requestFoundById[0].status}</span>
+                <span class="status-date">${dateTime}</span>
+            </div>`;
         }
         else {
             toastr.warning(data.message);
         }
         
-        document.getElementById('maintenanceheeading').innerHTML = theOutput;
+        document.getElementById('viewrequestplachholder').innerHTML = theOutput;
         //console.log(data.allUserRequests.length);
     })
   .catch(err => console.log(err));

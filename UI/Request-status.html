@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link href="css/toastr.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>Sign up</title>
 </head>
@@ -21,7 +22,7 @@
             
             <ul id="navul" class="navul">
                 <li><a href="./admin.html">Admin Dashboard</a></li>
-                <li id="signout"><a href="./Index.html">Signout</a></li>
+                <li><a href="./Index.html" id="signout" onclick="signout()">Signout</a></li>
 
             </ul>
         </div>
@@ -34,15 +35,15 @@
                 <hr>
                 <span>Action</span>
                 <span>
-                    <select name="" class="status-quo">
-                        <option value="" selected>Choose</option>
-                        <option value="">Approve</option>
-                        <option value="">Disapprove</option>
-                        <option value="">Resolve</option>
+                    <select name="" class="status-quo" id="statusselection">
+                        <option selected>Choose</option>
+                        <option value="2">Approve</option>
+                        <option value="3">Disapprove</option>
+                        <option value="4">Resolve</option>
                     </select>
                 </span>
                 
-                <button> Submit</button>
+                <button id="makedecision"> Submit</button>
 
                 <!-- CARD REQUEST 1 -->
                 <div>
@@ -70,8 +71,12 @@
             
            
     </div>
+<script src="./js/authorizationchecker.js"></script>
+<script src="./js/onlyAdminCanAccess.js"></script>
 <script src="./js/adminViewSingleRequest.js"></script>    
 <script src="./js/jquery-3.3.1.min.js"></script>
+<script src="js/toastr.js"></script>
+<script src="js/signout.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){

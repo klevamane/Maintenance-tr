@@ -12,8 +12,8 @@ try{
     errorDetection = true;
   }
 
- // fetch(`https://maintenancetr.herokuapp.com/api/v1/requests`, {
-    fetch(`http://localhost:3000/api/v1/requests`, { 
+    fetch('https://maintenancetr.herokuapp.com/api/v1/requests', {
+  //fetch(`http://localhost:3000/api/v1/requests`, { 
     method: 'GET',
     headers: {'Authorization': 'Bearer ' +token}
 }).then(response =>{ 
@@ -66,11 +66,10 @@ try{
         toastr.error('You cannot disapprove a request that has already been resolved or disapproved');
     } 
     else {
-        // TODO:
-        // change all urls to heroku
         let headers = new Headers({'Content-Type': 'application/json'});
         headers.append('Authorization', `Bearer ${token}`);
-        fetch(`http://localhost:3000/api/v1/requests/${requestToBeDisapprovedId}/disapprove`, {
+      //  fetch(`http://localhost:3000/api/v1/requests/${requestToBeDisapprovedId}/disapprove`, {
+        fetch(`http://maintenancetr.herokuapp.com/api/v1/requests/${requestToBeDisapprovedId}/disapprove`, {
             method: 'PUT',
             headers
         }).then((response) => {
