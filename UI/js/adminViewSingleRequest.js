@@ -136,3 +136,9 @@ try{
                     .catch(err => console.log(err));
                     }
                 });
+
+
+// Implementation of the back button
+document.getElementById('backtoallrequests').addEventListener('click', () => {
+    window.location.replace('./admin.html');
+});
