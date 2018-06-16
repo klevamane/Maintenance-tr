@@ -1,10 +1,12 @@
+let theOutput;
 let token;
 let requestId;
 //window.onload = getuserRequests();
 try{
     let retrievedUserDataFromLocalStorage = localStorage.getItem('dataAccessibleToOtherPages');
     token = JSON.parse(retrievedUserDataFromLocalStorage).token;
-    requestId =  localStorage.getItem('requestid'); 
+    // retrieve the Id of the request that was clicked
+    requestId =  localStorage.getItem('adminActionableRequestView'); 
   }
   catch(err) {
     console.log(err)
@@ -12,7 +14,7 @@ try{
   }
 
  // fetch('https://maintenancetr.herokuapp.com/api/v1/users/requests', {
-    fetch(`http://localhost:3000/api/v1/users/requests/${requestId}`, { 
+    fetch(`http://localhost:3000/api/v1/requests/${requestId}`, { 
     method: 'GET',
     headers: {'Authorization': 'Bearer ' + token}
 }).then(response => response.json())
@@ -25,6 +27,8 @@ try{
         let statusIconIndicator;
         if(completedata) {
 
+                timeStamp = new Date(completedata.requestFoundById[0].createdon);
+                dateTime = timeStamp.toDateString();
                 if(completedata.requestFoundById[0].status === 'Inactive') {
                     statusIconIndicator = 'status-pill-inactive'
                 } else if(completedata.requestFoundById[0].status === 'Pending') {
@@ -35,14 +39,11 @@ try{
                 else {
                     statusIconIndicator = 'status-pill-accepted';
                 }
-                let other = (completedata.requestFoundById[0].other === null)? '': completedata.requestFoundById[0].other;
-                timeStamp = new Date(completedata.requestFoundById[0].createdon);
-                dateTime = timeStamp.toDateString();
-                theOutput +=`<span>
+                theOutput =`<span>
                 <strong class="adminrequestheader">${completedata.requestFoundById[0].fault}</strong>
                 <hr>
                 <h4>${completedata.requestFoundById[0].brand}</h4>
-                <h5>Type: <span id="maintenanceheeading">${other}</span></h5>
+                <h5>Type: <span id="maintenanceheeading">${completedata.requestFoundById[0].other}</span></h5>
             </span>
             <p>${completedata.requestFoundById[0].description}
             </p>
@@ -55,7 +56,6 @@ try{
             toastr.warning(data.message);
         }
         
-        document.getElementById('maintenanceheeading').innerHTML = theOutput;
+        document.getElementById('cardplaceholder').innerHTML = theOutput;
         //console.log(data.allUserRequests.length);
-    })
-  .catch(err => console.log(err));
+        }).catch(err => console.log(err));

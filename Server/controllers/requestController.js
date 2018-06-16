@@ -72,7 +72,7 @@ class requestController {
 * @description List single request by the logged in user
 * @param  {object} req gets values passed to the api
 * @param  {object} res sends result as output
-* @returns {object} Success message with request list or error message
+* @returns {object} Success message with the request or error message
   */
   static getUserRequestById(req, res) {
     const id = parseInt(req.params.requestId, 10);

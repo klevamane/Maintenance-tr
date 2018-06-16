@@ -9,6 +9,9 @@ import {
 const routes = express.Router();
 
 routes.get('/requests', checkAuthentication, checkIfUserIsAdmin, admincontroller.getUserRequests);
+
+routes.get('/requests/:requestId', checkAuthentication, checkIfUserIsAdmin, admincontroller.getUserRequestById);
+
 routes.put(
   '/requests/:requestId/approve', checkAuthentication, checkIfUserIsAdmin, checkIfRequestIdParamIsValid, checkIfRequestExists,
   checkIfRequestIsApprovable, admincontroller.approveUserRequest
