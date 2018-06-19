@@ -4,12 +4,15 @@ import winston from 'winston';
 import logger from 'morgan';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './openAPIdocument.yaml';
 
 import userRoutes from './Server/routes/userRoute';
 import requestRoutes from './Server/routes/requestRoute';
 import adminRoutes from './Server/routes/adminRoute';
 
 dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -20,7 +23,7 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Routes
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Welcome to Maintenance Tracker' });
