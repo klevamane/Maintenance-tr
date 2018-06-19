@@ -21,6 +21,13 @@ status of their request.
 ## Api URL
 * https://maintenancetr.herokuapp.com
 
+## Api Documentation
+* https://maintenancetr.herokuapp.com/api-docs/#
+
+## User Access
+Admin user
+- email: admin@gmx.com
+- password: Password123 (note that the password is case sensitive)
 
 ## How to get a local copy
 #### Clone repository
@@ -77,6 +84,8 @@ POST /api/v1/auth/signup 400 1.013 ms - 49
 1. Html and Css
 2. Bootstrap
 3. JQuery
+4. NodeJS
+4. Fetch api
 
 # Contributors
 * Onengiye Richard (klevamane)
