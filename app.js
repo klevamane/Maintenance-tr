@@ -5,7 +5,7 @@ import logger from 'morgan';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './openAPIdocument.yaml';
+import swaggerDocument from './swagger.json';
 
 import userRoutes from './Server/routes/userRoute';
 import requestRoutes from './Server/routes/requestRoute';
