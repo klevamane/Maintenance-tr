@@ -1,6 +1,7 @@
 let token;
 let requestId;
 let theOutput ='';
+let completedata;
 const requestform = document.getElementById('requestform');
 //window.onload = getuserRequests();
 try{
@@ -12,8 +13,8 @@ try{
     errorDetection = true;
   }
 
-    fetch('https://maintenancetr.herokuapp.com/api/v1/requests', {
-  //fetch(`http://localhost:3000/api/v1/requests`, { 
+fetch('https://maintenancetr.herokuapp.com/api/v1/requests', {
+ // fetch(`http://localhost:3000/api/v1/requests`, { 
     method: 'GET',
     headers: {'Authorization': 'Bearer ' +token}
 }).then(response =>{ 
@@ -26,14 +27,19 @@ try{
 })
   .then((data) => {
     console.log(`MAIN DATA OH ${data}`);  
-    let completedata = data.allRequests;
-    console.log(`COMPLETED DATA OH ${completedata}`);
+    completedata = data.allRequests;
+    console.log(`COMPLETED DATA OH ${completedata[1].id}`);
+   
+    const filteredArray = completedata.filter(element => element.status = 'Inactive');
+
+    console.log(`FILTERED ARRAY OH .... ${filteredArray[1].status}`);
     console.log(`TOKEN OH ${token}`);
     if(completedata) {
         completedata.forEach((item) => {
             timeStamp = new Date(item.createdon);
             dateTime = timeStamp.toDateString();
-            theOutput +=`<tr><a href=""></a><td data-label="Request Id">${item.id}</td> </a>
+            
+            theOutput +=`<tr id="listofrequests"><a href=""></a><td data-label="Request Id">${item.id}</td> </a>
             <td data-label="Brand">${item.userid}</td>
             <td data-label="Brand">${item.brand}</td>
             <td data-label="Type">${item.other}</td>
@@ -41,6 +47,8 @@ try{
             <td data-label="Status"><a href="./Request-status.html" class="btn view-detail" id="${item.id}" onClick="adminviewonerequest(this.id)">view</a></td>
             <td data-label="Cancel"><button class="danger" id="${item.id}" name="${item.name}" onClick="return cancelrequest(this.id, this.name)"><i class="fa fa-trash"> Cancel Request</i></button></td>
           </tr>`;
+         let preloader = document.getElementById("loader");
+         preloader.style.display = 'none'; 
         });
     }
     else {
@@ -48,7 +56,10 @@ try{
     }
     document.getElementById('tablebody').innerHTML = theOutput;           
     })
-  .catch(err => console.log(err));
+  .catch((err) => {
+    toastr.warning('Unable to display data try refreshing your browser');  
+    console.log(err)
+});
 
 
   function adminviewonerequest (adminViewSelectedRequestId) {
@@ -97,3 +108,46 @@ try{
     }
 }
 
+
+function filterrequests() {
+    let filterOptions = document.getElementById('statusquo');
+    let selectedStatusFilter = filterOptions.options[filterOptions.selectedIndex].text;
+    console.log(`This the selected status OH ${selectedStatusFilter.trim()}`);
+    let filteredArray = completedata.filter(element => element.name == selectedStatusFilter.trim());
+    if(selectedStatusFilter === 'Choose') {
+     // List all requests
+        filteredArray = completedata.filter(element => element.name === element.name);
+    }
+    console.log(filteredArray)
+    console.log(`FILTERED ARRAY LENGTH OHHH ${filteredArray.length}`);
+    if(filteredArray.length > 0) {
+        theOutput = ''
+        if(filteredArray) {
+            filteredArray.forEach((item) => {
+                timeStamp = new Date(item.createdon);
+                dateTime = timeStamp.toDateString();
+                theOutput +=`<tr id="listofrequests"><a href=""></a><td data-label="Request Id">${item.id}</td> </a>
+                <td data-label="Brand">${item.userid}</td>
+                <td data-label="Brand">${item.brand}</td>
+                <td data-label="Type">${item.other}</td>
+                <td data-label="Status">${item.name}</td>
+                <td data-label="Status"><a href="./Request-status.html" class="btn view-detail" id="${item.id}" onClick="adminviewonerequest(this.id)">view</a></td>
+                <td data-label="Cancel"><button class="danger" id="${item.id}" name="${item.name}" onClick="return cancelrequest(this.id, this.name)"><i class="fa fa-trash"> Cancel Request</i></button></td>
+              </tr>`;
+            // let preloader = document.getElementById("loader");
+            // preloader.style.display = 'none'; 
+            let tableBody = document.getElementById('tablebody');
+                while(tableBody.firstChild) {
+                    tableBody.removeChild(tableBody.firstChild);
+            }
+             tableBody.innerHTML = theOutput;
+            })
+       
+    }
+     } else {
+        let tableBody = document.getElementById('tablebody');
+        tableBody.innerHTML = '';
+        toastr.warning('The filter retured no result');
+        }
+    
+}

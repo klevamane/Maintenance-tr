@@ -1,4 +1,5 @@
 try {
+// Access data from local storage
 let dataFromLocalStorage = localStorage.getItem('dataAccessibleToOtherPages');
 let recievedToken = JSON.parse(dataFromLocalStorage).token;
 
@@ -7,7 +8,6 @@ let base64Url = recievedToken.split('.')[1];
 let base64 = base64Url.replace('-', '+').replace('_', '/');
 let payload=JSON.parse(window.atob(base64));
 
-// const userId = payload.payload.id;
 const tokenIssuedTimeInSeconds = payload.iat;
 const tokenExpiryInSeconds = payload.exp;
 
@@ -17,7 +17,8 @@ if(tokenIssuedTimeInSeconds <= currentTime &&  tokenExpiryInSeconds >= currentTi
     console.log('Valid user');
 }
  else {
-    console.log('welcome')
+    // Token has expired and is invalid, or token is invalid 
+    console.log('welcome');
     window.location.replace('./Index.html');
     }
 }

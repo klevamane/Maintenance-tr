@@ -20,9 +20,8 @@ try{
 }).then(response => response.json())
   .then((data) => {
         let completedata = data;
-        console.log(`The completed data is ${completedata.requestFoundById[0].id}`);
-        console.log(`The completed data2 is ${data.id}`)
-        console.log(`Request data found by Id ${requestId}`);
+        let preloader = document.getElementById("loader");
+        preloader.style.display = 'none'; 
         let theOutput ='';
         let statusIconIndicator;
         if(completedata) {
@@ -41,7 +40,8 @@ try{
                 else {
                     statusIconIndicator = 'status-pill-accepted';
                 }
-                theOutput =`<span>
+                theOutput =`<div class="card-fluid pad10 marg-top70y">
+                <span>
                 <strong class="adminrequestheader">${completedata.requestFoundById[0].fault}</strong>
                 <hr>
                 <h4>${completedata.requestFoundById[0].brand}</h4>

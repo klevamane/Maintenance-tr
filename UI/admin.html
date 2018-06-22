@@ -28,21 +28,20 @@
 </nav>
 
     <div class="container">
-       
-            
             <div>
                 <h2 class="card-h2">Request Infomation</h2>
-               <!-- 
+               
                 <span>Filter by</span>
             <span>
-                <select name="" class="status-quo">
-                    <option value="">Resolved</option>
-                    <option value="">Disapproved</option>
-                    <option value="">Pending</option>
-                    <option value="">Inactive</option>
+                <select name="" class="status-quo" id="statusquo" onchange="filterrequests()">
+                    <option value="">Choose</option>
+                    <option value="1">Resolved</option>
+                    <option value="2">Disapproved</option>
+                    <option value="3">Pending</option>
+                    <option value="4">Inactive</option>
                 </select>
             </span>
-        -->
+        
                 <hr>
 
                 <table>
@@ -60,9 +59,10 @@
                           </tr>
                         </thead>
                         <tbody id="tablebody">
-                          
+                            
                         </tbody>
-                      </table>                
+                      </table>
+                      <div class="loader" id="loader"></div>                
                 </a>
                 <!--
                     <div class="list">
@@ -83,6 +83,8 @@
             
            
     </div>
+
+
 
 <script src="./js/authorizationchecker.js"></script>
 <script src="./js/onlyAdminCanAccess.js"></script>
