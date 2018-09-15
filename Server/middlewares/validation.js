@@ -66,5 +66,3 @@ export const validateNewRequest = (req, res, next) => {
     next();
   }
 };
-
-export const validateNewUser

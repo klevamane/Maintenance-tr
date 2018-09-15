@@ -1,6 +1,9 @@
 import winston from 'winston';
 import dbconnect from '../../../connection';
 
+const checkDBprocesses = `SELECT * FROM pg_stat_activity WHERE datname = ${process.env.TESTDB}`; // to be used
+const dropDB = `DROP DATABASE ${process.env.TESTDB}`;
+const createDB = `CREATE DATABASE ${process.env.TESTDB}`;
 const registeredUserTableQuery = `CREATE TABLE "registereduser" (
     "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
     "firstname" character varying(200) NOT NULL,
@@ -62,6 +65,20 @@ CONSTRAINT contactus_pk PRIMARY KEY ("id")
   OIDS=FALSE
 )`;
 
+
+// const dropCreateDB = async (value) => {
+//   try {
+//     const res = await dbconnect.query(value);
+//     console.log(res.rows[0]);
+//     console.log(value);
+//     // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
+//   } catch (err) {
+//     console.log(err.stack);
+//   }
+// };
+
+// dropCreateDB(dropDB);
+// dropCreateDB(createDB);
 
 const sqlExtension = 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"';
 dbconnect.query(sqlExtension)

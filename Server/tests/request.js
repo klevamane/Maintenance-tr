@@ -21,14 +21,37 @@ describe('POST USER /user', () => {
       lastname: 'Jonji',
       mobile: '08025912890',
       password: 'password123',
+      password2: 'password123'
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         newlycreateduser = res.body.user;
-        expect(res).to.have.status(201);
+        expect(res).to.have.status(200);
         expect(res.body.message).to.equal('User has been registered');
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+
+  it('should require confirm password to match the password', (done) => {
+    const user = {
+      firstname: 'kleventh',
+      email: 'exampleuserfive@user.com',
+      lastname: 'Jonji',
+      mobile: '08025912877',
+      password: 'password123',
+      password2: 'password123ss',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(user)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        console.log(res.body);
+         console.log(res.body.errors);
+        expect(res.body.errors.password2).to.equal('Passwords dont match');
         expect(res.body).to.be.a('object');
         done();
       });
@@ -59,6 +82,7 @@ describe('POST USER /user', () => {
       .get('/api/v1/requests')
       .set('authorization', `Bearer ${initialAdminToken}`)
       .end((err, res) => {
+        console.log(res.body);
         expect(res.body.error).to.equal('No request found');
         expect(res).to.have.status(404);
         expect(res.body).to.be.a('object');
@@ -73,70 +97,93 @@ describe('POST USER /user', () => {
       email: 'email@email.com',
       lastname: 'Jonji',
       mobile: '',
-      password: 'Password123',
+      password: 'password123',
+      password2: 'password123'
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
-        expect(res.body.error).to.equal('Mobile number must be in Nigerian Format');
+        expect(res.body.errors.mobile).to.equal('Mobile number must be of nigerian format of 11 digits');
         expect(res).to.have.status(400);
         expect(res.body).to.be.a('object');
         done();
       });
   });
 
-  it('Lastname must contain only alphabets', (done) => {
+
+  it('Lastname must be between 2 and 30 characters', (done) => {
     const user = {
       firstname: 'Bestman',
       email: 'email@email.com',
-      lastname: '',
+      lastname: 'a',
       mobile: '08025785342',
       password: 'Password123',
+      password2: 'Password123',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
-        expect(res.body.error).to.equal('lastname must contain only alphabets');
+        expect(res.body.errors.lastname).to.equal('Lastname must be between 2 and 30 characters');
         expect(res).to.have.status(400);
         expect(res.body).to.be.a('object');
         done();
       });
   });
 
-  it('You must provide a valid email address', (done) => {
+  it('Lastname must be between 2 and 30 characters ******', (done) => {
     const user = {
       firstname: 'Bestman',
-      email: 'email',
-      lastname: 'Kevin',
+      email: 'email@email.com',
       mobile: '08025785342',
       password: 'Password123',
+      password2: 'Password123',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
-        expect(res.body.error).to.equal('You must provide a valid email address');
+        expect(res.body.errors.lastname).to.equal('Lastname must be between 2 and 30 characters');
         expect(res).to.have.status(400);
         expect(res.body).to.be.a('object');
         done();
       });
   });
 
+  it('Lastname must be between only alphabets', (done) => {
+    const user = {
+      firstname: 'Bestman1',
+      lastname: 'last12323',
+      email: 'email@email.com',
+      mobile: '08025785342',
+      password: 'Password123',
+      password2: 'Password123',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(user)
+      .end((err, res) => {
+        expect(res.body.errors.lastname).to.equal('Lastname must be only alphabets');
+        expect(res).to.have.status(400);
+        expect(res.body).to.be.a('object');
+        done();
+      });
+  });
 
   it('Firstname must contain only alphabets', (done) => {
     const user = {
       firstname: 'Kevin77',
       email: 'userone@email.com',
       lastname: 'Kevin',
-      password: 'password123'
+      password: 'password123',
+      password2: 'Password123',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
-        expect(res.body.error).to.equal('firstname must contain only alphabets');
+        expect(res.body.errors.firstname).to.equal('Firstname must be only alphabets');
         expect(res).to.have.status(400);
         done();
       });
@@ -153,24 +200,7 @@ describe('POST USER /user', () => {
       .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
-        expect(res.body.error).to.equal('Password must be between 6-15 characters');
-        expect(res).to.have.status(400);
-        done();
-      });
-  });
-
-  it('Enter password less than 16 characters', (done) => {
-    const user = {
-      firstname: 'Kevin',
-      email: 'userone@email.com',
-      lastname: 'Kevin',
-      password: 'paslore10ipsumloremsom'
-    };
-    chai.request(app)
-      .post('/api/v1/auth/signup')
-      .send(user)
-      .end((err, res) => {
-        expect(res.body.error).to.equal('Password must be between 6-15 characters');
+        expect(res.body.errors.password).to.equal('Password must be between 8 and 30 characters');
         expect(res).to.have.status(400);
         done();
       });
@@ -182,31 +212,37 @@ describe('POST USER /user', () => {
       firstname: 'firstname',
       email: 'userone@email.com',
       lastname: 'Peti675',
-      password: 'newpassword',
+      password: 'password123',
+      password2: 'password123',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
         expect(res).to.have.status(400);
-        expect(res.body.error).to.equal('lastname must contain only alphabets');
+        expect(res.body.errors.lastname).to.equal('Lastname must be only alphabets');
         done();
       });
   });
 });
 
 describe('POST USER /Login', () => {
-  it('Invalid password', (done) => {
+
+  it('should create a new user', (done) => {
     const user = {
-      firstname: 'Bestman',
-      email: 'manipresh@ymail.com',
+      firstname: 'kleventh',
+      email: 'dbuser@test.com',
+      lastname: 'Jonji',
+      mobile: '08025912890',
+      password: 'password123',
+      password2: 'password123'
     };
     chai.request(app)
-      .post('/api/v1/auth/login')
+      .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
-        expect(res.body.error).to.equal('Password must be between 6-15 characters');
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.equal('User has been registered');
         expect(res.body).to.be.a('object');
         done();
       });
@@ -216,14 +252,15 @@ describe('POST USER /Login', () => {
 describe('POST USER /Login', () => {
   it('You must provide a valid email address', (done) => {
     const user = {
-      firstname: 'Bestman',
-      email: 'manip',
+      email: 'manip@sns',
+      password: 'sabhjkajsd'
     };
     chai.request(app)
       .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
-        expect(res.body.error).to.equal('You must provide a valid email address');
+        console.log(res.body);
+        expect(res.body.errors.email).to.equal('Email is invalid');
         expect(res).to.have.status(400);
         expect(res.body).to.be.a('object');
         done();
@@ -239,24 +276,8 @@ describe('POST USER /Login', () => {
       .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
-        expect(res.body.error).to.equal('Invalid email or password');
-        expect(res).to.have.status(406);
-        expect(res.body).to.be.a('object');
-        done();
-      });
-  });
-
-  it('user should be Unauthorized', (done) => {
-    const user = {
-      email: 'adebrokikali@gmail.com',
-      password: 'extremely'
-    };
-    chai.request(app)
-      .post('/api/v1/auth/login')
-      .send(user)
-      .end((err, res) => {
-        expect(res.body.error).to.equal('Invalid email or password');
-        expect(res).to.have.status(406);
+        expect(res.body.emaildoesnotexist).to.equal('Email does not exist');
+        expect(res).to.have.status(400);
         expect(res.body).to.be.a('object');
         done();
       });
@@ -281,9 +302,9 @@ describe('REQUEST FILE', () => {
       });
   });
 
-  it('fault should contain only Alphabets and numbers', (done) => {
+  it('fault is required', (done) => {
     const request = {
-      fault: 'Broken %& @',
+      fault: '',
       brand: 'LGG',
       modelnumber: '77263',
       description: 'description'
@@ -294,16 +315,16 @@ describe('REQUEST FILE', () => {
       .send(request)
       .end((err, res) => {
         expect(res).to.have.status(400);
-        expect(res.body.error).to.equal('fault should contain only Alphabets and numbers');
+        expect(res.body.errors.fault).to.equal('The Fault field is required');
         expect(res.body).to.be.a('object');
         done();
       });
   });
 
-  it('Brand should contain only Alphabets and numbers', (done) => {
+  it('Brand is required', (done) => {
     const request = {
       fault: 'Broken mouthpiece',
-      brand: 'L&# @!',
+      brand: '',
       modelnumber: '77263',
       description: 'description'
     };
@@ -313,7 +334,7 @@ describe('REQUEST FILE', () => {
       .send(request)
       .end((err, res) => {
         expect(res).to.have.status(400);
-        expect(res.body.error).to.equal('Brand should contain only Alphabets and numbers');
+        expect(res.body.errors.brand).to.equal('Brand is required');
         expect(res.body).to.be.a('object');
         done();
       });
@@ -325,7 +346,7 @@ describe('REQUEST FILE', () => {
       fault: 'Broken mouthpiece',
       brand: 'Lenovo',
       modelnumber: '77263',
-      description: 'descri@#ption ^'
+      description: 'This is the description proper'
     };
     chai.request(app)
       .post('/api/v1/users/requests')
@@ -340,7 +361,7 @@ describe('REQUEST FILE', () => {
     const request = {
       fault: 'Broken mouthpiece',
       brand: 'Lenovo',
-      modelNumber: '77263* @!#@ ^',
+      modelNumber: '',
       description: 'description'
     };
     chai.request(app)
@@ -348,7 +369,7 @@ describe('REQUEST FILE', () => {
       .set('Authorization', `Bearer ${authenticationToken}`)
       .send(request)
       .end((err, res) => {
-        expect(res.body.error).to.equal('Model number should contain only Alphabets and numbers');
+        expect(res.body.errors.modelnumber).to.equal('The model number is required');
         expect(res).to.have.status(400);
         expect(res.body).to.be.a('object');
         done();
@@ -490,21 +511,6 @@ describe('ADMIN CONTROLLER', () => {
       });
   });
 
-
-  // // GET ALL USERS REQUESTS
-  // it('Unable to Get all requests of a logged in user', (done) => {
-  //   chai.request(app)
-  //     .get('/api/v1/requests')
-  //     .set('authorization', `Bearer ${adminAuthToken}`)
-  //     .end((err, res) => {
-  //       expect(res.body.message).to.equal('All requests');
-  //       expect(res).to.have.status(200);
-  //       expect(res.body).to.be.a('object');
-  //       done();
-  //     });
-  // });
-
-
   // APPROVE USERS REQUESTS
 
   it('Should return Request does not exist', (done) => {
@@ -632,4 +638,3 @@ describe('ADMIN CONTROLLER', () => {
       });
   });
 });
-

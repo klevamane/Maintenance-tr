@@ -10,7 +10,7 @@ const configuration = {
     database: process.env.LOCALDB,
     // database: 'testonly',
     host: process.env.LOCALDBHOST,
-   // port: process.env.LOCALDBSERVERPORT,
+    // port: process.env.LOCALDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 3000
   },
@@ -26,11 +26,11 @@ const configuration = {
     idleTimeoutMillis: 6000,
     connectionTimeoutMillis: 9000
   },
- // test environment configuration
+  // test environment configuration
   test: {
     user: 'user',
     password: 'user',
-    database: 'testdb2',
+    database: 'mktracker',
     host: '127.0.0.1',
     //  port: process.env.TESTDBSERVERPORT,
     max: 10,

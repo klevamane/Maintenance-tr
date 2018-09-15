@@ -25,7 +25,8 @@ class usercontroller {
     const { password } = req.body;
     // Check validation
     if (!isValid) {
-      return res.status(400).json(errors);
+      // return res.status(400).json(errors);
+      return res.status(400).json({ errors });
     }
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
@@ -92,7 +93,7 @@ class usercontroller {
     const { email, password } = req.body;
     // Check validation
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(400).json({ errors });
     }
     db.connect()
       .then((client) => {

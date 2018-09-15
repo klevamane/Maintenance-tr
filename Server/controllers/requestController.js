@@ -1,6 +1,7 @@
 import db from '../connection';
 import winston from 'winston';
 import validateRegisterInput from '../helpers/validations/validateRegisterInput';
+import validateCreateNewRequest from '../helpers/validations/validateCreateNewRequest';
 
 /**
 * @class requestController
@@ -15,10 +16,10 @@ class requestController {
       * @returns {object} Success message with the user created or error message
       */
   static createRequest(req, res) {
-    const { errors, isValid } = validateRegisterInput(req.body);
+    const { errors, isValid } = validateCreateNewRequest(req.body);
     // Check validation
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(400).json({ errors });
     }
     db.connect()
       .then((client) => {

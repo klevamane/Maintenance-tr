@@ -12,22 +12,27 @@ const validateRegisterInput = (data) => {
   data.firstname = isEmpty(data.firstname) === true ? '' : data.firstname;
   data.email = isEmpty(data.email) === true ? '' : data.email;
   data.password = isEmpty(data.password) === true ? '' : data.password;
+  data.mobile = isEmpty(data.mobile) === true ? '' : data.mobile;
   data.password2 = isEmpty(data.password2) === true ? '' : data.password2;
 
-  if (!Validator.isLength(data.name, { min: 2, max: 30 })) {
-    errors.name = 'Name must be between 2 and 30 characters';
+  if (!Validator.isAlpha(data.lastname)) {
+    errors.lastname = 'Lastname must be only alphabets';
+  }
+  if (Validator.isEmpty(data.lastname) || !Validator.isLength(data.lastname, { min: 2, max: 30 })) {
+    errors.lastname = 'Lastname must be between 2 and 30 characters';
   }
 
-  if (Validator.isEmpty(data.firstname)) {
-    errors.firstname = 'Firstname is required';
+  if (isEmpty(data.firstname) ||
+  !Validator.isLength(data.firstname, { min: 2, max: 30 })) {
+    errors.firstname = 'Firstname must be between 2 and 30 characters';
   }
 
-  if (Validator.isEmpty(data.lastname)) {
-    errors.lastname = 'Lastname is required';
+  if (!Validator.isAlpha(data.firstname)) {
+    errors.firstname = 'Firstname must be only alphabets';
   }
 
   if (!Validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
+    errors.email = 'The Email is invalid';
   }
 
   if (Validator.isEmpty(data.password)) {
@@ -38,7 +43,11 @@ const validateRegisterInput = (data) => {
     errors.password = 'Password must be between 8 and 30 characters';
   }
 
-  if (Validator.isEmpty(data.password2)) {
+  if (!Validator.isMobilePhone(data.mobile, 'en-NG')) {
+    errors.mobile = 'Mobile number must be of nigerian format of 11 digits';
+  }
+
+  if (isEmpty(data.password2)) {
     // errors.password2confirm = 'Confirm password field is required';
     errors.password2 = 'Confirm password field is required';
   }

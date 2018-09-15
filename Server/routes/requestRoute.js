@@ -6,7 +6,7 @@ import { validateNewRequest } from '../middlewares/validation';
 import { checkIfRequestIdParamIsValid } from '../middlewares/helpers';
 
 const routes = express.Router();
-routes.post('/requests', checkAuthentication, validateNewRequest, requestController.createRequest);
+routes.post('/requests', checkAuthentication, requestController.createRequest);
 routes.get('/requests', checkAuthentication, requestController.getUserRequests);
 routes.get('/requests/:requestId', checkAuthentication, checkIfRequestIdParamIsValid, requestController.getUserRequestById);
 routes.put('/requests/:requestId', checkAuthentication, checkIfRequestIdParamIsValid, validateNewRequest, requestController.modifyUserRequest);
