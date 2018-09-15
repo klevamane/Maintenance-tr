@@ -1,5 +1,6 @@
 import db from '../connection';
 import winston from 'winston';
+import validateRegisterInput from '../helpers/validations/validateRegisterInput';
 
 /**
 * @class requestController
@@ -14,6 +15,11 @@ class requestController {
       * @returns {object} Success message with the user created or error message
       */
   static createRequest(req, res) {
+    const { errors, isValid } = validateRegisterInput(req.body);
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
     db.connect()
       .then((client) => {
         const sql = 'INSERT INTO request(fault, brand, modelnumber, userid, description, other, statusid) VALUES ( $1, $2, $3, $4, $5, $6, $7) RETURNING *';
