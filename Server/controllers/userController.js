@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 import winston from 'winston';
 import bcrypt from 'bcrypt';
 import db from '../connection';
+import validateLogin from '../helpers/validations/validateLogin';
+import validateRegisterInput from '../helpers/validations/validateRegisterInput';
 
 
 /**
@@ -19,7 +21,14 @@ class usercontroller {
      * @memberOf
      */
   static registerUser(req, res) {
-    bcrypt.hash(req.body.password, 10, (err, hash) => {
+    const { errors, isValid } = validateRegisterInput(req.body);
+    const { password } = req.body;
+    // Check validation
+    if (!isValid) {
+      // return res.status(400).json(errors);
+      return res.status(400).json({ errors });
+    }
+    bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
         return res.status(500).json({ error: err });
       }
@@ -42,11 +51,12 @@ class usercontroller {
             email: result.rows[0].email,
             mobile: result.rows[0].mobile
           };
-          return res.status(201).json({ message: 'User has been registered', user });
+          return res.status(200).json({ message: 'User has been registered', user });
         })
         .catch(((err) => {
           winston.info(err);
-          return res.status(400).json({ error: 'Unable to register a new user' });
+          errors.generic = 'Unable to register a new user';
+          return res.status(400).json(errors);
         }));
     });
   }
@@ -79,10 +89,16 @@ class usercontroller {
 * @memberOf
 */
   static authenticateUser(req, res) {
+    const { errors, isValid } = validateLogin(req.body);
+    const { email, password } = req.body;
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json({ errors });
+    }
     db.connect()
       .then((client) => {
         const sql = 'select * from registereduser where email =$1 LIMIT 1 ';
-        const bindingParamaters = [req.body.email];
+        const bindingParamaters = [email];
         // continue the chain by returning result to the next then block
         const value = client.query(sql, bindingParamaters);
         client.release();
@@ -97,11 +113,11 @@ class usercontroller {
           id,
           isadmin
         };
-        bcrypt.compare(req.body.password, storedPassword, (err, result) => {
+        bcrypt.compare(password, storedPassword, (err, result) => {
           if (result) {
             // Ensure to put the secretekey in your environment variable
-           // const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * process.env.TOKENEXPIRY });
-           const token = jwt.sign({ payload }, 'secreteKey', { expiresIn: 60 * process.env.TOKENEXPIRY });
+            // const token = jwt.sign({ id: user.rows[0].id }, 'secreteKey', { expiresIn: 60 * process.env.TOKENEXPIRY });
+            const token = jwt.sign({ payload }, 'secretKey', { expiresIn: 60 * process.env.TOKENEXPIRY });
             return res.status(202).json({
               message: 'User has been authenticated',
               token,
@@ -109,12 +125,14 @@ class usercontroller {
               userid
             });
           }
-          return res.status(401).json({ error: 'Invalid email or password' });
+          errors.password = 'Invalid password';
+          return res.status(400).json(errors);
         });
       })
       .catch(((err) => {
         winston.info(err);
-        res.status(400).json({ error: 'Unable to process login information' });
+        errors.email = 'invalid email address';
+        res.status(400).json();
       }));
   }
 }

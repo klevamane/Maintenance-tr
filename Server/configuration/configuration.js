@@ -10,7 +10,7 @@ const configuration = {
     database: process.env.LOCALDB,
     // database: 'testonly',
     host: process.env.LOCALDBHOST,
-   // port: process.env.LOCALDBSERVERPORT,
+    // port: process.env.LOCALDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 3000
   },
@@ -26,7 +26,8 @@ const configuration = {
     idleTimeoutMillis: 6000,
     connectionTimeoutMillis: 9000
   },
- // test environment configuration
+  // test environment configuration
+  // test environment configuration
   test: {
     user: 'user',
     password: 'user',
@@ -46,7 +47,10 @@ const configuration = {
     port: process.env.MTPORT,
     max: 10,
     idleTimeoutMillis: 6000,
-    connectionTimeoutMillis: 9000
+    connectionTimeoutMillis: 9000,
+    ssl: {
+      rejectedUnauthorized: false
+    }
   }
 };
 

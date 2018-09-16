@@ -2,12 +2,19 @@ import Joi from 'joi';
 import winston from 'winston';
 import db from '../connection';
 import { error } from 'util';
+import validateEmailBeforeCheck from '../helpers/validations/validateEmailBeforeCheck';
 
 
 exports.checkIfEmailAlreadyExist = (req, res, next) => {
+  const { errors, isValid } = validateEmailBeforeCheck(req.body);
+  const { email } = req.body;
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json({ errors });
+  }
   const sql = 'select * from registereduser where email = $1';
   // binding parameter value must be an array else error is thrown
-  const bindingParameter = [req.body.email];
+  const bindingParameter = [email];
   db.connect()
     .then((client) => {
       const resultOfEmailAvailabilityCheck = client.query(sql, bindingParameter);
@@ -26,8 +33,14 @@ exports.checkIfEmailAlreadyExist = (req, res, next) => {
 };
 
 exports.checkIfLoginEmailExist = (req, res, next) => {
+  const { errors, isValid } = validateEmailBeforeCheck(req.body);
+  const { email } = req.body;
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json({ errors });
+  }
   // binding parameter value must be an array else error is thrown
-  const bindingParameter = [req.body.email];
+  const bindingParameter = [email];
   const sql = 'select * from registereduser where email = $1 LIMIT 1';
   db.connect()
     .then((client) => {
@@ -37,9 +50,7 @@ exports.checkIfLoginEmailExist = (req, res, next) => {
     })
     .then((result) => {
       if (result.rowCount === 0) {
-        // Indicate invalid email or password so the user won't be sure which is wrong
-        // This is especially for to protect agains a malicious user
-        return res.status(406).json({ error: 'Invalid email or password' });
+        return res.status(400).json({ emaildoesnotexist: 'Email does not exist' });
       }
       next();
     })
@@ -73,7 +84,7 @@ exports.checkIfMobileAlreadyExist = (req, res, next) => {
     })
     .then((result) => {
       if (result.rowCount > 0) {
-        return res.status(302).json({ message: 'The mobile number is in already used by another client' });
+        return res.status(302).json({ mobilealreadyinuse: 'The mobile number is in already used by another client' });
       }
       next();
     });
