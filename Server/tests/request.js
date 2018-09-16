@@ -14,12 +14,12 @@ let initialAdminToken;
  * USER
  * ****************************** */
 describe('POST USER /user', () => {
-  it('should create a new user', (done) => {
+  it('should create a new user ****', (done) => {
     const user = {
       firstname: 'kleventh',
       email: 'exampleusertwo@user.com',
       lastname: 'Jonji',
-      mobile: '08025912890',
+      mobile: '08025912897',
       password: 'password123',
       password2: 'password123'
     };
@@ -227,8 +227,7 @@ describe('POST USER /user', () => {
 });
 
 describe('POST USER /Login', () => {
-
-  it('should create a new user', (done) => {
+  it('should create a new user +++', (done) => {
     const user = {
       firstname: 'kleventh',
       email: 'dbuser@test.com',
