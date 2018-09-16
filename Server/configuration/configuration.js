@@ -28,14 +28,17 @@ const configuration = {
   },
   // test environment configuration
   test: {
-    user: 'user',
-    password: 'user',
-    database: 'mktracker',
-    host: '127.0.0.1',
+    user: process.env.TESTDBUSER,
+    password: process.env.TESTDBPSWD,
+    database: process.env.TESTDB,
+    host: process.env.TESTDBHOST,
     //  port: process.env.TESTDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 6000,
-    connectionTimeoutMillis: 9000
+    connectionTimeoutMillis: 9000,
+    ssl: {
+      rejectedUnauthorized: false
+    }
   },
 
   production: {
@@ -46,7 +49,10 @@ const configuration = {
     port: process.env.MTPORT,
     max: 10,
     idleTimeoutMillis: 6000,
-    connectionTimeoutMillis: 9000
+    connectionTimeoutMillis: 9000,
+    ssl: {
+      rejectedUnauthorized: false
+    }
   }
 };
 
