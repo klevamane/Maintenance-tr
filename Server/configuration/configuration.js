@@ -27,18 +27,16 @@ const configuration = {
     connectionTimeoutMillis: 9000
   },
   // test environment configuration
+  // test environment configuration
   test: {
-    user: process.env.TESTDBUSER,
-    password: process.env.TESTDBPSWD,
-    database: process.env.TESTDB,
-    host: process.env.TESTDBHOST,
+    user: 'user',
+    password: 'user',
+    database: 'testdb2',
+    host: '127.0.0.1',
     //  port: process.env.TESTDBSERVERPORT,
     max: 10,
     idleTimeoutMillis: 6000,
-    connectionTimeoutMillis: 9000,
-    ssl: {
-      rejectedUnauthorized: false
-    }
+    connectionTimeoutMillis: 9000
   },
 
   production: {
