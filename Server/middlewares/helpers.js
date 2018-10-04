@@ -5,6 +5,7 @@ import { error } from 'util';
 import validateEmailBeforeCheck from '../helpers/validations/validateEmailBeforeCheck';
 
 
+
 exports.checkIfEmailAlreadyExist = (req, res, next) => {
   const { errors, isValid } = validateEmailBeforeCheck(req.body);
   const { email } = req.body;
@@ -23,7 +24,8 @@ exports.checkIfEmailAlreadyExist = (req, res, next) => {
     })
     .then((result) => {
       if (result.rowCount > 0) {
-        return res.status(302).json({ message: 'User with the same email already exist' });
+        errors.email = 'User with the same email already exist';
+        return res.status(400).json({ errors });
       }
       next();
     }).catch(((err) => {
@@ -50,7 +52,8 @@ exports.checkIfLoginEmailExist = (req, res, next) => {
     })
     .then((result) => {
       if (result.rowCount === 0) {
-        return res.status(400).json({ emaildoesnotexist: 'Email does not exist' });
+        errors.email = 'Email does not exist';
+        return res.status(400).json({errors});
       }
       next();
     })
@@ -73,6 +76,13 @@ exports.checkIfRequestIdParamIsValid = (req, res, next) => {
 };
 
 exports.checkIfMobileAlreadyExist = (req, res, next) => {
+ 
+ const errors = {};
+
+  // if (!isValid) {
+  //   return res.status(400).json({ errors });
+  // }
+  
   const sql = 'select * from registereduser where mobile = $1';
   // binding parameter value must be an array else error is thrown
   const bindingParameter = [req.body.mobile];
@@ -83,8 +93,11 @@ exports.checkIfMobileAlreadyExist = (req, res, next) => {
       return resultOfEmailAvailabilityCheck;
     })
     .then((result) => {
+      let mavin = {};
       if (result.rowCount > 0) {
-        return res.status(302).json({ mobilealreadyinuse: 'The mobile number is in already used by another client' });
+          
+       errors.mobile = 'The mobile number is already in user by another user';
+        return res.status(400).json({errors});
       }
       next();
     });
@@ -153,11 +166,11 @@ exports.checkIfRequestIsDisApprovable = (req, res, next) => {
     .then((result) => {
       // check the value retured by the sql statement
       if (result.rows[0].count > 0) {
-        return res.status(400).json({ message: 'You cannot disapprove a request that has already been resolved or disapproved' });
+        return res.status(400).json({ error: 'You cannot disapprove a request that has already been resolved or disapproved' });
       }
       next();
     })
-    .catch((err => res.status(400).json({ err, message: 'Unable to Disapprove the request' })));
+    .catch((err => res.status(400).json({ err, error: 'Unable to Disapprove the request' })));
 };
 
 exports.checkIfRequestIsResolvable = (req, res, next) => {
@@ -174,13 +187,13 @@ exports.checkIfRequestIsResolvable = (req, res, next) => {
     .then((result) => {
       // check the value retured by the sql statement
       if (result.rows[0].count < 1) {
-        return res.status(400).json({ message: 'You can only resolve a request that is pending' });
+        return res.status(400).json({ error: 'You can only resolve a request that is pending' });
       }
       next();
     })
     .catch(((err) => {
       winston.info(err);
-      res.status(400).json({ message: 'Unable to resolve the request' });
+      res.status(400).json({ error: 'Unable to resolve the request' });
     }));
 };
 

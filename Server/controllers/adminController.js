@@ -26,15 +26,13 @@ class adminController extends usercontroller {
           return res.status(404).json({ error: 'No request found' });
         }
         const allRequests = listOfeveryUsersRequests.rows;
-        res.status(302).json({ message: 'All requests', allRequests });
+        res.status(200).json({ message: 'All requests', allRequests });
       })
       .catch(((err) => {
         winston.info(err);
         res.status(400).json({ message: 'Unable to List all requests' });
       }));
   }
-
-
   
   /**
 * @static

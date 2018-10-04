@@ -111,6 +111,11 @@ class requestController {
 * @returns {object} Sends the updated request as output with success message  and status code
   */
   static modifyUserRequest(req, res) {
+    const { errors, isValid } = validateCreateNewRequest(req.body);
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json({ errors });
+    }
     const id = parseInt(req.params.requestId, 10);
     const bindingParameters = [req.body.fault, req.body.brand, req.body.modelnumber,
       req.body.description, req.body.other, id, 2, req.decodedUserData.id];

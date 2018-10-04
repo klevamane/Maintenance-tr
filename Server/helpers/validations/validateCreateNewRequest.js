@@ -38,6 +38,9 @@ const validateCreateNewRequest = (data) => {
   if (Validator.isEmpty(data.fault)) {
     errors.fault = 'The Fault field is required';
   }
+  if (Validator.isEmpty(data.other)) {
+    errors.other = 'The type of request is required';
+  }
   return {
     errors,
     isValid: isEmpty(errors)
