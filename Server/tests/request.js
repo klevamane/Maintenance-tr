@@ -275,7 +275,7 @@ describe('POST USER /Login', () => {
       .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
-        expect(res.body.emaildoesnotexist).to.equal('Email does not exist');
+        expect(res.body.errors.email).to.equal('Email does not exist');
         expect(res).to.have.status(400);
         expect(res.body).to.be.a('object');
         done();
