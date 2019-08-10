@@ -54,6 +54,10 @@ Admin user
 * POST https://maintenancetr.herokuapp.com/api/v1/auth/login - Authenticate registered user
 * POST https://maintenancetr.herokuapp.com/api/v1/users/requests -Create a user request
 
+## Local Routes
+
+* For local environment use localhost:3000/api/v1/
+
 
 ## Branches
 The branches are structured in a way that they correspond to feature developed in the application. for example the with name a ft-login-xxxx corresponds codes for the log in page and ft-signup-xxx corresponds to codes for the signup page, some other branches to update user interface and implement quick fix also exist.
