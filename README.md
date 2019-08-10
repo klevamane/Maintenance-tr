@@ -2,7 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/1e818cfeb6e60ac2c268/maintainability)](https://codeclimate.com/github/klevamane/Maintenance-tr/maintainability)
 
 
-# Maintenance Tracker
+# Maintenance Tracker(API)
 Maintenance Tracker App is an application that provides users with the ability to reach out to
 operations or repairs department regarding repair or maintenance requests and monitor the
 status of their request.
